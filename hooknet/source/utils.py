@@ -1,3 +1,7 @@
+import numpy as np
+from experiment.callbacks import ExperimentCallback
+
+
 class HookNetReshape(ExperimentCallback):
     def __init__(self, multi_loss=False):
         self._multi_loss = multi_loss
