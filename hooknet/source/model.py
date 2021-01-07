@@ -19,7 +19,7 @@ from tensorflow.keras.layers import (
 from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import SGD, Adam, Optimizer
 from tensorflow.python.framework.ops import Tensor
-
+from tensorflow.keras.layers.experimental.preprocessing import Rescaling
 
 class HookNet(Model):
 
@@ -201,6 +201,8 @@ class HookNet(Model):
 
         # input
         net = input
+        print('rescaling')
+        net = Rescaling(scale=1./255., offset=0.0, name=None)(net)
 
         # encode and retreive residuals
         net, residuals = self._encode_path(net)
@@ -393,7 +395,6 @@ class HookNet(Model):
         for shook, ehook in self._hook_indexes.items():
             hooks[ehook] = outhooks[shook]
 
-        print(type(net))
         return net, hooks
 
     def _conv_block(self, net: Tensor, n_filters: int, kernel_size: int = 3) -> Tensor:
