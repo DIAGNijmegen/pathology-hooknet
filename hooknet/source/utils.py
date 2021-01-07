@@ -1,8 +1,8 @@
 import numpy as np
-from experiment.callbacks import ExperimentCallback
+from experiment.callbacks import TrainCallback
 
 
-class HookNetReshape(ExperimentCallback):
+class HookNetReshape(TrainCallback):
     def __init__(self, multi_loss=False):
         self._multi_loss = multi_loss
 
