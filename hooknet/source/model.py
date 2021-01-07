@@ -2,6 +2,7 @@ from pprint import pprint
 from typing import Dict, List, Tuple
 
 from tensorflow.keras import backend, regularizers
+import tensorflow as tf
 from tensorflow.keras.backend import int_shape
 from tensorflow.keras.layers import (
     Add,
@@ -20,6 +21,10 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import SGD, Adam, Optimizer
 from tensorflow.python.framework.ops import Tensor
 from tensorflow.keras.layers.experimental.preprocessing import Rescaling
+
+
+from tensorflow.keras.metrics import TruePositives
+
 
 class HookNet(Model):
 
@@ -201,8 +206,8 @@ class HookNet(Model):
 
         # input
         net = input
-        print('rescaling')
-        net = Rescaling(scale=1./255., offset=0.0, name=None)(net)
+        print("rescaling")
+        net = Rescaling(scale=1.0 / 255.0, offset=0.0, name=None)(net)
 
         # encode and retreive residuals
         net, residuals = self._encode_path(net)
@@ -262,12 +267,17 @@ class HookNet(Model):
             else {"reshape_target": self._loss_weights[0]}
         )
 
+        sample_weights_mode = (
+            ["temporal", "temporal"] if self._multi_loss else "temporal"
+        )
+
         # compile model
         self.compile(
             optimizer=self._opt(),
             loss=losses,
+            sample_weight_mode=sample_weights_mode,
             loss_weights=loss_weights,
-            metrics=["accuracy"],
+            weighted_metrics=["accuracy", TruePositives()],
         )
 
     def _opt(self) -> Optimizer:
