@@ -21,7 +21,7 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import SGD, Adam, Optimizer
 from tensorflow.python.framework.ops import Tensor
 from tensorflow.keras.layers.experimental.preprocessing import Rescaling
-
+from tensorflow.keras.metrics import CategoricalCrossentropy
 
 from tensorflow.keras.metrics import TruePositives
 
@@ -277,7 +277,7 @@ class HookNet(Model):
             loss=losses,
             sample_weight_mode=sample_weights_mode,
             loss_weights=loss_weights,
-            weighted_metrics=["accuracy", TruePositives()],
+            weighted_metrics=["accuracy", CategoricalCrossentropy()],
         )
 
     def _opt(self) -> Optimizer:
