@@ -1,10 +1,9 @@
 import numpy as np
-from experiment.train import StepCallback
 
 def clean_weights(masks):
     return np.clip(np.sum(masks, axis=-1), 0, 1)
 
-class HookNetReshape(StepCallback):
+class HookNetReshape():
     def __init__(self, multi_loss=False):
         self._multi_loss = multi_loss
 
