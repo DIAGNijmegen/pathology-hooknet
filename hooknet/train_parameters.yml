@@ -6,7 +6,7 @@ output_path: '/home/user/output'     # path were output will be saved (e.g, the 
 input_shape: [284, 284, 3]  # input shape of the model
 n_classes: 6                # output classes of the model
 resolutions: [0.5, 8.0]     # input resolutions of the model [target, context]
-hook_indexes: [3, 3]        # the respective depths (starting from 0) of hooking [from, to] in the decoders
+hook_indexes: [0, 3]        # the respective depths (starting from 0) of hooking [from, to] in the decoders
 n_convs: 2                  # the number of 2D convolutions per convolutional block
 depth: 4                    # the depth of the encoder-decoder branches
 n_filters: 16               # the number of starting filters (will be increased and decreased by a factor 2 in each conv block in the encoders and decoders, respectively)
