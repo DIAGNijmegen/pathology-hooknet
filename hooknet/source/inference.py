@@ -53,7 +53,6 @@ class Inference:
         self._batch_size = batch_size
 
         self._model_instance = model_instance
-        # self._graph = tf.get_default_graph()
 
         # queues
         self._reader_queue = Queue(maxsize=self._queue_size)
@@ -93,7 +92,6 @@ class Inference:
         t1_read = time.time()
         for data in iter(self._reader_queue.get, "STOP"):
             X_batch, masks, items = data
-            X_batch = normalize(X_batch)
             pred = self._model_instance.predict_on_batch(x=X_batch)
 
             if self._multi_loss:
@@ -109,7 +107,6 @@ class Inference:
     def start(self):
         # start reader
         self._readerdeamon.start()
-        # with self._graph.as_default():
         self._test_on_wsi()
         self.stop()
 

@@ -6,7 +6,7 @@
 #### Training
 
 ##### dependecies
- - This code has been tested on Ubuntu 18.04, keras==2.0.8 and tensorflow-gpu==1.14
+ - This code has been tested on Ubuntu 18.04, tensorflow-gpu==2.30
  
 ##### Examples
  - train.py will train HookNet on random values. Please adjust the script with your own batchgenerator or sampling function. 

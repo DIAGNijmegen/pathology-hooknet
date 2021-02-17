@@ -137,12 +137,10 @@ class HookNetTrainer(Trainer):
 
         self._best_metric = None
         self._weights_file = os.path.join(output_path, 'weights.h5')
-        self._graph = tf.get_default_graph()
 
     def train(self):
         print('Start training...')
-        with self._graph.as_default():
-            super().train()
+        super().train()
 
     def _update(self, epoch, epoch_metrics):
         # compute average loss of epoch

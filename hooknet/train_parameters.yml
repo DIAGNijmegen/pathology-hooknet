@@ -1,6 +1,6 @@
 ## data:
 data_path: './data'         # path to data folder
-output_path: './output'     # path were output will be saved (e.g, the weights of the model)
+output_path: '/home/user/output'     # path were output will be saved (e.g, the weights of the model)
 
 # model
 input_shape: [284, 284, 3]  # input shape of the model

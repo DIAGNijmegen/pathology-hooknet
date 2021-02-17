@@ -22,9 +22,12 @@ def train():
     """
 
     # parse config and command line arguments
-    parser = ArgumentConfigParser('./parameters.yml', description='HookNet')
+    parser = ArgumentConfigParser('./train_parameters.yml', description='HookNet')
     config = parser.parse_args()
     print(f'CONFIG: \n------\n{yaml.dump(config)}')
+    
+    if not os.path.exists(config['output_path']):
+        raise ValueError('output path in config does not exists')
 
     # initialize model
     hooknet = HookNet(input_shape=config['input_shape'],
