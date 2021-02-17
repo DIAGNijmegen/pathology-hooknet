@@ -53,11 +53,11 @@ abstract = {We propose HookNet, a semantic segmentation model for histopathology
 
 #### Pre-trained models
 
-A pretraind model on breast or colon can be applied via https://grand-challenge.org/. Please create an user account and request access to an algorith if you are interested. 
+A pretraind model on breast or lung can be applied via https://grand-challenge.org/. Please create an user account and request access to an algorith if you are interested. 
 
 You can try out a pretrained HookNet on breast tissue here:  
 https://grand-challenge.org/algorithms/hooknet/  
 
-You can try out a pretrained HookNet on colon tissue here:  
-https://grand-challenge.org/algorithms/hooknet-colon/
+You can try out a pretrained HookNet on lung tissue here:  
+https://grand-challenge.org/algorithms/hooknet-lung/
 
