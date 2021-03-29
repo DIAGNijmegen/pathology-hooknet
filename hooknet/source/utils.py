@@ -23,8 +23,8 @@ class HookNetReshape():
 
         x_list_batch[0] = np.array(x_list_batch[0])
         x_list_batch[1] = np.array(x_list_batch[1])
-        y_list_batch[0] = np.array(y_list_batch[0])
-        y_list_batch[1] = np.array(y_list_batch[1])
+        y_list_batch[0] = y_list_batch[0]
+        y_list_batch[1] = y_list_batch[1]
         if self._multi_loss:
             return (
                 x_list_batch,

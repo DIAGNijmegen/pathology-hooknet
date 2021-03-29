@@ -112,7 +112,7 @@ class HookNet(Model):
             method used for combining feature maps (either 'concat', 'add', 'subtract', 'multiply')
         """
         super().__init__()
-        self._input_shape = input_shape
+        self._input_shape = input_shape[0]
         self._n_classes = n_classes
         self._hook_indexes = {(depth - 1) - hook_indexes[0]: hook_indexes[1]}
         self._depth = depth
