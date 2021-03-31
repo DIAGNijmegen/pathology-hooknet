@@ -49,6 +49,7 @@ class HookNet(Model):
         input_shape: List[int],
         n_classes: int,
         hook_indexes: List[int],
+        weights=None,
         depth: int = 4,
         n_convs: int = 2,
         filter_size: int = 3,
@@ -139,6 +140,10 @@ class HookNet(Model):
 
         # construct model
         self._construct_hooknet()
+        
+        if weights is not None
+            self.load_weigths(weights)
+        
 
     @property
     def input_shape(self) -> List[int]:
