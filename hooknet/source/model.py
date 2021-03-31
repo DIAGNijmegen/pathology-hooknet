@@ -141,7 +141,7 @@ class HookNet(Model):
         # construct model
         self._construct_hooknet()
         
-        if weights is not None
+        if weights is not None:
             self.load_weigths(weights)
         
 
