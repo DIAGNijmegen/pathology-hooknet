@@ -113,7 +113,8 @@ class HookNet(Model):
             method used for combining feature maps (either 'concat', 'add', 'subtract', 'multiply')
         """
         super().__init__()
-        self._input_shape = input_shape[0]
+        self._input_shape_target = input_shape[0]
+        self._input_shape_context = input_shape[1]
         self._n_classes = n_classes
         self._hook_indexes = {(depth - 1) - hook_indexes[0]: hook_indexes[1]}
         self._depth = depth
@@ -149,7 +150,7 @@ class HookNet(Model):
     def input_shape(self) -> List[int]:
         """Return the input shape of the model"""
 
-        return self._input_shape
+        return self._input_shape_target
 
     @property
     def output_shape(self) -> List[int]:
@@ -164,7 +165,7 @@ class HookNet(Model):
         """Construction of single/multi-loss model with multiple inputs and single/multiple outputs"""
 
         # declaration of context input
-        input_2 = Input(self._input_shape)
+        input_2 = Input(self._input_shape_context)
 
         # construction of context branch and context hooks
         flatten2, context_hooks = self._construct_branch(
@@ -172,7 +173,7 @@ class HookNet(Model):
         )
 
         # declaration of target inpput
-        input_1 = Input(self._input_shape)
+        input_1 = Input(self._input_shape_target)
 
         # construction of target branch with context hooks
         flatten1, _ = self._construct_branch(

@@ -3,7 +3,7 @@ data_path: './data'         # path to data folder
 output_path: '/home/user/output'     # path were output will be saved (e.g, the weights of the model)
 
 # model
-input_shape: [284, 284, 3]  # input shape of the model
+input_shape: [[284, 284, 3], [284, 284, 3]]  # input shape of the model
 n_classes: 6                # output classes of the model
 resolutions: [0.5, 8.0]     # input resolutions of the model [target, context]
 hook_indexes: [0, 3]        # the respective depths (starting from 0) of hooking [from, to] in the decoders
