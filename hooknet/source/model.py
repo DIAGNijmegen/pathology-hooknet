@@ -388,7 +388,7 @@ class HookNet(Model):
             if b in inhooks:
                 # combine feature maps via merge type
                 if self._merge_type == "concat":
-                    net = self._concatenator(net, inhooks[b])
+                    net = self._concatenator(net, inhooks[b], name='target-branchbottle')
                 else:
                     net = self._merger(net, inhooks[b])
 
@@ -472,13 +472,15 @@ class HookNet(Model):
 
         return net
 
-    def _concatenator(self, net: Tensor, item: Tensor) -> Tensor:
+    def _concatenator(self, net: Tensor, item: Tensor, name='') -> Tensor:
         """"Concatenate feature maps"""
 
         # crop feature maps
         crop_size = int(item.shape[1] - net.shape[1]) / 2
         item_cropped = Cropping2D(int(crop_size))(item)
 
+        if name:
+            return concatenate([item_cropped, net], axis=3, name=name)
         return concatenate([item_cropped, net], axis=3)
 
     def _merger(self, net: Tensor, item: Tensor) -> Tensor:
