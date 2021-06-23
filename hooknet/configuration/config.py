@@ -33,7 +33,7 @@ def create_hooknet(user_config):
     application_configuration = ApplicationConfiguration(
         user_config=user_config, default_key='default', resolve_keys=('model',), build_keys=('model',)
     )
-    print()
+
     hooknet_configuration = HookNetConfiguration(
         user_config=user_config, ext_settings=[application_configuration], build_keys=('model',)
     )

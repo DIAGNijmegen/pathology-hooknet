@@ -3,7 +3,7 @@ default: &default
         attribute: HookNet
         input_shape: [[284,284,3], [284,284,3], {~merge: replace}]
         n_classes: 6
-        hook_indexes: [0, 3]
+        hook_indexes: [2, 3]
         depth: 4
         n_convs: 2
         filter_size: 3
