@@ -143,6 +143,7 @@ class HookNet(Model):
         self._construct_hooknet()
         
         if weights is not None:
+            print(f'loading weights... {weights}')
             self.load_weights(weights)
         
 
