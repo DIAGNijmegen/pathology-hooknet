@@ -62,6 +62,7 @@ class HookNet(Model):
         l2_lambda: float = 0.001,
         loss_weights: List[float] = [1.0, 0.0],
         merge_type: str = "concat",
+        predict_target_only: bool = True,
     ) -> None:
 
         """
@@ -129,6 +130,7 @@ class HookNet(Model):
         self._l2_lambda = l2_lambda
         self._loss_weights = loss_weights
         self._merge_type = merge_type
+        self._predict_target_only = predict_target_only
 
         # determine multi-loss model from loss weights
         self._multi_loss = any(loss_weights[1:])
@@ -161,6 +163,11 @@ class HookNet(Model):
 
     def multi_loss(self) -> bool:
         return self._multi_loss
+
+    def predict_on_batch(self, batch):
+        if self.multi_loss and self._predict_target_only:
+            return super().predict_on_batch(batch)[0]
+        return super().predict_on_batch(batch)
 
     def _construct_hooknet(self) -> None:
         """Construction of single/multi-loss model with multiple inputs and single/multiple outputs"""
@@ -213,7 +220,6 @@ class HookNet(Model):
 
         # input
         net = input
-        print("rescaling")
         net = Rescaling(scale=1.0 / 255.0, offset=0.0, name=None)(net)
 
         # encode and retreive residuals

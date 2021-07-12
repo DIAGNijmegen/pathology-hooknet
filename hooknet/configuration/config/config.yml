@@ -1,7 +1,7 @@
 default: &default
         module: hooknet.source.model
         attribute: HookNet
-        input_shape: [[284,284,3], [284,284,3], {~merge: replace}]
+        input_shape: [[284,284,3], [284,284,3]]
         n_classes: 6
         hook_indexes: [2, 3]
         weights: None
