@@ -161,6 +161,7 @@ class HookNet(Model):
 
         return self._output_shape
 
+    @property
     def multi_loss(self) -> bool:
         return self._multi_loss
 
