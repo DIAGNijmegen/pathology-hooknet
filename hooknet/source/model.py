@@ -161,13 +161,14 @@ class HookNet(Model):
 
         return self._output_shape
 
+    @property
     def multi_loss(self) -> bool:
         return self._multi_loss
 
-    def predict_on_batch(self, batch):
+    def predict_on_batch(self, x):
         if self.multi_loss and self._predict_target_only:
-            return super().predict_on_batch(batch)[0]
-        return super().predict_on_batch(batch)
+            return super().predict_on_batch(x)[0]
+        return super().predict_on_batch(x)
 
     def _construct_hooknet(self) -> None:
         """Construction of single/multi-loss model with multiple inputs and single/multiple outputs"""
