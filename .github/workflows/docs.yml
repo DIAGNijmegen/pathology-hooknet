@@ -2,13 +2,13 @@ name: docs
 
 on:
   push:
-    branches: [main]
+    branches: [master]
     paths:
       - "hooknet/**"
       - "docs/**"
       - .github/workflows/docs.yml
   pull_request:
-    branches: [main]
+    branches: [master]
     paths:
       - "hooknet/**"
       - "docs/**"
