@@ -1,4 +1,4 @@
-###  HookNet - multi-resolution convolutional neural networks for semantic segmentation.
+###  HookNet - multi-resolution convolutional neural networks for semantic segmentation
 
 ----
 
