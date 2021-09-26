@@ -8,6 +8,7 @@
 Please see  [HookNet - practical guide](https://github.com/DIAGNijmegen/pathology-hooknet/blob/master/notebooks/HookNetPracticalGuide.ipynb) for an example on how to train/apply HookNet
 
 ### Additional Information
+---- 
 
 #### Paper
 This model is presented in our paper: 
