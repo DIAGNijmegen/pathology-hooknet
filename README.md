@@ -2,7 +2,7 @@
 
 ----
 
-#### Dependecies
+#### Dependencies
 This code has been tested on Ubuntu 18.04, tensorflow-gpu==2.3.0
  
 #### Examples
