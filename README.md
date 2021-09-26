@@ -1,18 +1,17 @@
-# HookNet
-## Multi-resolution convolutional neural networks for semantic segmentation in histopathology whole-slide images.
+###  HookNet - multi-resolution convolutional neural networks for semantic segmentation in histopathology whole-slide images.
 
 ----
 
-##### Dependecies
+#### Dependecies
  - This code has been tested on Ubuntu 18.04, tensorflow-gpu==2.3.0
  
-##### Examples
+#### Examples
 Please see  [HookNet - practical guide](https://github.com/DIAGNijmegen/pathology-hooknet/blob/master/notebooks/HookNetPracticalGuide.ipynb) for an example on how to train/apply HookNet
 
-### Additional Information
----- 
+#### Additional Information
 
-#### Paper
+
+###### Paper
 This model is presented in our paper: 
 
 [HookNet: Multi-resolution convolutional neural networks for semantic segmentation in histopathology whole-slide images](https://www.sciencedirect.com/science/article/pii/S1361841520302541)
@@ -36,7 +35,7 @@ abstract = {We propose HookNet, a semantic segmentation model for histopathology
 ```
 
 
-#### Pre-trained models
+###### Pre-trained models
 
 A pretraind model on breast or lung can be applied via https://grand-challenge.org/. Please create an user account and request access to an algorithm if you are interested. 
 
