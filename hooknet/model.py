@@ -1,8 +1,6 @@
-from pprint import pprint
 from typing import Dict, List, Tuple
-
-from tensorflow.keras import backend, regularizers
-import tensorflow as tf
+import numpy as np
+from tensorflow.keras import regularizers
 from tensorflow.keras.backend import int_shape
 from tensorflow.keras.layers import (
     Add,
@@ -17,13 +15,12 @@ from tensorflow.keras.layers import (
     UpSampling2D,
     concatenate,
 )
+from tensorflow.keras.layers.experimental.preprocessing import Rescaling
+from tensorflow.keras.metrics import CategoricalCrossentropy
 from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import SGD, Adam, Optimizer
 from tensorflow.python.framework.ops import Tensor
-from tensorflow.keras.layers.experimental.preprocessing import Rescaling
-from tensorflow.keras.metrics import CategoricalCrossentropy
-
-from tensorflow.keras.metrics import TruePositives
+from hooknet.utils import check_input
 
 
 class HookNet(Model):
@@ -47,17 +44,17 @@ class HookNet(Model):
     def __init__(
         self,
         input_shape: List[int],
+        hook_indices: tuple,
         n_classes: int,
-        hook_indexes: List[int],
-        weights=None,
+        model_weights=None,
         depth: int = 4,
         n_convs: int = 2,
         filter_size: int = 3,
-        n_filters: int = 64,
+        n_filters: int = 16,
         padding: str = "valid",
-        batch_norm: bool = True,
+        batch_norm: bool = False,
         activation: str = "relu",
-        learning_rate: float = 0.000005,
+        learning_rate: float = 0.00005,
         opt_name: str = "adam",
         l2_lambda: float = 0.001,
         loss_weights: List[float] = [1.0, 0.0],
@@ -74,7 +71,7 @@ class HookNet(Model):
         n_classes: int
             the possible number of classes in the output of the model
 
-        hook_indexes: List[int]
+        hook_indices: List[int]
             the respective depths (starting from 0) of hooking [from, to] in the decoders
 
         depth: int
@@ -113,11 +110,23 @@ class HookNet(Model):
         merge_type: str
             method used for combining feature maps (either 'concat', 'add', 'subtract', 'multiply')
         """
-        super().__init__()
+
+        if input_shape[0] != input_shape[1]:
+            raise ValueError("input shapes of both branches should be the same")
+
+        if not check_input(
+            depth=depth,
+            input_size=input_shape[0][0],
+            filter_size=filter_size,
+            n_convs=n_convs,
+        ):
+            raise ValueError("input_shapes are not valid model parameters")
+
         self._input_shape_target = input_shape[0]
         self._input_shape_context = input_shape[1]
+
         self._n_classes = n_classes
-        self._hook_indexes = {(depth - 1) - hook_indexes[0]: hook_indexes[1]}
+        self._hook_indices = {(depth - 1) - hook_indices[0]: hook_indices[1] - 1}
         self._depth = depth
         self._n_convs = n_convs
         self._filter_size = filter_size
@@ -131,23 +140,18 @@ class HookNet(Model):
         self._loss_weights = loss_weights
         self._merge_type = merge_type
         self._predict_target_only = predict_target_only
-
-        # determine multi-loss model from loss weights
-        self._multi_loss = any(loss_weights[1:])
-
         # set l2 regulizer
         self._l2 = regularizers.l2(self._l2_lambda)
 
-        # placeholder for output_shape
-        self._output_shape = []
-
+        # determine multi-loss model from loss weights
+        self._multi_loss = any(loss_weights[1:])
         # construct model
+
         self._construct_hooknet()
-        
-        if weights is not None:
-            print(f'loading weights... {weights}')
-            self.load_weights(weights)
-        
+
+        if model_weights is not None:
+            print(f"loading weights... {model_weights}")
+            self.load_weights(model_weights)
 
     @property
     def input_shape(self) -> List[int]:
@@ -159,16 +163,44 @@ class HookNet(Model):
     def output_shape(self) -> List[int]:
         """Return the output shape of the model before flattening"""
 
-        return self._output_shape
+        return self._out_shape
 
     @property
     def multi_loss(self) -> bool:
         return self._multi_loss
 
-    def predict_on_batch(self, x):
+    def train_on_batch(
+        self,
+        x,
+        y,
+        sample_weight=None,
+        class_weight=None,
+        reset_metrics=True,
+        return_dict=False,
+    ):
+        # flatten
+        y = y.reshape(y.shape[0], y.shape[1] * y.shape[2], y.shape[3])
+
+        return super().train_on_batch(
+            x,
+            y=y,
+            sample_weight=sample_weight,
+            class_weight=class_weight,
+            reset_metrics=reset_metrics,
+            return_dict=return_dict,
+        )
+
+    def predict_on_batch(self, x, reshape=True, argmax=True):
         if self.multi_loss and self._predict_target_only:
-            return super().predict_on_batch(x)[0]
-        return super().predict_on_batch(x)
+            predictions = super().predict_on_batch(x)[0]
+        predictions = super().predict_on_batch(x)
+
+        if reshape:
+            predictions = predictions.reshape(predictions.shape[0], *self._out_shape)
+
+        if argmax:
+            predictions = np.argmax(predictions, axis=-1) + 1
+        return predictions
 
     def _construct_hooknet(self) -> None:
         """Construction of single/multi-loss model with multiple inputs and single/multiple outputs"""
@@ -236,11 +268,11 @@ class HookNet(Model):
         net = Conv2D(self._n_classes, 1, activation="softmax")(net)
 
         # set output shape
-        self._output_shape = int_shape(net)[1:]
+        self._out_shape = int_shape(net)[1:]
 
         # Reshape net
         flatten = Reshape(
-            (self.output_shape[0] * self.output_shape[1], self.output_shape[2]),
+            (self._out_shape[0] * self._out_shape[1], self._out_shape[2]),
             name=reshape_name,
         )(net)
 
@@ -396,7 +428,9 @@ class HookNet(Model):
             if b in inhooks:
                 # combine feature maps via merge type
                 if self._merge_type == "concat":
-                    net = self._concatenator(net, inhooks[b], name='target-branchbottle')
+                    net = self._concatenator(
+                        net, inhooks[b], name="target-branchbottle"
+                    )
                 else:
                     net = self._merger(net, inhooks[b])
 
@@ -416,7 +450,7 @@ class HookNet(Model):
 
         # get hooks from potential hooks
         hooks = {}
-        for shook, ehook in self._hook_indexes.items():
+        for shook, ehook in self._hook_indices.items():
             hooks[ehook] = outhooks[shook]
 
         return net, hooks
@@ -480,7 +514,7 @@ class HookNet(Model):
 
         return net
 
-    def _concatenator(self, net: Tensor, item: Tensor, name='') -> Tensor:
+    def _concatenator(self, net: Tensor, item: Tensor, name="") -> Tensor:
         """"Concatenate feature maps"""
 
         # crop feature maps
@@ -516,195 +550,3 @@ class HookNet(Model):
 
         # Raise ValueError if merge type is unsupported
         raise ValueError(f"unsupported merge type: {self._merge_type}")
-
-
-class UNet(Model):
-    def __init__(
-        self,
-        patch_shape,
-        n_labels,
-        depth: int = 4,
-        n_convs: int = 2,
-        filter_size: int = 3,
-        n_filters: int = 91,
-        padding: str = "valid",
-        batch_norm: bool = True,
-        activation: str = "relu",
-        l2_lambda: float = 0.001,
-    ):
-
-        self._patch_shape = patch_shape
-        self._n_labels = n_labels
-        self._activation = activation
-        self._n_convs = n_convs
-        self._padding = padding
-        self._n_filters = n_filters
-        self._depth = depth
-        self._batch_norm = batch_norm
-        self._l2_lambda = l2_lambda
-        self._l2 = regularizers.l2(self._l2_lambda)
-        self._filter_size = filter_size
-
-        self.construct_unet()
-
-    @property
-    def patch_shape(self):
-        return self._patch_shape
-
-    @property
-    def n_labels(self):
-        return self._n_labels
-
-    @property
-    def n_filters(self):
-        return self._n_filters
-
-    @property
-    def activation(self):
-        return self._activation
-
-    @property
-    def filter_size(self):
-        return self._filter_size
-
-    @property
-    def batch_norm(self):
-        return self._batch_norm
-
-    @property
-    def n_convs(self):
-        return self._n_convs
-
-    @property
-    def depth(self):
-        return self._depth
-
-    @property
-    def padding(self):
-        return self._padding
-
-    @property
-    def l2(self):
-        return self._l2
-
-    @property
-    def output_shape(self):
-        return self._output_shape
-
-    def construct_unet(self):
-        input_ = Input(self.patch_shape)
-        flatten = self._construct_net(input_)
-        self._create_model(input_, flatten)
-
-    def _encode_path(self, net):
-        residuals = []
-        n_filters = self.n_filters
-        for b in range(self.depth):
-            net = self._conv_block(net, n_filters)
-            residuals.append(net)
-            net = MaxPooling2D(pool_size=(2, 2))(net)
-            n_filters *= 2
-        return net, residuals
-
-    def _decode_path(self, net, residuals):
-
-        n_filters = self.n_filters * 2 * self.depth
-
-        for b in reversed(range(self.depth)):
-            net = self._upsample(net, n_filters)
-            net = self._concatenator(net, residuals[b])
-            net = self._conv_block(net, n_filters)
-
-            n_filters = n_filters // 2
-
-        return net
-
-    def _conv_block(self, net, n_filters, kernel_size=3):
-        for n in range(self.n_convs):
-            net = Conv2D(
-                n_filters,
-                kernel_size,
-                activation=self.activation,
-                kernel_initializer="he_normal",
-                padding=self.padding,
-                kernel_regularizer=self.l2,
-            )(net)
-
-            if self.batch_norm:
-                net = BatchNormalization()(net)
-        return net
-
-    def _upsample(self, net, n_filters):
-        net = UpSampling2D(size=(2, 2))(net)
-        net = Conv2D(
-            n_filters,
-            self.filter_size,
-            activation=self.activation,
-            padding=self.padding,
-            kernel_regularizer=self.l2,
-        )(net)
-
-        return net
-
-    def _concatenator(self, net: Tensor, item: Tensor) -> Tensor:
-        """"Concatenate feature maps"""
-
-        # crop feature maps
-        crop_size = int(item.shape[1] - net.shape[1]) / 2
-        item_cropped = Cropping2D(int(crop_size))(item)
-
-        return concatenate([item_cropped, net], axis=3)
-
-    def _construct_net(self, input_):
-        # input
-        net = input_
-
-        # encode
-        net, residuals = self._encode_path(net)
-
-        # mid conv block
-        net = self._conv_block(net, self.n_filters * 2 * (self._depth + 1))
-
-        # decode
-        net = self._decode_path(net, residuals)
-
-        # softmax output
-        net = Conv2D(
-            self.n_labels, 1, activation="softmax", kernel_regularizer=self.l2
-        )(net)
-
-        # Reshape net
-        self._output_shape = int_shape(net)[1:]
-
-        flatten = Reshape(
-            target_shape=(
-                self._output_shape[0] * self._output_shape[1],
-                self._output_shape[2],
-            )
-        )(net)
-
-        return flatten
-
-    def _create_model(self, inputs: List[Input], outputs: List[Tensor]):
-        super().__init__(inputs, outputs)
-
-        self.compile(
-            optimizer=Adam(),
-            loss="categorical_crossentropy",
-        )
-
-    def __str__(self):
-        attributes = {
-            "patch_shape": str(self._patch_shape),
-            "n_labels": str(self._n_labels),
-            "activation": str(self._activation),
-            "n_convs": str(self._n_convs),
-            "padding": str(self._padding),
-            "n_filters": str(self._n_filters),
-            "depth": str(self._depth),
-            "batch_norm": str(self._batch_norm),
-            "l2": str(self._l2),
-            "filter_size": str(self._filter_size),
-        }
-
-        return pprint.pformat(attributes, sort_dicts=False)

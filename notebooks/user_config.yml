@@ -1,0 +1,24 @@
+wholeslidedata:
+    default:
+        seed: 123
+        yaml_source: data.yml
+
+        label_map: 
+            tumor: 1
+            stroma: 2
+            lymphocytes: 3
+
+        batch_shape:
+            batch_size: 1
+            shape: [[284,284,3],[284,284,3]]
+            spacing: [0.5, 8.0]
+            y_shape: [2, 70, 70, 3]
+
+        sample_callbacks:
+            - module: wholeslidedata.samplers.callbacks
+              attribute: FitOutput
+              output_shape: [70, 70]
+
+            - module: wholeslidedata.samplers.callbacks
+              attribute: OneHotEncoding
+              labels: ${wholeslidedata:labels}
