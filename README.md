@@ -9,21 +9,7 @@
  - This code has been tested on Ubuntu 18.04, tensorflow-gpu==2.3.0
  
 ##### Examples
- - train.py will train HookNet on random values. Please adjust the script with your own batchgenerator or sampling function. 
- - For an explanation about possible settings see the comments in parameters.yml. All settings defined in parameters.yml can be overwritten via command line arguments (see argconfigparser.py for more info).  
- 
-
-#### Inference
-
-##### dependecies
- - Inference depends on the python api multiresolutionimageinterface.py from ASAP (https://github.com/computationalpathologygroup/ASAP/releases).
- 
- ##### Examples
-  - apply.py in this repository will apply a trained hooknet on a WSI. 
-
-
-For more information, please check the code comments and the doc strings. If you happen to experience any problems, have questions, or would like to give feedback, feel free to open an issue.
-
+Please see  [HookNet - practical guide](https://github.com/DIAGNijmegen/pathology-hooknet/blob/master/notebooks/HookNetPracticalGuide.ipynb) for an example on how to train/apply HookNet
 
 ### Additional Information
 
