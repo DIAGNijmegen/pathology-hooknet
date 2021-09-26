@@ -1,7 +1,7 @@
 # HookNet
 ## Multi-resolution convolutional neural networks for semantic segmentation in histopathology whole-slide images.
 
-##### dependecies
+##### Dependecies
  - This code has been tested on Ubuntu 18.04, tensorflow-gpu==2.3.0
  
 ##### Examples
