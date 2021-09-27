@@ -8,3 +8,4 @@ ipython
 jupytext
 jupyter
 numpy
+tensorflow-gpu
