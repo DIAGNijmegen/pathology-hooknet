@@ -1,0 +1,712 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hooknet.model &#8212; hooknet 0.0.2 documentation</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+<a class="navbar-brand" href="../../index.html">
+<p class="title">hooknet</p>
+</a>
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../index.html">
+  Home page
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar"><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    
+  </div>
+</nav>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for hooknet.model</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">regularizers</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.backend</span> <span class="kn">import</span> <span class="n">int_shape</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Add</span><span class="p">,</span>
+    <span class="n">BatchNormalization</span><span class="p">,</span>
+    <span class="n">Conv2D</span><span class="p">,</span>
+    <span class="n">Cropping2D</span><span class="p">,</span>
+    <span class="n">Input</span><span class="p">,</span>
+    <span class="n">MaxPooling2D</span><span class="p">,</span>
+    <span class="n">Multiply</span><span class="p">,</span>
+    <span class="n">Reshape</span><span class="p">,</span>
+    <span class="n">Subtract</span><span class="p">,</span>
+    <span class="n">UpSampling2D</span><span class="p">,</span>
+    <span class="n">concatenate</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers.experimental.preprocessing</span> <span class="kn">import</span> <span class="n">Rescaling</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.metrics</span> <span class="kn">import</span> <span class="n">CategoricalCrossentropy</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.optimizers</span> <span class="kn">import</span> <span class="n">SGD</span><span class="p">,</span> <span class="n">Adam</span><span class="p">,</span> <span class="n">Optimizer</span>
+<span class="kn">from</span> <span class="nn">tensorflow.python.framework.ops</span> <span class="kn">import</span> <span class="n">Tensor</span>
+<span class="kn">from</span> <span class="nn">hooknet.utils</span> <span class="kn">import</span> <span class="n">check_input</span>
+
+
+<div class="viewcode-block" id="HookNet"><a class="viewcode-back" href="../../_autosummary/hooknet.model.HookNet.html#hooknet.model.HookNet">[docs]</a><span class="k">class</span> <span class="nc">HookNet</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    HookNet: a convolutional neural network with mulitple branches of encoder-decoders for the task of semantic segmenation.</span>
+
+<span class="sd">    ...</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    input_shape: List[int]</span>
+<span class="sd">        the input shape of the model</span>
+
+<span class="sd">    output_shape: List[int]</span>
+<span class="sd">        the output shape of the model before flattening.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="HookNet.__init__"><a class="viewcode-back" href="../../_autosummary/hooknet.model.HookNet.html#hooknet.model.HookNet.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">input_shape</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+        <span class="n">hook_indices</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span>
+        <span class="n">n_classes</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">model_weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="n">n_convs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="n">filter_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="n">n_filters</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span>
+        <span class="n">padding</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;valid&quot;</span><span class="p">,</span>
+        <span class="n">batch_norm</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">activation</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;relu&quot;</span><span class="p">,</span>
+        <span class="n">learning_rate</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.00005</span><span class="p">,</span>
+        <span class="n">opt_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;adam&quot;</span><span class="p">,</span>
+        <span class="n">l2_lambda</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.001</span><span class="p">,</span>
+        <span class="n">loss_weights</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
+        <span class="n">merge_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;concat&quot;</span><span class="p">,</span>
+        <span class="n">predict_target_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        input_shape : List[int]</span>
+<span class="sd">            the input shape of the model for both branches</span>
+
+<span class="sd">        n_classes: int</span>
+<span class="sd">            the possible number of classes in the output of the model</span>
+
+<span class="sd">        hook_indices: List[int]</span>
+<span class="sd">            the respective depths (starting from 0) of hooking [from, to] in the decoders</span>
+
+<span class="sd">        depth: int</span>
+<span class="sd">            the depth of the encoder-decoder branches</span>
+
+<span class="sd">        n_convs: int</span>
+<span class="sd">            the number of 2D convolutions per convolutional block</span>
+
+<span class="sd">        filter_size: int</span>
+<span class="sd">            the size of the filter in a 2D convolution</span>
+
+<span class="sd">        n_filters: intv</span>
+<span class="sd">            the number of starting filters (will be increased and decreased by a factor 2 in each conv block in the encoders and decoders, respectively)</span>
+
+<span class="sd">        padding: str</span>
+<span class="sd">            padding type in 2D convolution (either &#39;same&#39; or &#39;valid&#39;)</span>
+
+<span class="sd">        batch_norm: bool</span>
+<span class="sd">            boolean for using batch normalization</span>
+
+<span class="sd">        activation: str</span>
+<span class="sd">            activation function after 2D convolution</span>
+
+<span class="sd">        learning_rate: float</span>
+<span class="sd">            learning rate of the optimizer</span>
+
+<span class="sd">        opt_name: str</span>
+<span class="sd">            optimizer name (either &#39;sgd&#39; or &#39;adam&#39;)</span>
+
+<span class="sd">        l2_lambda: float</span>
+<span class="sd">            l2 value for regulizer</span>
+
+<span class="sd">        loss_weights: bool</span>
+<span class="sd">            loss contribution for each branch</span>
+
+<span class="sd">        merge_type: str</span>
+<span class="sd">            method used for combining feature maps (either &#39;concat&#39;, &#39;add&#39;, &#39;subtract&#39;, &#39;multiply&#39;)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">input_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">input_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;input shapes of both branches should be the same&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">check_input</span><span class="p">(</span>
+            <span class="n">depth</span><span class="o">=</span><span class="n">depth</span><span class="p">,</span>
+            <span class="n">input_size</span><span class="o">=</span><span class="n">input_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">filter_size</span><span class="o">=</span><span class="n">filter_size</span><span class="p">,</span>
+            <span class="n">n_convs</span><span class="o">=</span><span class="n">n_convs</span><span class="p">,</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;input_shapes are not valid model parameters&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_input_shape_target</span> <span class="o">=</span> <span class="n">input_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_input_shape_context</span> <span class="o">=</span> <span class="n">input_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_n_classes</span> <span class="o">=</span> <span class="n">n_classes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hook_indices</span> <span class="o">=</span> <span class="p">{(</span><span class="n">depth</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">hook_indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">hook_indices</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_depth</span> <span class="o">=</span> <span class="n">depth</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_n_convs</span> <span class="o">=</span> <span class="n">n_convs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_filter_size</span> <span class="o">=</span> <span class="n">filter_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_n_filters</span> <span class="o">=</span> <span class="n">n_filters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_padding</span> <span class="o">=</span> <span class="n">padding</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_batch_norm</span> <span class="o">=</span> <span class="n">batch_norm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_activation</span> <span class="o">=</span> <span class="n">activation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_learning_rate</span> <span class="o">=</span> <span class="n">learning_rate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_opt_name</span> <span class="o">=</span> <span class="n">opt_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_l2_lambda</span> <span class="o">=</span> <span class="n">l2_lambda</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_loss_weights</span> <span class="o">=</span> <span class="n">loss_weights</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_merge_type</span> <span class="o">=</span> <span class="n">merge_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_predict_target_only</span> <span class="o">=</span> <span class="n">predict_target_only</span>
+        <span class="c1"># set l2 regulizer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_l2</span> <span class="o">=</span> <span class="n">regularizers</span><span class="o">.</span><span class="n">l2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_l2_lambda</span><span class="p">)</span>
+
+        <span class="c1"># determine multi-loss model from loss weights</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_multi_loss</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="n">loss_weights</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="c1"># construct model</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_construct_hooknet</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">model_weights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;loading weights... </span><span class="si">{</span><span class="n">model_weights</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">load_weights</span><span class="p">(</span><span class="n">model_weights</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">input_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Return the input shape of the model&quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_shape_target</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">output_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Return the output shape of the model before flattening&quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_out_shape</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">multi_loss</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multi_loss</span>
+
+<div class="viewcode-block" id="HookNet.train_on_batch"><a class="viewcode-back" href="../../_autosummary/hooknet.model.HookNet.html#hooknet.model.HookNet.train_on_batch">[docs]</a>    <span class="k">def</span> <span class="nf">train_on_batch</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">x</span><span class="p">,</span>
+        <span class="n">y</span><span class="p">,</span>
+        <span class="n">sample_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">class_weight</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">reset_metrics</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">return_dict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="c1"># flatten</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">train_on_batch</span><span class="p">(</span>
+            <span class="n">x</span><span class="p">,</span>
+            <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
+            <span class="n">sample_weight</span><span class="o">=</span><span class="n">sample_weight</span><span class="p">,</span>
+            <span class="n">class_weight</span><span class="o">=</span><span class="n">class_weight</span><span class="p">,</span>
+            <span class="n">reset_metrics</span><span class="o">=</span><span class="n">reset_metrics</span><span class="p">,</span>
+            <span class="n">return_dict</span><span class="o">=</span><span class="n">return_dict</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="HookNet.predict_on_batch"><a class="viewcode-back" href="../../_autosummary/hooknet.model.HookNet.html#hooknet.model.HookNet.predict_on_batch">[docs]</a>    <span class="k">def</span> <span class="nf">predict_on_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">reshape</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">argmax</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">multi_loss</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_predict_target_only</span><span class="p">:</span>
+            <span class="n">predictions</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">predict_on_batch</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">predict_on_batch</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">reshape</span><span class="p">:</span>
+            <span class="n">predictions</span> <span class="o">=</span> <span class="n">predictions</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">predictions</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_out_shape</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">argmax</span><span class="p">:</span>
+            <span class="n">predictions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">predictions</span></div>
+
+    <span class="k">def</span> <span class="nf">_construct_hooknet</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Construction of single/multi-loss model with multiple inputs and single/multiple outputs&quot;&quot;&quot;</span>
+
+        <span class="c1"># declaration of context input</span>
+        <span class="n">input_2</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_input_shape_context</span><span class="p">)</span>
+
+        <span class="c1"># construction of context branch and context hooks</span>
+        <span class="n">flatten2</span><span class="p">,</span> <span class="n">context_hooks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_construct_branch</span><span class="p">(</span>
+            <span class="n">input_2</span><span class="p">,</span> <span class="n">reshape_name</span><span class="o">=</span><span class="s2">&quot;reshape_context&quot;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># declaration of target inpput</span>
+        <span class="n">input_1</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_input_shape_target</span><span class="p">)</span>
+
+        <span class="c1"># construction of target branch with context hooks</span>
+        <span class="n">flatten1</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_construct_branch</span><span class="p">(</span>
+            <span class="n">input_1</span><span class="p">,</span> <span class="n">context_hooks</span><span class="p">,</span> <span class="n">reshape_name</span><span class="o">=</span><span class="s2">&quot;reshape_target&quot;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># create single/multi loss model</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multi_loss</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_create_model</span><span class="p">([</span><span class="n">input_1</span><span class="p">,</span> <span class="n">input_2</span><span class="p">],</span> <span class="p">[</span><span class="n">flatten1</span><span class="p">,</span> <span class="n">flatten2</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_create_model</span><span class="p">([</span><span class="n">input_1</span><span class="p">,</span> <span class="n">input_2</span><span class="p">],</span> <span class="n">flatten1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_construct_branch</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">Input</span><span class="p">,</span> <span class="n">in_hooks</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">reshape_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;reshape_target&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">Dict</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Construction of single branch</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        input : Input</span>
+<span class="sd">            keras Input Tensor</span>
+<span class="sd">        in_hooks : Dict</span>
+<span class="sd">            A mapping for hooking from the context branch to the target branch</span>
+<span class="sd">        reshape_name: str</span>
+<span class="sd">            name for Reshape Tensor</span>
+
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        flatten: Tensor</span>
+<span class="sd">            last Tensor of the branch</span>
+<span class="sd">        out_hooks: Dict</span>
+<span class="sd">            mapping for hooking between branches</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># input</span>
+        <span class="n">net</span> <span class="o">=</span> <span class="nb">input</span>
+        <span class="n">net</span> <span class="o">=</span> <span class="n">Rescaling</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span> <span class="o">/</span> <span class="mf">255.0</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">)(</span><span class="n">net</span><span class="p">)</span>
+
+        <span class="c1"># encode and retreive residuals</span>
+        <span class="n">net</span><span class="p">,</span> <span class="n">residuals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_encode_path</span><span class="p">(</span><span class="n">net</span><span class="p">)</span>
+
+        <span class="c1"># mid conv block</span>
+        <span class="n">net</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_conv_block</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_filters</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+        <span class="c1"># decode and retreive hooks</span>
+        <span class="n">net</span><span class="p">,</span> <span class="n">out_hooks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decode_path</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">residuals</span><span class="p">,</span> <span class="n">in_hooks</span><span class="p">)</span>
+
+        <span class="c1"># softmax output</span>
+        <span class="n">net</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_n_classes</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;softmax&quot;</span><span class="p">)(</span><span class="n">net</span><span class="p">)</span>
+
+        <span class="c1"># set output shape</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_out_shape</span> <span class="o">=</span> <span class="n">int_shape</span><span class="p">(</span><span class="n">net</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
+
+        <span class="c1"># Reshape net</span>
+        <span class="n">flatten</span> <span class="o">=</span> <span class="n">Reshape</span><span class="p">(</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_out_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_out_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_out_shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">reshape_name</span><span class="p">,</span>
+        <span class="p">)(</span><span class="n">net</span><span class="p">)</span>
+
+        <span class="c1"># return flatten output and hooks</span>
+        <span class="k">return</span> <span class="n">flatten</span><span class="p">,</span> <span class="n">out_hooks</span>
+
+    <span class="k">def</span> <span class="nf">_create_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Input</span><span class="p">],</span> <span class="n">outputs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tensor</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creation of model</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        inputs: List[Input]</span>
+<span class="sd">            inputs to the context and target branch</span>
+<span class="sd">        output: List[Reshape]</span>
+<span class="sd">            output(s) of the (context) and target branch</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># initilization of keras model</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
+
+        <span class="c1"># set losses and loss weigths</span>
+        <span class="n">losses</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;reshape_target&quot;</span><span class="p">:</span> <span class="s2">&quot;categorical_crossentropy&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;reshape_context&quot;</span><span class="p">:</span> <span class="s2">&quot;categorical_crossentropy&quot;</span><span class="p">,</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multi_loss</span>
+            <span class="k">else</span> <span class="p">{</span><span class="s2">&quot;reshape_target&quot;</span><span class="p">:</span> <span class="s2">&quot;categorical_crossentropy&quot;</span><span class="p">}</span>
+        <span class="p">)</span>
+        <span class="n">loss_weights</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;reshape_target&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loss_weights</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="s2">&quot;reshape_context&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loss_weights</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multi_loss</span>
+            <span class="k">else</span> <span class="p">{</span><span class="s2">&quot;reshape_target&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loss_weights</span><span class="p">[</span><span class="mi">0</span><span class="p">]}</span>
+        <span class="p">)</span>
+
+        <span class="n">sample_weights_mode</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">[</span><span class="s2">&quot;temporal&quot;</span><span class="p">,</span> <span class="s2">&quot;temporal&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multi_loss</span> <span class="k">else</span> <span class="s2">&quot;temporal&quot;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># compile model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+            <span class="n">optimizer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_opt</span><span class="p">(),</span>
+            <span class="n">loss</span><span class="o">=</span><span class="n">losses</span><span class="p">,</span>
+            <span class="n">sample_weight_mode</span><span class="o">=</span><span class="n">sample_weights_mode</span><span class="p">,</span>
+            <span class="n">loss_weights</span><span class="o">=</span><span class="n">loss_weights</span><span class="p">,</span>
+            <span class="n">weighted_metrics</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">,</span> <span class="n">CategoricalCrossentropy</span><span class="p">()],</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_opt</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optimizer</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set optimizer</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        SGD or ADAM optimizer</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+
+<span class="sd">        ValueError: unsupported optimizer</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Set Gradient-descent optimizer</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_opt_name</span> <span class="o">==</span> <span class="s2">&quot;sgd&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">SGD</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_learning_rate</span><span class="p">)</span>
+
+        <span class="c1"># Set Adam optimizer</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_opt_name</span> <span class="o">==</span> <span class="s2">&quot;adam&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Adam</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_learning_rate</span><span class="p">)</span>
+
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unsupported optimizer name: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_opt_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_encode_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">net</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Tensor</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Encoder</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        net: Tensor</span>
+<span class="sd">            current Tensor in the model</span>
+
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        net: Tensor</span>
+<span class="sd">            current Tensor in the model</span>
+<span class="sd">        residuals: List[Tensors]</span>
+<span class="sd">            all the Tensors used residuals/skip connections in the decoder part of the model</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># list for keeping track for residuals/skip connections</span>
+        <span class="n">residuals</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># set start filtersize</span>
+        <span class="n">n_filters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_filters</span>
+
+        <span class="c1"># loop through depths</span>
+        <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_depth</span><span class="p">):</span>
+            <span class="c1"># apply convblock</span>
+            <span class="n">net</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_conv_block</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">n_filters</span><span class="p">)</span>
+
+            <span class="c1"># keep Tensor for residual/sip connection</span>
+            <span class="n">residuals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">net</span><span class="p">)</span>
+
+            <span class="c1"># downsample</span>
+            <span class="n">net</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_downsample</span><span class="p">(</span><span class="n">net</span><span class="p">)</span>
+
+            <span class="c1"># increase number of filters with factor 2</span>
+            <span class="n">n_filters</span> <span class="o">*=</span> <span class="mi">2</span>
+
+        <span class="k">return</span> <span class="n">net</span><span class="p">,</span> <span class="n">residuals</span>
+
+    <span class="k">def</span> <span class="nf">_decode_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">net</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">residuals</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">inhooks</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="p">{})</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Decoder</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        net: Tensor</span>
+<span class="sd">            current Tensor in the model</span>
+<span class="sd">        residuals: List[Tensors]</span>
+<span class="sd">            all the Tensors used residuals/skip connections in the decoder part of the model</span>
+<span class="sd">        in_hooks: Dict</span>
+<span class="sd">            mapping for hooking between branches</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        net: Tensor</span>
+<span class="sd">            current Tensor in the model</span>
+<span class="sd">        hooks: Dict</span>
+<span class="sd">            mapping between index and Tensor in model for hooking between branches</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># list for keeping potential hook Tensors</span>
+        <span class="n">outhooks</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># set start number of filters of decoder</span>
+        <span class="n">n_filters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_filters</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_depth</span>
+
+        <span class="c1"># loop through depth in reverse</span>
+        <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_depth</span><span class="p">)):</span>
+
+            <span class="c1"># hook if hook is available</span>
+            <span class="k">if</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">inhooks</span><span class="p">:</span>
+                <span class="c1"># combine feature maps via merge type</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_merge_type</span> <span class="o">==</span> <span class="s2">&quot;concat&quot;</span><span class="p">:</span>
+                    <span class="n">net</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_concatenator</span><span class="p">(</span>
+                        <span class="n">net</span><span class="p">,</span> <span class="n">inhooks</span><span class="p">[</span><span class="n">b</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;target-branchbottle&quot;</span>
+                    <span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">net</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_merger</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">inhooks</span><span class="p">[</span><span class="n">b</span><span class="p">])</span>
+
+            <span class="c1"># upsample</span>
+            <span class="n">net</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_upsample</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">n_filters</span><span class="p">)</span>
+
+            <span class="c1"># concatenate residuals/skip connections</span>
+            <span class="n">net</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_concatenator</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">residuals</span><span class="p">[</span><span class="n">b</span><span class="p">])</span>
+
+            <span class="c1"># apply conv block</span>
+            <span class="n">net</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_conv_block</span><span class="p">(</span><span class="n">net</span><span class="p">,</span> <span class="n">n_filters</span><span class="p">)</span>
+
+            <span class="c1"># set potential hook</span>
+            <span class="n">outhooks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">net</span><span class="p">)</span>
+
+            <span class="n">n_filters</span> <span class="o">=</span> <span class="n">n_filters</span> <span class="o">//</span> <span class="mi">2</span>
+
+        <span class="c1"># get hooks from potential hooks</span>
+        <span class="n">hooks</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">shook</span><span class="p">,</span> <span class="n">ehook</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hook_indices</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">hooks</span><span class="p">[</span><span class="n">ehook</span><span class="p">]</span> <span class="o">=</span> <span class="n">outhooks</span><span class="p">[</span><span class="n">shook</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">net</span><span class="p">,</span> <span class="n">hooks</span>
+
+    <span class="k">def</span> <span class="nf">_conv_block</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">net</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">n_filters</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">kernel_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convolutional Block</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        net: Tensor</span>
+<span class="sd">            current Tensor in the model</span>
+<span class="sd">        n_filters: int</span>
+<span class="sd">            current number of filters</span>
+<span class="sd">        kernel_size: int:</span>
+<span class="sd">            size of filter in 2d convolution</span>
+
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+
+<span class="sd">        net: Tensor</span>
+<span class="sd">            current Tensor of the model</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># loop through number of convolutions in convolution block</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_n_convs</span><span class="p">):</span>
+            <span class="c1"># apply 2D convolution</span>
+            <span class="n">net</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span>
+                <span class="n">n_filters</span><span class="p">,</span>
+                <span class="n">kernel_size</span><span class="p">,</span>
+                <span class="n">activation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_activation</span><span class="p">,</span>
+                <span class="n">kernel_initializer</span><span class="o">=</span><span class="s2">&quot;he_normal&quot;</span><span class="p">,</span>
+                <span class="n">padding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_padding</span><span class="p">,</span>
+                <span class="n">kernel_regularizer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_l2</span><span class="p">,</span>
+            <span class="p">)(</span><span class="n">net</span><span class="p">)</span>
+
+            <span class="c1"># apply batch normalization</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_batch_norm</span><span class="p">:</span>
+                <span class="n">net</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">net</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">net</span>
+
+    <span class="k">def</span> <span class="nf">_downsample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">net</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Downsampling via max pooling&quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))(</span><span class="n">net</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_upsample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">net</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">n_filters</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Upsamplign via nearest neightbour interpolation and additional convolution&quot;&quot;&quot;</span>
+
+        <span class="n">net</span> <span class="o">=</span> <span class="n">UpSampling2D</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))(</span><span class="n">net</span><span class="p">)</span>
+        <span class="n">net</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span>
+            <span class="n">n_filters</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_filter_size</span><span class="p">,</span>
+            <span class="n">activation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_activation</span><span class="p">,</span>
+            <span class="n">padding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_padding</span><span class="p">,</span>
+            <span class="n">kernel_regularizer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_l2</span><span class="p">,</span>
+        <span class="p">)(</span><span class="n">net</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">net</span>
+
+    <span class="k">def</span> <span class="nf">_concatenator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">net</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;&quot;Concatenate feature maps&quot;&quot;&quot;</span>
+
+        <span class="c1"># crop feature maps</span>
+        <span class="n">crop_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">net</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">item_cropped</span> <span class="o">=</span> <span class="n">Cropping2D</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">crop_size</span><span class="p">))(</span><span class="n">item</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">name</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">concatenate</span><span class="p">([</span><span class="n">item_cropped</span><span class="p">,</span> <span class="n">net</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">concatenate</span><span class="p">([</span><span class="n">item_cropped</span><span class="p">,</span> <span class="n">net</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_merger</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">net</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tensor</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;&quot;Combine feature maps&quot;&quot;&quot;</span>
+
+        <span class="c1"># crop feature maps</span>
+        <span class="n">crop_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">net</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">item_cropped</span> <span class="o">=</span> <span class="n">Cropping2D</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">crop_size</span><span class="p">))(</span><span class="n">item</span><span class="p">)</span>
+
+        <span class="c1"># adapt number of filters via 1x1 convolutional to allow merge</span>
+        <span class="n">current_filters</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">net</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">item_cropped</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span>
+            <span class="n">current_filters</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_activation</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_padding</span>
+        <span class="p">)(</span><span class="n">item_cropped</span><span class="p">)</span>
+
+        <span class="c1"># Combine feature maps by adding</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_merge_type</span> <span class="o">==</span> <span class="s2">&quot;add&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Add</span><span class="p">()([</span><span class="n">item_cropped</span><span class="p">,</span> <span class="n">net</span><span class="p">])</span>
+        <span class="c1"># Combine feature maps by subtracting</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_merge_type</span> <span class="o">==</span> <span class="s2">&quot;subtract&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Subtract</span><span class="p">()([</span><span class="n">item_cropped</span><span class="p">,</span> <span class="n">net</span><span class="p">])</span>
+        <span class="c1"># Combine feature maps by multiplication</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_merge_type</span> <span class="o">==</span> <span class="s2">&quot;multiply&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Multiply</span><span class="p">()([</span><span class="n">item_cropped</span><span class="p">,</span> <span class="n">net</span><span class="p">])</span>
+
+        <span class="c1"># Raise ValueError if merge type is unsupported</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unsupported merge type: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_merge_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+</pre></div>
+
+              </div>
+              
+              
+              <div class='prev-next-bottom'>
+                
+
+              </div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, Mart van Rijthoven.<br/>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.2.0.<br/>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

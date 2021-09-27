@@ -99,7 +99,48 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
   <div class="bd-toc-item active">
-    
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="hooknet.model.html">
+   hooknet.model
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hooknet.model.HookNet.html">
+     hooknet.model.HookNet
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="hooknet.utils.html">
+   hooknet.utils
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     hooknet.utils.check_input
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hooknet.utils.create_hooknet_encoder.html">
+     hooknet.utils.create_hooknet_encoder
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
   </div>
 </nav>
             </div>
@@ -136,6 +177,19 @@
                 
   <div class="section" id="hooknet-utils-check-input">
 <h1>hooknet.utils.check_input<a class="headerlink" href="#hooknet-utils-check-input" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="hooknet.utils.check_input">
+<span class="sig-name descname"><span class="pre">check_input</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_convs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hooknet/utils.html#check_input"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hooknet.utils.check_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>checks if input is valid for model configuration</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>depth (int): depth of the model
+input_size (int): shape of model (width or height)
+filter_size (int): filter size  convolutions
+n_convs (int): number of convolutions per depth</p>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 

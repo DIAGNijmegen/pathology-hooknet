@@ -99,7 +99,48 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
   <div class="bd-toc-item active">
-    
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="hooknet.model.html">
+   hooknet.model
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hooknet.model.HookNet.html">
+     hooknet.model.HookNet
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="current reference internal" href="#">
+   hooknet.utils
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hooknet.utils.check_input.html">
+     hooknet.utils.check_input
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="hooknet.utils.create_hooknet_encoder.html">
+     hooknet.utils.create_hooknet_encoder
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
   </div>
 </nav>
             </div>
@@ -134,8 +175,23 @@
               
               <div>
                 
-  <div class="section" id="hooknet-utils">
-<h1>hooknet.utils<a class="headerlink" href="#hooknet-utils" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-hooknet.utils">
+<span id="hooknet-utils"></span><h1>hooknet.utils<a class="headerlink" href="#module-hooknet.utils" title="Permalink to this headline">¶</a></h1>
+<p class="rubric">Functions</p>
+<table class="longtable table autosummary">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="hooknet.utils.check_input.html#hooknet.utils.check_input" title="hooknet.utils.check_input"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_input</span></code></a>(depth, input_size, filter_size, ...)</p></td>
+<td><p>checks if input is valid for model configuration</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="hooknet.utils.create_hooknet_encoder.html#hooknet.utils.create_hooknet_encoder" title="hooknet.utils.create_hooknet_encoder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_hooknet_encoder</span></code></a>(hooknet)</p></td>
+<td><p>Creates a new Keras model with bottleneck of the target branch as ouput after combining the context features</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 
 

@@ -1,4 +1,4 @@
-hooknet.model.HookNet
+﻿hooknet.model.HookNet
 =====================
 
 .. currentmodule:: hooknet.model
@@ -32,6 +32,7 @@ hooknet.model.HookNet
       ~HookNet.count_params
       ~HookNet.evaluate
       ~HookNet.evaluate_generator
+      ~HookNet.finalize_state
       ~HookNet.fit
       ~HookNet.fit_generator
       ~HookNet.from_config
@@ -57,6 +58,7 @@ hooknet.model.HookNet
       ~HookNet.reset_metrics
       ~HookNet.reset_states
       ~HookNet.save
+      ~HookNet.save_spec
       ~HookNet.save_weights
       ~HookNet.set_weights
       ~HookNet.summary
@@ -77,8 +79,10 @@ hooknet.model.HookNet
    .. autosummary::
    
       ~HookNet.activity_regularizer
+      ~HookNet.compute_dtype
       ~HookNet.distribute_strategy
       ~HookNet.dtype
+      ~HookNet.dtype_policy
       ~HookNet.dynamic
       ~HookNet.inbound_nodes
       ~HookNet.input
@@ -107,6 +111,7 @@ hooknet.model.HookNet
       ~HookNet.trainable_variables
       ~HookNet.trainable_weights
       ~HookNet.updates
+      ~HookNet.variable_dtype
       ~HookNet.variables
       ~HookNet.weights
    
