@@ -1,10 +1,9 @@
 HookNet Documentation
 ===============================
 
-Multi Resolution Segmentation 
+Documentation for the package hooknet
 
  - :doc:`HookNet API </_autosummary/hooknet>`
-
 
 
 .. toctree::
