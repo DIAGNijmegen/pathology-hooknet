@@ -17,7 +17,6 @@ def plot_mfmr_patches(target_patch, context_patch, size, downsampling):
                              edgecolor='lightgreen', 
                              facecolor='none')
 
-    print(downsampling_size)
     rect2 = patches.Rectangle((1,1),size-2,size-2, 
                              linewidth=4, 
                              edgecolor='lightgreen', 
