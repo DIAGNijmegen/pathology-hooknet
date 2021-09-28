@@ -179,7 +179,11 @@ class HookNet(Model):
         return_dict=False,
     ):
         # flatten
-        y = y.reshape(y.shape[0], y.shape[1] * y.shape[2], y.shape[3])
+        if self.multi_loss:
+            y = y.reshape(y.shape[0], y.shape[1], y.shape[2] * y.shape[3], y.shape[4])
+            y = list(y)
+        else:
+            y = y.reshape(y.shape[0], y.shape[1] * y.shape[2], y.shape[3])
 
         return super().train_on_batch(
             x,
@@ -192,11 +196,15 @@ class HookNet(Model):
 
     def predict_on_batch(self, x, reshape=True, argmax=True):
         if self.multi_loss and self._predict_target_only:
-            predictions = super().predict_on_batch(x)[0]
-        predictions = super().predict_on_batch(x)
+            predictions = np.array(super().predict_on_batch(x))[:, 0, :]
+        else:
+            predictions = super().predict_on_batch(x)
 
         if reshape:
-            predictions = predictions.reshape(predictions.shape[0], *self._out_shape)
+            if self.multi_loss and not self._predict_target_only:
+                predictions = predictions.reshape(predictions.shape[0], predictions.shape[1], *self._out_shape)
+            else:
+                predictions = predictions.reshape(predictions.shape[0], *self._out_shape)
 
         if argmax:
             predictions = np.argmax(predictions, axis=-1) + 1
