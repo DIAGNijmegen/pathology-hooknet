@@ -5,8 +5,9 @@
 #### Dependencies
 This code has been tested on Ubuntu 18.04, tensorflow-gpu==2.3.0
  
-#### Examples
-Please see  [HookNet - practical guide](https://github.com/DIAGNijmegen/pathology-hooknet/blob/master/notebooks/HookNetPracticalGuide.ipynb) for an example on how to train/apply HookNet
+#### Examples and Docs
+Please see  [HookNet - practical guide](https://github.com/DIAGNijmegen/pathology-hooknet/blob/master/notebooks/HookNetPracticalGuide.ipynb) for an example on how to train/apply HookNet. For the API reference please see the [Docs](https://diagnijmegen.github.io/pathology-hooknet/).
+
 
 #### Additional Information
 
