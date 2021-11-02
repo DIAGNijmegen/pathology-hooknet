@@ -196,7 +196,7 @@ class HookNet(Model):
 
     def predict_on_batch(self, x, reshape=True, argmax=True):
         if self.multi_loss and self._predict_target_only:
-            predictions = np.array(super().predict_on_batch(x))[:, 0, :]
+            predictions = np.array(super().predict_on_batch(x))[0, :]
         else:
             predictions = super().predict_on_batch(x)
 
