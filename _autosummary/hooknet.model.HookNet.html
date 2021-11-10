@@ -300,7 +300,7 @@ the input shape of the model for both branches</p></td>
 <td><p>Builds the model based on input shapes received.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.call" title="hooknet.model.HookNet.call"><code class="xref py py-obj docutils literal notranslate"><span class="pre">call</span></code></a>(inputs[, training, mask])</p></td>
-<td><p>Calls the model on new inputs.</p></td>
+<td><p>Calls the model on new inputs and returns the outputs as tensors.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.compile" title="hooknet.model.HookNet.compile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compile</span></code></a>([optimizer, loss, metrics, ...])</p></td>
 <td><p>Configures the model for training.</p></td>
@@ -410,7 +410,7 @@ the input shape of the model for both branches</p></td>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.set_weights" title="hooknet.model.HookNet.set_weights"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_weights</span></code></a>(weights)</p></td>
 <td><p>Sets the weights of the layer, from NumPy arrays.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.summary" title="hooknet.model.HookNet.summary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">summary</span></code></a>([line_length, positions, print_fn])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.summary" title="hooknet.model.HookNet.summary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">summary</span></code></a>([line_length, positions, print_fn, ...])</p></td>
 <td><p>Prints a string summary of the network.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.test_on_batch" title="hooknet.model.HookNet.test_on_batch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_on_batch</span></code></a>(x[, y, sample_weight, ...])</p></td>
@@ -483,7 +483,7 @@ the input shape of the model for both branches</p></td>
 <td><p>List of losses added using the <cite>add_loss()</cite> API.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.metrics" title="hooknet.model.HookNet.metrics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">metrics</span></code></a></p></td>
-<td><p>Returns the model's metrics added using <cite>compile</cite>, <cite>add_metric</cite> APIs.</p></td>
+<td><p>Returns the model's metrics added using <cite>compile()</cite>, <cite>add_metric()</cite> APIs.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.metrics_names" title="hooknet.model.HookNet.metrics_names"><code class="xref py py-obj docutils literal notranslate"><span class="pre">metrics_names</span></code></a></p></td>
 <td><p>Returns the model's display labels for all outputs.</p></td>
@@ -786,16 +786,16 @@ build it). It will never be called by the framework (and thus it will
 never throw unexpected errors in an unrelated workflow).</p>
 <dl>
 <dt>Args:</dt><dd><dl class="simple">
-<dt>input_shape: Single tuple, TensorShape, or list/dict of shapes, where</dt><dd><p>shapes are tuples, integers, or TensorShapes.</p>
+<dt>input_shape: Single tuple, <cite>TensorShape</cite> instance, or list/dict of shapes,</dt><dd><p>where shapes are tuples, integers, or <cite>TensorShape</cite> instances.</p>
 </dd>
 </dl>
 </dd>
 <dt>Raises:</dt><dd><dl class="simple">
 <dt>ValueError:</dt><dd><ol class="arabic simple">
 <li><p>In case of invalid user-provided data (not of type tuple,
-list, TensorShape, or dict).</p></li>
+list, <cite>TensorShape</cite>, or dict).</p></li>
 <li><p>If the model requires call arguments that are agnostic
-to the input shapes (positional or kwarg in call signature).</p></li>
+to the input shapes (positional or keyword arg in call signature).</p></li>
 <li><p>If not all layers were properly built.</p></li>
 <li><p>If float type inputs are not supported within the layers.</p></li>
 </ol>
@@ -810,14 +810,14 @@ on real tensor data.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="hooknet.model.HookNet.call">
 <span class="sig-name descname"><span class="pre">call</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">training</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hooknet.model.HookNet.call" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calls the model on new inputs.</p>
-<p>In this case <cite>call</cite> just reapplies
+<dd><p>Calls the model on new inputs and returns the outputs as tensors.</p>
+<p>In this case <cite>call()</cite> just reapplies
 all ops in the graph to the new inputs
 (e.g. build a new computational graph from the provided inputs).</p>
 <p>Note: This method should not be called directly. It is only meant to be
 overridden when subclassing <cite>tf.keras.Model</cite>.
-To call a model on an input, always use the <cite>__call__</cite> method,
-i.e. <cite>model(inputs)</cite>, which relies on the underlying <cite>call</cite> method.</p>
+To call a model on an input, always use the <cite>__call__()</cite> method,
+i.e. <cite>model(inputs)</cite>, which relies on the underlying <cite>call()</cite> method.</p>
 <dl>
 <dt>Args:</dt><dd><p>inputs: Input tensor, or dict/list/tuple of input tensors.
 training: Boolean or boolean scalar tensor, indicating whether to run</p>
@@ -825,7 +825,10 @@ training: Boolean or boolean scalar tensor, indicating whether to run</p>
 <div><p>the <cite>Network</cite> in training mode or inference mode.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>mask: A mask or list of masks. A mask can be</dt><dd><p>either a tensor or None (no mask).</p>
+<dt>mask: A mask or list of masks. A mask can be either a boolean tensor or</dt><dd><dl class="simple">
+<dt>None (no mask). For more details, check the guide</dt><dd><p>[here](<a class="reference external" href="https://www.tensorflow.org/guide/keras/masking_and_padding">https://www.tensorflow.org/guide/keras/masking_and_padding</a>).</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd>
@@ -841,7 +844,7 @@ a list of tensors if there are more than one outputs.</p>
 <dd><p>Configures the model for training.</p>
 <p>Example:</p>
 <p><a href="#id27"><span class="problematic" id="id28">``</span></a><a href="#id29"><span class="problematic" id="id30">`</span></a>python
-model.compile(optimizer=tf.keras.optimizer.Adam(learning_rate=1e-3),</p>
+model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=1e-3),</p>
 <blockquote>
 <div><p>loss=tf.keras.losses.BinaryCrossentropy(),
 metrics=[tf.keras.metrics.BinaryAccuracy(),</p>
@@ -923,11 +926,6 @@ will only be called every <cite>N</cite> batches
 </dd>
 </dl>
 <p><a href="#id35"><span class="problematic" id="id36">**</span></a>kwargs: Arguments supported for backwards compatibility only.</p>
-</dd>
-<dt>Raises:</dt><dd><dl class="simple">
-<dt>ValueError: In case of invalid arguments for</dt><dd><p><cite>optimizer</cite>, <cite>loss</cite> or <cite>metrics</cite>.</p>
-</dd>
-</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -1146,8 +1144,7 @@ or list of scalars (if the model has multiple outputs
 and/or metrics). The attribute <cite>model.metrics_names</cite> will give you
 the display labels for the scalar outputs.</p>
 </dd>
-<dt>Raises:</dt><dd><p>RuntimeError: If <cite>model.evaluate</cite> is wrapped in <cite>tf.function</cite>.
-ValueError: in case of invalid arguments.</p>
+<dt>Raises:</dt><dd><p>RuntimeError: If <cite>model.evaluate</cite> is wrapped in a <cite>tf.function</cite>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1216,7 +1213,9 @@ form of datasets, generators, or <cite>keras.utils.Sequence</cite> instances
 (since they generate batches).</p>
 </dd>
 <dt>epochs: Integer. Number of epochs to train the model.</dt><dd><p>An epoch is an iteration over the entire <cite>x</cite> and <cite>y</cite>
-data provided.
+data provided
+(unless the <cite>steps_per_epoch</cite> flag is set to
+something other than None).
 Note that in conjunction with <cite>initial_epoch</cite>,
 <cite>epochs</cite> is to be understood as “final epoch”.
 The model is not trained for a number of iterations
@@ -1510,8 +1509,6 @@ index: Integer, index of layer.</p>
 </dd>
 <dt>Returns:</dt><dd><p>A layer instance.</p>
 </dd>
-<dt>Raises:</dt><dd><p>ValueError: In case of invalid layer name or index.</p>
-</dd>
 </dl>
 </dd></dl>
 
@@ -1728,7 +1725,7 @@ already built).</p>
 <p>When loading weights in HDF5 format, returns <cite>None</cite>.</p>
 </dd>
 <dt>Raises:</dt><dd><dl class="simple">
-<dt>ImportError: If h5py is not available and the weight file is in HDF5</dt><dd><p>format.</p>
+<dt>ImportError: If <cite>h5py</cite> is not available and the weight file is in HDF5</dt><dd><p>format.</p>
 </dd>
 <dt>ValueError: If <cite>skip_mismatch</cite> is set to <cite>True</cite> when <cite>by_name</cite> is</dt><dd><p><cite>False</cite>.</p>
 </dd>
@@ -1865,7 +1862,7 @@ be passed to <cite>tf.keras.Callbacks.on_train_batch_end</cite>, such as
 <dl class="py property">
 <dt class="sig sig-object py" id="hooknet.model.HookNet.metrics">
 <em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">metrics</span></span><a class="headerlink" href="#hooknet.model.HookNet.metrics" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the model’s metrics added using <cite>compile</cite>, <cite>add_metric</cite> APIs.</p>
+<dd><p>Returns the model’s metrics added using <cite>compile()</cite>, <cite>add_metric()</cite> APIs.</p>
 <p>Note: Metrics passed to <cite>compile()</cite> are available only after a <cite>keras.Model</cite>
 has been trained/evaluated on actual data.</p>
 <p>Examples:</p>
@@ -2034,7 +2031,7 @@ more than one incoming layers.</p>
 <dd><p>Generates output predictions for the input samples.</p>
 <p>Computation is done in batches. This method is designed for performance in
 large scale inputs. For small amount of inputs that fit in one batch,
-directly using <cite>__call__</cite> is recommended for faster execution, e.g.,
+directly using <cite>__call__()</cite> is recommended for faster execution, e.g.,
 <cite>model(x)</cite>, or <cite>model(x, training=False)</cite> if you have layers such as
 <cite>tf.keras.layers.BatchNormalization</cite> that behaves differently during
 inference. Also, note the fact that test loss is not affected by
@@ -2065,7 +2062,7 @@ steps: Total number of steps (batches of samples)</p>
 <blockquote>
 <div><p>before declaring the prediction round finished.
 Ignored with the default value of <cite>None</cite>. If x is a <cite>tf.data</cite>
-dataset and <cite>steps</cite> is None, <cite>predict</cite> will
+dataset and <cite>steps</cite> is None, <cite>predict()</cite> will
 run until the input dataset is exhausted.</p>
 </div></blockquote>
 <dl class="simple">
@@ -2095,7 +2092,7 @@ three methods.</p>
 <dl>
 <dt>Returns:</dt><dd><p>Numpy array(s) of predictions.</p>
 </dd>
-<dt>Raises:</dt><dd><p>RuntimeError: If <cite>model.predict</cite> is wrapped in <cite>tf.function</cite>.
+<dt>Raises:</dt><dd><p>RuntimeError: If <cite>model.predict</cite> is wrapped in a <cite>tf.function</cite>.
 ValueError: In case of mismatch between the provided</p>
 <blockquote>
 <div><p>input data and the model’s expectations,
@@ -2121,7 +2118,7 @@ to use this endpoint.</p>
 <dt class="sig sig-object py" id="hooknet.model.HookNet.predict_on_batch">
 <span class="sig-name descname"><span class="pre">predict_on_batch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reshape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">argmax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hooknet/model.html#HookNet.predict_on_batch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hooknet.model.HookNet.predict_on_batch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns predictions for a single batch of samples.</p>
-<dl>
+<dl class="simple">
 <dt>Args:</dt><dd><dl class="simple">
 <dt>x: Input data. It could be:</dt><dd><ul class="simple">
 <li><dl class="simple">
@@ -2140,11 +2137,7 @@ to use this endpoint.</p>
 </dd>
 <dt>Returns:</dt><dd><p>Numpy array(s) of predictions.</p>
 </dd>
-<dt>Raises:</dt><dd><p>RuntimeError: If <cite>model.predict_on_batch</cite> is wrapped in <cite>tf.function</cite>.
-ValueError: In case of mismatch between given number of inputs and</p>
-<blockquote>
-<div><p>expectations of the model.</p>
-</div></blockquote>
+<dt>Raises:</dt><dd><p>RuntimeError: If <cite>model.predict_on_batch</cite> is wrapped in a <cite>tf.function</cite>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2348,10 +2341,10 @@ names. For <cite>Model.save</cite> this is the <cite>Model</cite>, and for <cite
 is the <cite>Checkpoint</cite> even if the <cite>Checkpoint</cite> has a model attached. This
 means saving a <cite>tf.keras.Model</cite> using <cite>save_weights</cite> and loading into a
 <cite>tf.train.Checkpoint</cite> with a <cite>Model</cite> attached (or vice versa) will not match
-the <cite>Model</cite>’s variables. See the [guide to training
-checkpoints](<a class="reference external" href="https://www.tensorflow.org/guide/checkpoint">https://www.tensorflow.org/guide/checkpoint</a>) for details
-on the TensorFlow format.</p>
-<dl>
+the <cite>Model</cite>’s variables. See the
+[guide to training checkpoints](<a class="reference external" href="https://www.tensorflow.org/guide/checkpoint">https://www.tensorflow.org/guide/checkpoint</a>)
+for details on the TensorFlow format.</p>
+<dl class="simple">
 <dt>Args:</dt><dd><dl class="simple">
 <dt>filepath: String or PathLike, path to the file to save the weights to.</dt><dd><p>When saving in TensorFlow format, this is the prefix used for
 checkpoint files (multiple files are generated). Note that the ‘.h5’
@@ -2367,10 +2360,9 @@ suffix causes weights to be saved in HDF5 format.</p>
 </dl>
 </dd>
 <dt>Raises:</dt><dd><dl class="simple">
-<dt>ImportError: If h5py is not available when attempting to save in HDF5</dt><dd><p>format.</p>
+<dt>ImportError: If <cite>h5py</cite> is not available when attempting to save in HDF5</dt><dd><p>format.</p>
 </dd>
 </dl>
-<p>ValueError: For invalid/unknown format arguments.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2466,7 +2458,7 @@ properties of modules which are properties of this module (and so on).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hooknet.model.HookNet.summary">
-<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_fn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hooknet.model.HookNet.summary" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_fn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expand_nested</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hooknet.model.HookNet.summary" title="Permalink to this definition">¶</a></dt>
 <dd><p>Prints a string summary of the network.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><dl class="simple">
@@ -2479,6 +2471,8 @@ defaults to <cite>[.33, .55, .67, 1.]</cite>.</p>
 <dt>print_fn: Print function to use. Defaults to <cite>print</cite>.</dt><dd><p>It will be called on each line of the summary.
 You can set it to a custom function
 in order to capture the string summary.</p>
+</dd>
+<dt>expand_nested: Whether to expand the nested models.</dt><dd><p>If not provided, defaults to <cite>False</cite>.</p>
 </dd>
 </dl>
 </dd>
@@ -2538,8 +2532,7 @@ or list of scalars (if the model has multiple outputs
 and/or metrics). The attribute <cite>model.metrics_names</cite> will give you
 the display labels for the scalar outputs.</p>
 </dd>
-<dt>Raises:</dt><dd><p>RuntimeError: If <cite>model.test_on_batch</cite> is wrapped in <cite>tf.function</cite>.
-ValueError: In case of invalid user-provided arguments.</p>
+<dt>Raises:</dt><dd><p>RuntimeError: If <cite>model.test_on_batch</cite> is wrapped in a <cite>tf.function</cite>.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2603,10 +2596,7 @@ functions / classes.</p>
 </dd>
 <dt>Returns:</dt><dd><p>A YAML string.</p>
 </dd>
-<dt>Raises:</dt><dd><dl class="simple">
-<dt>RuntimeError: announces that the method poses a security risk</dt><dd><p>(Use the safer <cite>safe_load</cite> function instead of <cite>unsafe_load</cite> when possible)</p>
-</dd>
-</dl>
+<dt>Raises:</dt><dd><p>RuntimeError: announces that the method poses a security risk</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2661,8 +2651,7 @@ or list of scalars (if the model has multiple outputs
 and/or metrics). The attribute <cite>model.metrics_names</cite> will give you
 the display labels for the scalar outputs.</p>
 </dd>
-<dt>Raises:</dt><dd><p>RuntimeError: If <cite>model.train_on_batch</cite> is wrapped in <cite>tf.function</cite>.
-ValueError: In case of invalid user-provided arguments.</p>
+<dt>Raises:</dt><dd><p>RuntimeError: If <cite>model.train_on_batch</cite> is wrapped in a <cite>tf.function</cite>.</p>
 </dd>
 </dl>
 </dd></dl>
