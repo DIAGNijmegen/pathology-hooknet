@@ -21,7 +21,7 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import SGD, Adam, Optimizer
 from tensorflow.python.framework.ops import Tensor
 from hooknet.utils import check_input
-
+from tensorflow.keras.layers import LeakyReLU
 
 class HookNet(Model):
 
@@ -491,7 +491,7 @@ class HookNet(Model):
             net = Conv2D(
                 n_filters,
                 kernel_size,
-                activation=self._activation,
+                activation=LeakyReLU(0.1),
                 kernel_initializer="he_normal",
                 padding=self._padding,
                 kernel_regularizer=self._l2,

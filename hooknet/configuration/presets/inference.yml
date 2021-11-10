@@ -1,21 +1,28 @@
-wholeslidedata:
-    default:
-        batch_shape:
-            batch_size: 1
-            shape: [[1244, 1244, 3], [1244, 1244, 3]]
-            y_shape: [2, 1030, 1030]
-            spacing: [0.5, 4.0]
-            
-        point_sampler:
-            attribute: CenterPointSampler
-          
-        patch_sampler:
-            center: True
-          
-        patch_label_sampler:
-            center: True
-          
-        sample_callbacks:
-            - module: wholeslidedata.samplers.callbacks
-              attribute: FitOutput
-              output_shape: [1030, 1030]  
+
+default:
+    annotation_parser: 
+        processing_spacing: 2.0
+        output_spacing: 0.5
+        
+    batch_shape:
+        batch_size: 1
+        shape: [[1244, 1244, 3], [1244, 1244, 3]]
+        y_shape: [2, 1030, 1030]
+        spacing: [0.5, 2.0]
+
+
+    point_sampler:
+        attribute: CenterPointSampler
+
+    patch_sampler:
+        center: True
+        relative: True
+
+    patch_label_sampler:
+        center: True
+        ratio: 4.0
+
+    sample_callbacks:
+        - module: wholeslidedata.samplers.callbacks
+          attribute: FitOutput
+          output_shape: [1030, 1030]  

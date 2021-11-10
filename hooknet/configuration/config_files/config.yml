@@ -2,13 +2,13 @@ default: &default
         model:
                 module: hooknet.model
                 attribute: HookNet
-                input_shape@replace=true: [[284,284,3], [284,284,3]]
-                n_classes: 6
-                hook_indices@replace=true: [2, 3]
+                input_shape@replace=true: [[1244,1244,3], [1244,1244,3]]
+                n_classes: 3
+                hook_indices@replace=true: [2, 4]
                 depth: 4
                 n_convs: 2
                 filter_size: 3
-                n_filters: 8
+                n_filters: 32
                 padding: valid
                 batch_norm: True
                 activation: relu
