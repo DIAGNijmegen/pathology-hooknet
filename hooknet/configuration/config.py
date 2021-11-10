@@ -14,6 +14,7 @@ class HookNetConfiguration(Configuration):
     CONFIG_PATH = pathlib.Path(__file__).absolute().parent / os.path.join(
         "config_files", "config.yml"
     )
+    PRESETS_FOLDER = pathlib.Path(__file__).absolute().parent / "presets"
     SEARCH_PATHS = ("", pathlib.Path(__file__).absolute().parent / "config_files")
 
     def __init__(self, modes=_DEFAULT_MODES, search_paths=()):
