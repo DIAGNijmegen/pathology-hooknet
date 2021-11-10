@@ -1,0 +1,20 @@
+default: &default
+        model:
+                module: hooknet.model
+                attribute: HookNet
+                input_shape@replace=true: [[284,284,3], [284,284,3]]
+                n_classes: 6
+                hook_indices@replace=true: [2, 3]
+                depth: 4
+                n_convs: 2
+                filter_size: 3
+                n_filters: 8
+                padding: valid
+                batch_norm: True
+                activation: relu
+                learning_rate: 0.000005
+                opt_name: adam  
+                l2_lambda: 0.001
+                loss_weights: [1.0, 0.0]
+                merge_type: concat
+
