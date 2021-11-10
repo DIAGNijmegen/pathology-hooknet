@@ -133,7 +133,6 @@ class HookNet(Model):
         self._n_filters = n_filters
         self._padding = padding
         self._batch_norm = batch_norm
-        self._activation = activation
         self._learning_rate = learning_rate
         self._opt_name = opt_name
         self._l2_lambda = l2_lambda
@@ -515,7 +514,7 @@ class HookNet(Model):
         net = Conv2D(
             n_filters,
             self._filter_size,
-            activation=self._activation,
+            activation=LeakyReLU(0.1),
             padding=self._padding,
             kernel_regularizer=self._l2,
         )(net)
@@ -543,7 +542,7 @@ class HookNet(Model):
         # adapt number of filters via 1x1 convolutional to allow merge
         current_filters = int(net.shape[-1])
         item_cropped = Conv2D(
-            current_filters, 1, activation=self._activation, padding=self._padding
+            current_filters, 1, activation=LeakyReLU(0.1), padding=self._padding
         )(item_cropped)
 
         # Combine feature maps by adding
