@@ -1,0 +1,45 @@
+wholeslidedata:
+    default:
+        yaml_source: inferencedata.yml
+        
+        batch_shape:
+            batch_size: 1
+            shape: [[1244, 1244, 3], [1244, 1244, 3]]
+            y_shape: [2, 1030, 1030]
+            spacing: [0.5, 8.0]
+            
+        point_sampler:
+            attribute: CenterPointSampler
+
+          
+        patch_sampler:
+            center: True
+          
+        patch_label_sampler:
+            center: True
+            ratio: 4.0
+          
+        sample_callbacks:
+            - module: wholeslidedata.samplers.callbacks
+              attribute: FitOutput
+              output_shape: [1030, 1030]  
+              
+        
+        
+hooknet:
+    default:
+        model:
+            input_shape@replace=true: [[1244,1244,3], [1244,1244,3]]
+            n_classes: 6
+            hook_indices@replace=true: [0, 4]
+            depth: 4
+            n_convs: 2
+            filter_size: 3
+            n_filters: 64
+            padding: valid
+            batch_norm: True
+            activation: relu
+            loss_weights: [0.75, 0.25]
+            merge_type: concat
+            model_weights: /home/user/weights.h5
+
