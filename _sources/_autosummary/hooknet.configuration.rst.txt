@@ -1,7 +1,7 @@
-﻿hooknet
-=======
+hooknet.configuration
+=====================
 
-.. automodule:: hooknet
+.. automodule:: hooknet.configuration
   
    
    
@@ -28,7 +28,5 @@
    :template: custom-module-template.rst                 
    :recursive:
 
-   hooknet.configuration
-   hooknet.model
-   hooknet.utils
+   hooknet.configuration.config
 
