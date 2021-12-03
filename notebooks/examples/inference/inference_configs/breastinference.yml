@@ -1,19 +1,22 @@
 wholeslidedata:
     default:
-        yaml_source: inferencedata.yml
+        yaml_source: /home/user/leslie_data.yml
         
         batch_shape:
             batch_size: 1
             shape: [[1244, 1244, 3], [1244, 1244, 3]]
             y_shape: [2, 1030, 1030]
             spacing: [0.5, 8.0]
+        
+        dataset:
+            copy_path: /home/user/data
             
         point_sampler:
             attribute: CenterPointSampler
-
           
         patch_sampler:
             center: True
+            relative: 0.5
           
         patch_label_sampler:
             center: True
@@ -41,5 +44,6 @@ hooknet:
             activation: relu
             loss_weights: [0.75, 0.25]
             merge_type: concat
+            activation: 'relu'
             model_weights: /home/user/weights.h5
 
