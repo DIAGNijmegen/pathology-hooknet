@@ -144,7 +144,7 @@ def apply(
     for image_path, annotation_path in get_paths(user_config, preset=source_preset):
         # do something with lockfile image_path
         # create lock file path
-        lock_file_path = output_folder / image_path.stem + ".lock"
+        lock_file_path = output_folder / (image_path.stem + ".lock")
 
         if lock_file_path.exists():
             continue
