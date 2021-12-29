@@ -29,6 +29,7 @@
    :recursive:
 
    hooknet.configuration
+   hooknet.inference
    hooknet.model
    hooknet.utils
 
