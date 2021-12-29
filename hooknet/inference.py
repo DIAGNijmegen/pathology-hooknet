@@ -194,11 +194,11 @@ def _parse_args():
     argument_parser.add_argument("-u", "--user_config", required=True)
     argument_parser.add_argument("-n", "--model_name", required=True)
     argument_parser.add_argument("-o", "--output_folder", required=True)
-    argument_parser.add_argument("-t", "--tmp_folder", required=True)
+    argument_parser.add_argument("-d", "--tmp_folder", required=True)
     argument_parser.add_argument("-m", "--mode", required=False)
     argument_parser.add_argument("-s", "--source_preset", required=False)
     argument_parser.add_argument("-c", "--cpus", required=False)
-    argument_parser.add_argument("-h", "--heatmaps", nargs="+", required=False)
+    argument_parser.add_argument("-t", "--heatmaps", nargs="+", required=False)
     args = vars(argument_parser.parse_args())
 
     if "mode" not in args:
