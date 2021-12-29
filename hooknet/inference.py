@@ -201,18 +201,18 @@ def _parse_args():
     argument_parser.add_argument("-t", "--heatmaps", nargs="+", required=False)
     args = vars(argument_parser.parse_args())
 
-    if "mode" not in args:
+    if "mode" not in args or not args['mode']:
         args["mode"] = "default"
 
-    if "source_preset" in args:
-        args["source_preset"] = args["source_preset"]
-    else:
+    if "source_preset" not in args or not args['source_preset']:
         args["source_preset"] = "folders"
+    else:
+        args["source_preset"] = args["source_preset"]
 
     if "cpus" not in args or not args["cpus"]:
         args["cpus"] = 1
 
-    if "heatmaps" not in args:
+    if "heatmaps" not in args or not args['heatmaps']:
         args["heatmaps"] = None
 
     return args
