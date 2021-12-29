@@ -205,9 +205,9 @@ def _parse_args():
         args["mode"] = "default"
 
     if "source_preset" in args:
-        args["source_preset"] = (args["source_preset"],)
+        args["source_preset"] = args["source_preset"]
     else:
-        args["source_preset"] = ("folders",)
+        args["source_preset"] = "folders"
 
     if "cpus" not in args or not args["cpus"]:
         args["cpus"] = 1
