@@ -154,12 +154,12 @@ def apply(
             _create_lock_file(lock_file_path=lock_file_path)
 
             # Create iterator
-            user_config = insert_paths_into_config(
+            user_config_dict = insert_paths_into_config(
                 user_config, image_path, annotation_path
             )
             iterator = create_batch_iterator(
                 mode=mode,
-                user_config=user_config,
+                user_config=user_config_dict,
                 presets=(
                     "files",
                     "slidingwindow",
@@ -172,7 +172,6 @@ def apply(
             output_paths_tmp, output_paths = _apply_single_inference(
                 iterator=iterator,
                 model=model,
-                user_config=user_config,
                 image_path=image_path,
                 output_folder=output_folder,
                 tmp_folder=tmp_folder,
