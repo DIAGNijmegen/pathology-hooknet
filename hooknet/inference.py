@@ -227,7 +227,7 @@ def main():
         output_folder=args["output_folder"],
         tmp_folder=args["tmp_folder"],
         cpus=args["cpus"],
-        source_preset=["source_preset"],
+        source_preset=args["source_preset"],
         heatmaps=args["heatmaps"],
     )
 
