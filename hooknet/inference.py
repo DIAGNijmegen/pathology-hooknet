@@ -203,7 +203,7 @@ def _parse_args():
     argument_parser.add_argument("-m", "--mode", required=False)
     argument_parser.add_argument("-s", "--source_preset", required=False)
     argument_parser.add_argument("-c", "--cpus", required=False)
-    argument_parser.add_argument("-t", "--heatmaps", nargs="+", required=False)
+    argument_parser.add_argument("-t", "--heatmaps", type=int, nargs="+", required=False)
     args = vars(argument_parser.parse_args())
 
     if "mode" not in args or not args['mode']:
