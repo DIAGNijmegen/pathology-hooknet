@@ -100,25 +100,26 @@ def _apply_single_inference(
         heatmaps=heatmaps,
     )
 
-    print('Applying...')
-    for x_batch, y_batch, info in tqdm(iterator):
-        x_batch = list(x_batch.transpose(1, 0, 2, 3, 4))
-        predictions = model.predict_on_batch(x_batch, argmax=False)
+    if writers:
+        print('Applying...')
+        for x_batch, y_batch, info in tqdm(iterator):
+            x_batch = list(x_batch.transpose(1, 0, 2, 3, 4))
+            predictions = model.predict_on_batch(x_batch, argmax=False)
 
-        for idx, prediction in enumerate(predictions):
-            point = info["sample_references"][idx]["point"]
-            c, r = point.x - OUTPUT_SIZE // 4, point.y - OUTPUT_SIZE // 4
+            for idx, prediction in enumerate(predictions):
+                point = info["sample_references"][idx]["point"]
+                c, r = point.x - OUTPUT_SIZE // 4, point.y - OUTPUT_SIZE // 4
 
-            for writer in writers.values():
-                writer.write_tile(
-                    tile=prediction,
-                    coordinates=(int(c), int(r)),
-                    mask=y_batch[idx][0],
-                )
+                for writer in writers.values():
+                    writer.write_tile(
+                        tile=prediction,
+                        coordinates=(int(c), int(r)),
+                        mask=y_batch[idx][0],
+                    )
 
-    # save predictions
-    for writer in writers.values():
-        writer.save()
+        # save predictions
+        for writer in writers.values():
+            writer.save()
 
     return output_paths_tmp, output_paths
 
