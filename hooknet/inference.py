@@ -1,7 +1,7 @@
 import traceback
 from pathlib import Path
 
-from tqdm.notebook import tqdm
+from tqdm import tqdm
 from wholeslidedata.image.wholeslideimage import WholeSlideImage
 from wholeslidedata.image.wholeslideimagewriter import (
     HeatmapTileCallback,
