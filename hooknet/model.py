@@ -21,10 +21,10 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import SGD, Adam, Optimizer
 from tensorflow.python.framework.ops import Tensor
 from hooknet.utils import check_input
-from tensorflow.keras.layers import LeakyReLU
 
 class HookNet(Model):
 
+    _build = False
     """
     HookNet: a convolutional neural network with mulitple branches of encoder-decoders for the task of semantic segmenation.
 
@@ -110,6 +110,9 @@ class HookNet(Model):
         merge_type: str
             method used for combining feature maps (either 'concat', 'add', 'subtract', 'multiply')
         """
+        if not HookNet._build:
+            super().__init__()
+            HookNet._build = True
 
         if input_shape[0] != input_shape[1]:
             raise ValueError("input shapes of both branches should be the same")
@@ -133,7 +136,6 @@ class HookNet(Model):
         self._n_filters = n_filters
         self._padding = padding
         self._batch_norm = batch_norm
-        self._activation = activation
         self._learning_rate = learning_rate
         self._opt_name = opt_name
         self._l2_lambda = l2_lambda
@@ -142,6 +144,8 @@ class HookNet(Model):
         self._predict_target_only = predict_target_only
         # set l2 regulizer
         self._l2 = regularizers.l2(self._l2_lambda)
+
+        self._activation = activation
 
         # determine multi-loss model from loss weights
         self._multi_loss = any(loss_weights[1:])
@@ -491,7 +495,7 @@ class HookNet(Model):
             net = Conv2D(
                 n_filters,
                 kernel_size,
-                activation=LeakyReLU(0.1),
+                activation=self._activation,
                 kernel_initializer="he_normal",
                 padding=self._padding,
                 kernel_regularizer=self._l2,
@@ -535,7 +539,7 @@ class HookNet(Model):
 
     def _merger(self, net: Tensor, item: Tensor) -> Tensor:
         """"Combine feature maps"""
-
+    
         # crop feature maps
         crop_size = int(item.shape[1] - net.shape[1]) / 2
         item_cropped = Cropping2D(int(crop_size))(item)

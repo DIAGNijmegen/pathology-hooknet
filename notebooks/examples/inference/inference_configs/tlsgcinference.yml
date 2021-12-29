@@ -1,0 +1,51 @@
+wholeslidedata:
+    default:
+        yaml_source: /home/user/rinda-slides.yml
+        
+        batch_shape:
+            batch_size: 1
+            shape: [[1244, 1244, 3], [1244, 1244, 3]]
+            y_shape: [2, 1030, 1030]
+            spacing: [0.5, 2.0]
+        
+        dataset:
+            copy_path: /home/user/data
+            
+        point_sampler:
+            attribute: CenterPointSampler
+          
+        patch_sampler:
+            center: True
+            relative: 0.5
+          
+        patch_label_sampler:
+            center: True
+            ratio: 4.0
+          
+        sample_callbacks:
+            - module: wholeslidedata.samplers.callbacks
+              attribute: FitOutput
+              output_shape: [1030, 1030]  
+              
+        
+        
+hooknet:
+    default:
+        model:
+            input_shape@replace=true: [[1244,1244,3], [1244,1244,3]]
+            n_classes: 3
+            hook_indices@replace=true: [2, 4]
+            depth: 4
+            n_convs: 2
+            filter_size: 3
+            n_filters: 32
+            padding: valid
+            batch_norm: True
+            activation: 
+                module: tensorflow.keras.layers
+                attribute: LeakyReLU
+                alpha: 0.1
+            loss_weights: [1.0, 0.0]
+            merge_type: concat
+            model_weights: /home/user/weights.h5
+
