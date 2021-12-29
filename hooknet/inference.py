@@ -17,7 +17,7 @@ from wholeslidedata.source.configuration.config import (
 from hooknet.configuration.config import create_hooknet
 import argparse
 from pathlib import Path
-from shutil import copy
+from shutil import copyfile
 
 SPACING = 0.5
 TILE_SIZE = 1024
@@ -34,7 +34,7 @@ def _release_lock_file(lock_file_path):
 
 def _copy_temp_path_to_output_path(output_paths_tmp, output_paths):
     for output_path_tmp, output_path in zip(output_paths_tmp, output_paths):
-       copy(output_path_tmp, output_path)
+       copyfile(output_path_tmp, output_path)
 
 def _init_writers(image_path, output_folder, tmp_folder, model_name, heatmaps):
     output_paths_tmp = []
