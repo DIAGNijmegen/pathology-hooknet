@@ -1,5 +1,4 @@
-import os
-import sys
+import traceback
 from pathlib import Path
 
 from tqdm.notebook import tqdm
@@ -182,9 +181,8 @@ def apply(
             )
 
         except Exception as e:
-            exc_type, exc_obj, exc_tb = sys.exc_info()
-            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-            print(exc_type, fname, exc_tb.tb_lineno)
+            print(e)
+            print(traceback.format_exc())
         else:
             _copy_temp_path_to_output_path(output_paths_tmp, output_paths)
         finally:
