@@ -159,7 +159,7 @@ def apply(
             )
             iterator = create_batch_iterator(
                 mode=mode,
-                user_config=user_config_dict,
+                user_config=user_config_dict['wholeslidedata'],
                 presets=(
                     "files",
                     "slidingwindow",
