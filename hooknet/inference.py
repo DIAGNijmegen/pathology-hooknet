@@ -1,3 +1,5 @@
+import os
+import sys
 from pathlib import Path
 
 from tqdm.notebook import tqdm
@@ -23,12 +25,12 @@ TILE_SIZE = 1024
 OUTPUT_SIZE = 1030
 
 
-def _create_lock_file(lock_path):
-    Path(lock_path).touch()
+def _create_lock_file(lock_file_path):
+    Path(lock_file_path).touch()
 
 
-def _release_lock_file(lock_path):
-    Path(lock_path).unlink(missing_ok=True)
+def _release_lock_file(lock_file_path):
+    Path(lock_file_path).unlink(missing_ok=True)
 
 
 def _copy_temp_path_to_output_path(output_paths_tmp, output_paths):
@@ -140,7 +142,7 @@ def apply(
     tmp_folder.mkdir(parents=True, exist_ok=True)
 
     model = create_hooknet(user_config=user_config)
-
+    iterator = None
     for image_path, annotation_path in get_paths(user_config, preset=source_preset):
         # do something with lockfile image_path
         # create lock file path
@@ -150,7 +152,7 @@ def apply(
             continue
 
         try:
-            _create_lock_file
+            _create_lock_file(lock_file_path=lock_file_path)
 
             # Create iterator
             user_config = insert_paths_into_config(
@@ -179,13 +181,16 @@ def apply(
                 heatmaps=heatmaps,
             )
 
-        except Exception as exception:
-            print(exception)
+        except Exception as e:
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            print(exc_type, fname, exc_tb.tb_lineno)
         else:
             _copy_temp_path_to_output_path(output_paths_tmp, output_paths)
         finally:
-            iterator.stop()
-            _release_lock_file(lock_file_path)
+            if iterator is not None:
+                iterator.stop()
+            _release_lock_file(lock_file_path=lock_file_path)
 
 
 def _parse_args():
