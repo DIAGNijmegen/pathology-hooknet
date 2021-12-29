@@ -91,6 +91,7 @@ def _apply_single_inference(
     heatmaps,
 ):
 
+    print('Init writers...')
     writers, output_paths_tmp, output_paths = _init_writers(
         image_path=image_path,
         output_folder=output_folder,
@@ -99,6 +100,7 @@ def _apply_single_inference(
         heatmaps=heatmaps,
     )
 
+    print('Applying...')
     for x_batch, y_batch, info in tqdm(iterator):
         x_batch = list(x_batch.transpose(1, 0, 2, 3, 4))
         predictions = model.predict_on_batch(x_batch, argmax=False)
@@ -157,6 +159,7 @@ def apply(
             user_config_dict = insert_paths_into_config(
                 user_config, image_path, annotation_path
             )
+            print('Creating iterator...')
             iterator = create_batch_iterator(
                 mode=mode,
                 user_config=user_config_dict['wholeslidedata'],
@@ -168,7 +171,7 @@ def apply(
                 number_of_batches=-1,
                 search_paths=(str(Path(user_config).parent),),
             )
-
+            print('Applying...')
             output_paths_tmp, output_paths = _apply_single_inference(
                 iterator=iterator,
                 model=model,
