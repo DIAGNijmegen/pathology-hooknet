@@ -25,8 +25,12 @@ OUTPUT_SIZE = 1030
 
 def signal_handler(*args):
     print('Entering signal handler...')
+    Path('/data/pathology/users/mart/test.lock').touch()
     exit(0)  
-
+    
+signal.signal(signal.SIGTERM, signal_handler)
+signal.signal(signal.SIGTRAP, signal_handler)
+signal.signal(signal.SIGINT, signal_handler)
 
 def _create_lock_file(lock_file_path):
     print(f'Creating lock file: {lock_file_path}')
@@ -258,7 +262,4 @@ def main():
 
 
 if __name__ == "__main__":
-    signal.signal(signal.SIGTERM, signal_handler)
-    signal.signal(signal.SIGTRAP, signal_handler)
-    signal.signal(signal.SIGINT, signal_handler)
     main()
