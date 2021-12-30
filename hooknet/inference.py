@@ -25,16 +25,21 @@ OUTPUT_SIZE = 1030
 
 
 def _create_lock_file(lock_file_path):
+    print(f'Creating lock file: {lock_file_path}')
     Path(lock_file_path).touch()
 
 
 def _release_lock_file(lock_file_path):
+    print(f'Releasing lock file {lock_file_path}')
     Path(lock_file_path).unlink(missing_ok=True)
 
 
 def _copy_temp_path_to_output_path(output_paths_tmp, output_paths):
     for output_path_tmp, output_path in zip(output_paths_tmp, output_paths):
-       copyfile(output_path_tmp, output_path)
+        print(f'Copying from: {output_path_tmp}')
+        print(f'Copying to: {output_path}')
+        copyfile(output_path_tmp, output_path)
+        print(f'Copying done.')
 
 def _init_writers(image_path, output_folder, tmp_folder, model_name, heatmaps):
     output_paths_tmp = []
@@ -60,6 +65,8 @@ def _init_writers(image_path, output_folder, tmp_folder, model_name, heatmaps):
             dimensions=shape,
             tile_shape=(TILE_SIZE, TILE_SIZE),
         )
+    else:
+        print(f'Skipping prediction for {prediction_file_name}. Prediction already exists in output folder: {output_folder}')
 
     # heatmaps
     if heatmaps is not None:
@@ -78,6 +85,8 @@ def _init_writers(image_path, output_folder, tmp_folder, model_name, heatmaps):
                     dimensions=shape,
                     tile_shape=(TILE_SIZE, TILE_SIZE),
                 )
+            else:
+                print(f'Skipping heatmap for {heatmap_file_name}. heatmap already exists in output folder: {output_folder}')
     return writers, output_paths_tmp, output_paths
 
 
@@ -120,6 +129,8 @@ def _apply_single_inference(
         # save predictions
         for writer in writers.values():
             writer.save()
+    else:
+        print(f'Nothing to process for image {image_path}')
 
     return output_paths_tmp, output_paths
 
@@ -142,12 +153,11 @@ def apply(
     tmp_folder = Path(tmp_folder)
     output_folder.mkdir(parents=True, exist_ok=True)
     tmp_folder.mkdir(parents=True, exist_ok=True)
-
+    print('Create model')
     model = create_hooknet(user_config=user_config)
     iterator = None
     for image_path, annotation_path in get_paths(user_config, preset=source_preset):
-        # do something with lockfile image_path
-        # create lock file path
+        print(f'PROCESSING: {image_path}, with {annotation_path}....')
         lock_file_path = output_folder / (image_path.stem + ".lock")
 
         if lock_file_path.exists():
@@ -155,6 +165,7 @@ def apply(
 
         try:
             def signal_handler(*args):
+                print('Entering signal handler...')
                 _release_lock_file(lock_file_path=lock_file_path)
 
             signal.signal(signal.SIGINT, signal_handler)
@@ -189,15 +200,18 @@ def apply(
             )
 
         except Exception as e:
+            print('Exception')
             print(e)
             print(traceback.format_exc())
         else:
+            print('Copying...')
             _copy_temp_path_to_output_path(output_paths_tmp, output_paths)
         finally:
             if iterator is not None:
+                print('Stopping iteratator..')
                 iterator.stop()
             _release_lock_file(lock_file_path=lock_file_path)
-
+        print('--------------')
 
 def _parse_args():
     # create argument parser
