@@ -242,8 +242,7 @@ def _parse_args():
 
 
 def main():
-    print('adding sigterm signal')
-    signal.signal(signal.SIGTRAP, signal_handler)
+
 
     args = _parse_args()
     apply(
@@ -259,4 +258,7 @@ def main():
 
 
 if __name__ == "__main__":
+    signal.signal(signal.SIGTERM, signal_handler)
+    signal.signal(signal.SIGTRAP, signal_handler)
+    signal.signal(signal.SIGINT, signal_handler)
     main()
