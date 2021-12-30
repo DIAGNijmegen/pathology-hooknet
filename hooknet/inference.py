@@ -23,6 +23,10 @@ SPACING = 0.5
 TILE_SIZE = 1024
 OUTPUT_SIZE = 1030
 
+def signal_handler(*args):
+    print('Entering signal handler...')
+    exit(0)  
+
 
 def _create_lock_file(lock_file_path):
     print(f'Creating lock file: {lock_file_path}')
@@ -164,16 +168,6 @@ def apply(
             continue
 
         try:
-            def signal_handler(*args):
-                print('Entering signal handler...')
-                _release_lock_file(lock_file_path=lock_file_path)
-
-            signal.signal(signal.SIGINT, signal_handler)
-            signal.signal(signal.SIGQUIT, signal_handler)
-            signal.signal(signal.SIGABRT, signal_handler)
-            signal.signal(signal.SIGTERM, signal_handler)
-            signal.signal(signal.SIGSEGV, signal_handler)
-
             _create_lock_file(lock_file_path=lock_file_path)
 
             # Create iterator
@@ -248,6 +242,7 @@ def _parse_args():
 
 
 def main():
+    signal.signal(signal.SIGINT, signal_handler)
     args = _parse_args()
     apply(
         user_config=args["user_config"],
