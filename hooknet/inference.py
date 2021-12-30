@@ -169,6 +169,10 @@ def apply(
                 _release_lock_file(lock_file_path=lock_file_path)
 
             signal.signal(signal.SIGINT, signal_handler)
+            signal.signal(signal.SIGQUIT, signal_handler)
+            signal.signal(signal.SIGABRT, signal_handler)
+            signal.signal(signal.SIGTERM, signal_handler)
+            signal.signal(signal.SIGSEGV, signal_handler)
 
             _create_lock_file(lock_file_path=lock_file_path)
 
