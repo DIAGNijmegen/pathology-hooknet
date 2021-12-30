@@ -1,6 +1,6 @@
 import traceback
 from pathlib import Path
-
+import signal
 from tqdm import tqdm
 from wholeslidedata.image.wholeslideimage import WholeSlideImage
 from wholeslidedata.image.wholeslideimagewriter import (
@@ -154,6 +154,11 @@ def apply(
             continue
 
         try:
+            def signal_handler(*args):
+                _release_lock_file(lock_file_path=lock_file_path)
+
+            signal.signal(signal.SIGINT, signal_handler)
+
             _create_lock_file(lock_file_path=lock_file_path)
 
             # Create iterator
