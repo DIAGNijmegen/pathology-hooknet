@@ -29,4 +29,6 @@ hooknet.configuration
    :recursive:
 
    hooknet.configuration.config
+   hooknet.configuration.config_files
+   hooknet.configuration.presets
 

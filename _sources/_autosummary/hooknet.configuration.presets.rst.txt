@@ -1,0 +1,23 @@
+hooknet.configuration.presets
+=============================
+
+.. automodule:: hooknet.configuration.presets
+  
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
