@@ -2,6 +2,7 @@ import traceback
 from pathlib import Path
 import signal
 from tqdm import tqdm
+import sys
 from wholeslidedata.image.wholeslideimage import WholeSlideImage
 from wholeslidedata.image.wholeslideimagewriter import (
     HeatmapTileCallback,
@@ -22,15 +23,6 @@ from shutil import copyfile
 SPACING = 0.5
 TILE_SIZE = 1024
 OUTPUT_SIZE = 1030
-
-def signal_handler(*args):
-    print('Entering signal handler...')
-    Path('/data/pathology/users/mart/test.lock').touch()
-    exit(0)  
-    
-signal.signal(signal.SIGTERM, signal_handler)
-signal.signal(signal.SIGTRAP, signal_handler)
-signal.signal(signal.SIGINT, signal_handler)
 
 def _create_lock_file(lock_file_path):
     print(f'Creating lock file: {lock_file_path}')
@@ -238,12 +230,21 @@ def _parse_args():
 
     if "cpus" not in args or not args["cpus"]:
         args["cpus"] = 1
+    else:
+        args['cpus'] = int(args['cpus'])
 
     if "heatmaps" not in args or not args['heatmaps']:
         args["heatmaps"] = None
 
     return args
 
+
+# def signal_handler(*args):
+#     print('Exit gracefully...')
+#     _release_lock_file()
+#     sys.exit(0)  
+
+# signal.signal(signal.SIGINT, signal_handler)
 
 def main():
 
