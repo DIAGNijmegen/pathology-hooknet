@@ -242,7 +242,11 @@ def _parse_args():
 
 
 def main():
+    print('adding sigint signal')
     signal.signal(signal.SIGINT, signal_handler)
+    print('adding sigterm signal')
+    signal.signal(signal.SIGTERM, signal_handler)
+
     args = _parse_args()
     apply(
         user_config=args["user_config"],
