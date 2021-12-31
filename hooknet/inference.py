@@ -39,6 +39,8 @@ def _copy_temp_path_to_output_path(output_paths_tmp, output_paths):
         print(f'Copying from: {output_path_tmp}')
         print(f'Copying to: {output_path}')
         copyfile(output_path_tmp, output_path)
+        print('Removing tmp file...')
+        output_path_tmp.unlink()
         print(f'Copying done.')
 
 def _init_writers(image_path, output_folder, tmp_folder, model_name, heatmaps):
@@ -161,6 +163,20 @@ def apply(
         lock_file_path = output_folder / (image_path.stem + ".lock")
 
         if lock_file_path.exists():
+            print('Lock file exists, another process is processing this image.')
+            continue
+        
+        # check if files alreay exists
+        files_exists = []
+        prediction_file_name = image_path.stem + f"_{model_name}.tif"
+        files_exists.append((output_folder / prediction_file_name).exists())
+        if heatmaps is not None:
+            for value in heatmaps:
+                heatmap_file_name = image_path.stem + f"_{model_name}_heat{value}.tif"
+                files_exists.append((output_folder / heatmap_file_name).exists())
+
+        if all(files_exists):
+            print('All ouput files already exists')
             continue
 
         try:
