@@ -82,8 +82,9 @@ def _create_writer(
     writer = TmpWholeSlideMaskWriter(
         output_path=(output_folder / file["name"]), callbacks=callbacks
     )
+    print(f'write: {(tmp_folder / file["name"])}')
     writer.write(
-        path=tmp_folder / file["name"],
+        path=(tmp_folder / file["name"]),
         spacing=real_spacing,
         dimensions=shape,
         tile_shape=(TILE_SIZE, TILE_SIZE),
