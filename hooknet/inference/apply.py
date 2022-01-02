@@ -60,7 +60,7 @@ def _execute_inference_single(
 
     # save predictions
     print("Saving...")
-    for writer in writers.values():
+    for writer in writers:
         writer.save()
 
 
