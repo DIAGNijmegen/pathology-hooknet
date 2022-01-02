@@ -45,7 +45,7 @@ class TmpWholeSlideMaskWriter(WholeSlideMaskWriter):
         print(f"Copying to: {self._output_path}")
         copyfile(self._path, self._output_path)
         print("Removing tmp file...")
-        self._path.unlink()
+        Path(self._path).unlink()
         print(f"Copying done.")
 
 
