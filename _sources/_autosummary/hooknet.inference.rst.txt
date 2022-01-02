@@ -1,0 +1,34 @@
+hooknet.inference
+=================
+
+.. automodule:: hooknet.inference
+  
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+
+
+.. rubric:: Modules
+
+.. autosummary::
+   :toctree:
+   :template: custom-module-template.rst                 
+   :recursive:
+
+   hooknet.inference.apply
+   hooknet.inference.utils
+   hooknet.inference.writing
+
