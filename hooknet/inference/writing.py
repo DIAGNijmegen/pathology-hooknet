@@ -26,7 +26,7 @@ class MaskType(Enum):
 class TmpWholeSlideMaskWriter(WholeSlideMaskWriter):
     
 
-    def __init__(self, output_path: Path, *args, **kwargs):
+    def __init__(self, output_path: Path, callbacks=(), suffix='.tif'):
         """Writes temp file and copies the tmp file to an output folder in the save method.
 
         Args:
@@ -34,7 +34,7 @@ class TmpWholeSlideMaskWriter(WholeSlideMaskWriter):
         """
 
         self._output_path = output_path
-        super().__init__(args, kwargs)
+        super().__init__(callbacks=callbacks, suffix=suffix)
 
     def save(self):
         super().save()
