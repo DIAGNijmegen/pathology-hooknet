@@ -1,4 +1,5 @@
 import argparse
+from pathlib import Path
 
 from hooknet.inference.apply import execute_inference
 
@@ -23,6 +24,9 @@ def _parse_args():
         "-t", "--heatmaps", type=int, nargs="+", required=False
     )
     args = vars(argument_parser.parse_args())
+
+    args['output_folder'] = Path(args['output_folder'])
+    args['tmp_folder'] = Path(args['tmp_folder'])
 
     if "mode" not in args or not args["mode"]:
         args["mode"] = "default"
