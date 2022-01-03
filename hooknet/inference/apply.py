@@ -80,7 +80,6 @@ def execute_inference(
     print("Create output folder")
     create_output_folders(tmp_folder=tmp_folder, output_folder=output_folder)
 
-    iterator = None
     for image_path, annotation_path in get_paths(user_config, preset=source_preset):
         print(f"PROCESSING: {image_path}, with {annotation_path}....")
 
@@ -126,14 +125,13 @@ def execute_inference(
                 output_folder=output_folder,
                 tmp_folder=tmp_folder,
             )
+            print('Stopping iterator')
+            iterator.stop()
 
         except Exception as e:
             print("Exception")
             print(e)
             print(traceback.format_exc())
         finally:
-            if iterator is not None:
-                print("Stopping iterator..")
-                iterator.stop()
             release_lock_file(lock_file_path=lock_file_path)
         print("--------------")
