@@ -2,12 +2,13 @@ import argparse
 import signal
 import sys
 from pathlib import Path
-
+import time
 from hooknet.inference.apply import execute_inference
 
 
 def signal_handler(*args):
     print("Exit gracefully...")
+    time.sleep(2)
     sys.exit(0)
 
 
