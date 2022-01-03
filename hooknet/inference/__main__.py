@@ -1,13 +1,14 @@
 import argparse
+import signal
+import sys
 from pathlib import Path
 
 from hooknet.inference.apply import execute_inference
 
-# def signal_handler(*args):
-#     print('Exit gracefully...')
-#     sys.exit(0)
 
-# signal.signal(signal.SIGINT, signal_handler)
+def signal_handler(*args):
+    print("Exit gracefully...")
+    sys.exit(0)
 
 
 def _parse_args():
@@ -25,8 +26,8 @@ def _parse_args():
     )
     args = vars(argument_parser.parse_args())
 
-    args['output_folder'] = Path(args['output_folder'])
-    args['tmp_folder'] = Path(args['tmp_folder'])
+    args["output_folder"] = Path(args["output_folder"])
+    args["tmp_folder"] = Path(args["tmp_folder"])
 
     if "mode" not in args or not args["mode"]:
         args["mode"] = "default"
@@ -48,7 +49,7 @@ def _parse_args():
 
 
 def main():
-
+    signal.signal(signal.SIGINT, signal_handler)
     args = _parse_args()
     execute_inference(
         user_config=args["user_config"],
