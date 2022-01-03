@@ -51,6 +51,7 @@ def _parse_args():
 
 def main():
     signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
     args = _parse_args()
     execute_inference(
         user_config=args["user_config"],
