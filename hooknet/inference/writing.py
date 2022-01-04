@@ -73,7 +73,7 @@ def _create_writer(
     """
 
     if file["type"] == MaskType.HEATMAP:
-        callbacks = (HeatmapTileCallback(),)
+        callbacks = (HeatmapTileCallback(heatmap_index=file['heatmap_index']),)
     elif file["type"] == MaskType.PREDICTION:
         callbacks = (PredictionTileCallback(),)
     else:

@@ -27,7 +27,7 @@ def get_files(image_path, model_name, heatmaps):
     if heatmaps is not None:
         for value in heatmaps:
             heatmap_file_name = image_path.stem + f"_{model_name}_heat{value}.tif"
-            files.append({"name": heatmap_file_name, "type": MaskType.HEATMAP})
+            files.append({"name": heatmap_file_name, "type": MaskType.HEATMAP, "heatmap_index": value})
 
     return files
 
