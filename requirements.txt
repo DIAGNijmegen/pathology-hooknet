@@ -1,2 +1,2 @@
 tensorflow_gpu==2.3.0
-numpy==1.18.5
+numpy==1.20.2

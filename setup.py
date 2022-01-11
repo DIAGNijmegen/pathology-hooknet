@@ -10,7 +10,7 @@ setup(
     url="http://pypi.python.org/pypi/hooknet/",
     license="LICENSE.txt",
     install_requires=[
-        "numpy>=1.18.5",
+        "numpy>=1.20.2",
     ],
     long_description="HookNet: multi-resolution whole-slide image segmentation",
 )
