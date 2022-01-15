@@ -1,6 +1,7 @@
+import time
 import traceback
 from pathlib import Path
-
+import numpy as np
 from hooknet.configuration.config import create_hooknet
 from hooknet.inference.utils import (
     create_lock_file,
@@ -39,10 +40,19 @@ def _execute_inference_single(
         print(f"Nothing to process for image {image_path}")
         return
 
+    prediction_times = []
+    batch_times = []
     print("Applying...")
+    index = 0
+    batch_time = -1
     for x_batch, y_batch, info in tqdm(iterator):
+        if index > 0:
+            batch_times.append(time.time()-batch_time)
         x_batch = list(x_batch.transpose(1, 0, 2, 3, 4))
+        prediction_time = time.time()
         predictions = model.predict_on_batch(x_batch, argmax=False)
+        if index > 0:
+            prediction_times.append(time.time()-prediction_time)
 
         for idx, prediction in enumerate(predictions):
             point = info["sample_references"][idx]["point"]
@@ -57,7 +67,12 @@ def _execute_inference_single(
                     coordinates=(int(c), int(r)),
                     mask=y_batch[idx][0],
                 )
+        index += 1
+        batch_time = time.time()
 
+    print(f"average batch time: {np.mean(batch_times)}")
+    print(f"average prediction time: {np.mean(prediction_times)}")
+    
     # save predictions
     print("Saving...")
     for writer in writers:
