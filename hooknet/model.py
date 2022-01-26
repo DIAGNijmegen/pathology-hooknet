@@ -355,11 +355,11 @@ class HookNet(Model):
 
         # Set Gradient-descent optimizer
         if self._opt_name == "sgd":
-            return SGD(lr=self._learning_rate)
+            return SGD(learning_rate=self._learning_rate)
 
         # Set Adam optimizer
         if self._opt_name == "adam":
-            return Adam(lr=self._learning_rate)
+            return Adam(learning_rate=self._learning_rate)
 
         raise ValueError(f"unsupported optimizer name: {self._opt_name}")
 
