@@ -4,7 +4,7 @@ import pathlib
 import os
 
 
-_DEFAULT_MODES = ("default",)
+_DEFAULT_MODES = ("training", 'validation', 'testing')
 
 
 class HookNetConfiguration(Configuration):
@@ -32,7 +32,7 @@ class HookNetConfiguration(Configuration):
         )
 
 
-def create_hooknet(user_config):
-    return HookNetConfiguration.build(user_config=user_config, modes=_DEFAULT_MODES)[
+def create_hooknet(user_config, mode):
+    return HookNetConfiguration.build(user_config=user_config, modes=(mode,))[
         HookNetConfiguration.NAME
-    ][_DEFAULT_MODES[0]]["model"]
+    ][mode]["model"]
