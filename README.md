@@ -1,5 +1,8 @@
 ###  HookNet - multi-resolution convolutional neural networks for semantic segmentation
 
+![](https://github.com/DIAGNijmegen/pathology-hooknet/blob/master/notebooks/hooknet_software.png)
+
+
 ----
 
 #### Dependencies
