@@ -32,7 +32,7 @@ class HookNetConfiguration(Configuration):
         )
 
 
-def create_hooknet(user_config, mode):
+def create_hooknet(user_config, mode='default'):
     return HookNetConfiguration.build(user_config=user_config, modes=(mode,))[
         HookNetConfiguration.NAME
     ][mode]["model"]
