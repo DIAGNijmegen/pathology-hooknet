@@ -4,6 +4,10 @@
 
 
 ----
+#### Install 
+```
+pip install hooknet
+```
 
 #### Dependencies
 This code has been tested on Ubuntu 18.04, python==3.8, tensorflow-gpu==2.3.0
