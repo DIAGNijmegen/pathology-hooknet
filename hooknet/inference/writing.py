@@ -3,7 +3,7 @@ from shutil import copyfile
 from pathlib import Path
 
 from wholeslidedata.image.wholeslideimage import WholeSlideImage
-from wholeslidedata.image.wholeslideimagewriter import (HeatmapTileCallback,
+from wholeslidedata.accessories.asap.imagewriter import (HeatmapTileCallback,
                                                         PredictionTileCallback,
                                                         WholeSlideMaskWriter)
 
