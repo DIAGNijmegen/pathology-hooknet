@@ -22,11 +22,12 @@
       ~HookNet.add_update
       ~HookNet.add_variable
       ~HookNet.add_weight
-      ~HookNet.apply
       ~HookNet.build
       ~HookNet.call
       ~HookNet.compile
+      ~HookNet.compute_loss
       ~HookNet.compute_mask
+      ~HookNet.compute_metrics
       ~HookNet.compute_output_shape
       ~HookNet.compute_output_signature
       ~HookNet.count_params
@@ -41,11 +42,9 @@
       ~HookNet.get_input_mask_at
       ~HookNet.get_input_shape_at
       ~HookNet.get_layer
-      ~HookNet.get_losses_for
       ~HookNet.get_output_at
       ~HookNet.get_output_mask_at
       ~HookNet.get_output_shape_at
-      ~HookNet.get_updates_for
       ~HookNet.get_weights
       ~HookNet.load_weights
       ~HookNet.make_predict_function

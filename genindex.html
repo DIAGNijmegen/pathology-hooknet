@@ -7,26 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Index &#8212; hooknet 0.0.2 documentation</title>
     
-    <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 <link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-  
+
     
-    <link rel="stylesheet"
-      href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-    <link rel="preload" as="font" type="font/woff2" crossorigin
-      href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-    <link rel="preload" as="font" type="font/woff2" crossorigin
-      href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
-  
-    
-      
-  
-    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/pydata-sphinx-theme.css" />
     
-    <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
-  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
@@ -40,7 +37,7 @@
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -178,8 +175,6 @@
 </li>
       <li><a href="_autosummary/hooknet.model.HookNet.html#hooknet.model.HookNet.add_weight">add_weight() (HookNet method)</a>
 </li>
-      <li><a href="_autosummary/hooknet.model.HookNet.html#hooknet.model.HookNet.apply">apply() (HookNet method)</a>
-</li>
   </ul></td>
 </tr></table>
 
@@ -202,9 +197,13 @@
 </li>
       <li><a href="_autosummary/hooknet.model.HookNet.html#hooknet.model.HookNet.compute_dtype">compute_dtype (HookNet property)</a>
 </li>
+      <li><a href="_autosummary/hooknet.model.HookNet.html#hooknet.model.HookNet.compute_loss">compute_loss() (HookNet method)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="_autosummary/hooknet.model.HookNet.html#hooknet.model.HookNet.compute_mask">compute_mask() (HookNet method)</a>
+</li>
+      <li><a href="_autosummary/hooknet.model.HookNet.html#hooknet.model.HookNet.compute_metrics">compute_metrics() (HookNet method)</a>
 </li>
       <li><a href="_autosummary/hooknet.model.HookNet.html#hooknet.model.HookNet.compute_output_shape">compute_output_shape() (HookNet method)</a>
 </li>
@@ -272,19 +271,15 @@
 </li>
       <li><a href="_autosummary/hooknet.model.HookNet.html#hooknet.model.HookNet.get_input_shape_at">get_input_shape_at() (HookNet method)</a>
 </li>
-      <li><a href="_autosummary/hooknet.model.HookNet.html#hooknet.model.HookNet.get_layer">get_layer() (HookNet method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="_autosummary/hooknet.model.HookNet.html#hooknet.model.HookNet.get_losses_for">get_losses_for() (HookNet method)</a>
+      <li><a href="_autosummary/hooknet.model.HookNet.html#hooknet.model.HookNet.get_layer">get_layer() (HookNet method)</a>
 </li>
       <li><a href="_autosummary/hooknet.model.HookNet.html#hooknet.model.HookNet.get_output_at">get_output_at() (HookNet method)</a>
 </li>
       <li><a href="_autosummary/hooknet.model.HookNet.html#hooknet.model.HookNet.get_output_mask_at">get_output_mask_at() (HookNet method)</a>
 </li>
       <li><a href="_autosummary/hooknet.model.HookNet.html#hooknet.model.HookNet.get_output_shape_at">get_output_shape_at() (HookNet method)</a>
-</li>
-      <li><a href="_autosummary/hooknet.model.HookNet.html#hooknet.model.HookNet.get_updates_for">get_updates_for() (HookNet method)</a>
 </li>
       <li><a href="_autosummary/hooknet.model.HookNet.html#hooknet.model.HookNet.get_weights">get_weights() (HookNet method)</a>
 </li>
@@ -562,8 +557,9 @@
       </div>
     </div>
   
-    <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-  <footer class="footer mt-5 mt-md-0">
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+<footer class="footer mt-5 mt-md-0">
   <div class="container">
     
     <div class="footer-item">
@@ -574,7 +570,7 @@
     
     <div class="footer-item">
       <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.4.0.<br>
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
 </p>
     </div>
     
