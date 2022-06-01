@@ -53,3 +53,6 @@ https://grand-challenge.org/algorithms/hooknet/
 You can try out a pretrained HookNet on lung tissue here:  
 https://grand-challenge.org/algorithms/hooknet-lung/
 
+### Acknowledgements
+
+Created in the [#EXAMODE](https://www.examode.eu/) project
