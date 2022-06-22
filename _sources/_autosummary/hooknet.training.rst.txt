@@ -1,7 +1,7 @@
-﻿hooknet
-=======
+hooknet.training
+================
 
-.. automodule:: hooknet
+.. automodule:: hooknet.training
   
    
    
@@ -28,9 +28,7 @@
    :template: custom-module-template.rst                 
    :recursive:
 
-   hooknet.configuration
-   hooknet.inference
-   hooknet.model
-   hooknet.training
-   hooknet.utils
+   hooknet.training.metrics
+   hooknet.training.tracker
+   hooknet.training.train
 
