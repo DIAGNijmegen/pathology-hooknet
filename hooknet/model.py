@@ -155,7 +155,7 @@ class HookNet(Model):
 
         if model_weights is not None:
             print(f"loading weights... {model_weights}")
-            self.load_weights(model_weights).expect_partial()
+            self.load_weights(model_weights)
 
     @property
     def input_shape(self) -> List[int]:
