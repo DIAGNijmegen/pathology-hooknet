@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 
 import click
+import numpy as np
 from creationism.utils import open_yaml
 from hooknet.configuration.config import create_hooknet
 from hooknet.training.metrics import (ConfusionMatrixAccumulator,
@@ -29,7 +30,7 @@ def main(iterator_config, hooknet_config, epochs, steps, cpus, project, log_path
     tracker.save(str(hooknet_config))
         
     iterators = {
-        mode: create_batch_iterator(mode=mode, user_config=iterator_config, cpus=cpus)
+        mode: create_batch_iterator(mode=mode, user_config=iterator_config, cpus=cpus, buffer_dtype=np.uint8)
         for mode in MODES
     }
 
@@ -42,7 +43,7 @@ def main(iterator_config, hooknet_config, epochs, steps, cpus, project, log_path
 
 
     label_map = open_yaml(iterator_config)['hooknet']['default']['label_map']
-
+    print(label_map)
     metrics = {
         "training": [
             MetricAccumulater("loss", "Loss+L2"),

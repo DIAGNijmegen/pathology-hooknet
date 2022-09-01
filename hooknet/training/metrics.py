@@ -65,6 +65,7 @@ class ConfusionMatrixAccumulator:
         self.reset()
 
     def __call__(self):
+        
         confusion_matrix = ConfusionMatrix(matrix=deepcopy(self._confusion_matrix))
         confusion_matrix.relabel(
             mapping={value - 1: key for key, value in self._label_map.items()}
@@ -75,15 +76,19 @@ class ConfusionMatrixAccumulator:
             for metric_name in self._metric_names
         }
         self.reset()
+        
         return metrics
 
     def update(self, y, predictions, sample_weight=None, **kwargs):
         n_classes = y.shape[-1]
+        
         actual_vector = np.argmax(y.reshape(-1, n_classes), -1)
         predict_vector = np.argmax(predictions.reshape(-1, n_classes), -1)
-
+        
+        
         if sample_weight is not None:
             sample_weight = sample_weight.reshape(-1)
+        
 
         confusion_matrix = ConfusionMatrix(
             actual_vector=actual_vector,
@@ -91,10 +96,18 @@ class ConfusionMatrixAccumulator:
             sample_weight=sample_weight,
         )
 
+
         for key, value in confusion_matrix.table.items():
-            self._confusion_matrix[key].update(value)
+            if isinstance(key, str):
+                del value['~other~']
+                value = {int(key): int(v) for key, v in value.items()}
+            if key == '~other~':
+                continue
+            self._confusion_matrix[int(key)].update(value)
+        
 
     def reset(self):
+        
         self._confusion_matrix = {}
         for label_value in self._label_map.values():
             self._confusion_matrix[label_value - 1] = Counter(
