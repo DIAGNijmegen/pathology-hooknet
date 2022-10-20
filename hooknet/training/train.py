@@ -27,6 +27,8 @@ def train(
 
     best_metric = None
     update_learning_rate = KerasUpdateLearningRate(hooknet)
+    print('training labels', iterators['training'].dataset._labels.names)
+    print('validation labels', iterators['validation'].dataset._labels.names)
     for _ in tqdm(range(epochs)):
         for mode in MODES:
             for _ in range(steps):
@@ -64,5 +66,5 @@ def train(
                     # save weights
                     print(f"Saving weights to: {weights_file}")
                     hooknet.save_weights(weights_file)
-
+    hooknet.save_weights('/home/user/last_model.h5')
 

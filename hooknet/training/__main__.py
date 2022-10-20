@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 
 import click
+import numpy as np
 from creationism.utils import open_yaml
 from hooknet.configuration.config import create_hooknet
 from hooknet.training.metrics import (ConfusionMatrixAccumulator,
@@ -20,15 +21,16 @@ from hooknet.training.train import train, MODES
 @click.option("--epochs", type=int, required=True)
 @click.option("--steps", type=int, required=True)
 @click.option("--cpus", type=int, required=True)
+@click.option("--project", type=str, required=True)
 @click.option("--log_path", type=Path, required=True)
-def main(iterator_config, hooknet_config, epochs, steps, cpus, log_path):
-    tracker = WandbTracker(project="experiment_test", log_path=log_path)
+def main(iterator_config, hooknet_config, epochs, steps, cpus, project, log_path):
+    tracker = WandbTracker(project=project, log_path=log_path)
 
     tracker.save(str(iterator_config))
     tracker.save(str(hooknet_config))
         
     iterators = {
-        mode: create_batch_iterator(mode=mode, user_config=iterator_config, cpus=cpus)
+        mode: create_batch_iterator(mode=mode, user_config=iterator_config, cpus=cpus, buffer_dtype=np.uint8)
         for mode in MODES
     }
 
@@ -40,8 +42,8 @@ def main(iterator_config, hooknet_config, epochs, steps, cpus, log_path):
     weights_file = "./hooknet_weights.h5"
 
 
-    label_map = open_yaml(iterator_config)['wholeslidedata']['default']['label_map']
-
+    label_map = open_yaml(iterator_config)['hooknet']['default']['label_map']
+    print(label_map)
     metrics = {
         "training": [
             MetricAccumulater("loss", "Loss+L2"),
