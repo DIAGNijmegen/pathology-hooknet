@@ -45,6 +45,7 @@
       ~HookNet.get_output_at
       ~HookNet.get_output_mask_at
       ~HookNet.get_output_shape_at
+      ~HookNet.get_weight_paths
       ~HookNet.get_weights
       ~HookNet.load_weights
       ~HookNet.make_predict_function

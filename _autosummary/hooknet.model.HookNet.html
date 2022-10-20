@@ -4,52 +4,75 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>hooknet.model.HookNet &#8212; hooknet 0.0.2 documentation</title>
-<script>
-  document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-  document.documentElement.dataset.theme = localStorage.getItem("theme") || "light"
-</script>
-
+  <script>
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=92025949c220c2e29695" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=92025949c220c2e29695" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1e1de1a1873e13ef5536" rel="stylesheet">
 
-
+  
   <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+    href="../_static/vendor/fontawesome/6.1.2/css/all.min.css">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+    href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+    href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=92025949c220c2e29695">
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_autosummary/hooknet.model.HookNet';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="docsearch:language" content="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
   </head>
   
   
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
-    <div class="bd-header-announcement container-fluid" id="banner">
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
       
-
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
     </div>
+  </div>
 
-    
-    <nav class="bd-header navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="bd-header__inner container-xl">
-
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
   <div id="navbar-start">
     
     
@@ -57,9 +80,15 @@
 
 
 <a class="navbar-brand logo" href="../index.html">
+
   
   
   
+  
+  
+  
+  
+
   
   
     <p class="title logo__title">hooknet 0.0.2 documentation</p>
@@ -68,35 +97,42 @@
     
   </div>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="fas fa-bars"></span>
-  </button>
-
   
-  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+  <div class="col-lg-9 navbar-header-items">
     <div id="navbar-center" class="mr-auto">
       
       <div class="navbar-center-item">
-        <ul id="navbar-main-elements" class="navbar-nav">
-    <li class="toctree-l1 nav-item">
- <a class="reference internal nav-link" href="../index.html">
-  Home page
- </a>
-</li>
-
-    
-</ul>
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">
+                        Home page
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
       </div>
       
     </div>
 
     <div id="navbar-end">
+      <div class="navbar-end-item navbar-end__search-button-container">
+        
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+      </div>
       
       <div class="navbar-end-item">
-        <span id="theme-switch" class="btn btn-sm btn-outline-primary navbar-btn rounded-circle">
-    <a class="theme-switch" data-mode="light"><i class="fas fa-sun"></i></a>
-    <a class="theme-switch" data-mode="dark"><i class="far fa-moon"></i></a>
-    <a class="theme-switch" data-mode="auto"><i class="fas fa-adjust"></i></a>
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
 </span>
       </div>
       
@@ -107,137 +143,137 @@
       
     </div>
   </div>
+
+
+  
+  <div class="search-button-container--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+  </div>
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
 </div>
-    </nav>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                <li class="nav-item">
+                    <a class="nav-link" href="../index.html">
+                        Home page
+                    </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
     
 
-    <div class="bd-container container-xl">
-      <div class="bd-container__inner row">
-          
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <span class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" data-toggle="tooltip">
+    <a class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="fa-regular fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
 
-<!-- Only show if we have sidebars configured, else just a small margin  -->
-<div class="bd-sidebar-primary col-12 col-md-3 bd-sidebar">
-  <div class="sidebar-start-items"><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-  <div class="bd-toc-item active">
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">
+    Section Navigation
+  </p>
+  <div class="bd-toc-item navbar-nav">
     <ul class="current nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="hooknet.configuration.html">
-   hooknet.configuration
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="hooknet.configuration.config_files.html">
-     hooknet.configuration.config_files
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="hooknet.configuration.presets.html">
-     hooknet.configuration.presets
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="hooknet.inference.html">
-   hooknet.inference
-  </a>
- </li>
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="hooknet.model.html">
-   hooknet.model
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     hooknet.model.HookNet
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="hooknet.training.html">
-   hooknet.training
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="hooknet.utils.html">
-   hooknet.utils
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
-  <label for="toctree-checkbox-3">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="hooknet.utils.check_input.html">
-     hooknet.utils.check_input
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="hooknet.utils.create_hooknet_encoder.html">
-     hooknet.utils.create_hooknet_encoder
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="hooknet.configuration.html">hooknet.configuration</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="hooknet.configuration.config_files.html">hooknet.configuration.config_files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hooknet.configuration.presets.html">hooknet.configuration.presets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hooknet.inference.html">hooknet.inference</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="hooknet.model.html">hooknet.model</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">hooknet.model.HookNet</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hooknet.training.html">hooknet.training</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="hooknet.utils.html">hooknet.utils</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="hooknet.utils.check_input.html">hooknet.utils.check_input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hooknet.utils.create_hooknet_encoder.html">hooknet.utils.create_hooknet_encoder</a></li>
+</ul>
+</li>
 </ul>
 
   </div>
 </nav>
-  </div>
-  <div class="sidebar-end-items">
-  </div>
-</div>
-
-
-          
-
-
-<div class="bd-sidebar-secondary d-none d-xl-block col-xl-2 bd-toc">
-  
-    
-    <div class="toc-item">
-      
-
-<nav id="bd-toc-nav">
-    
-</nav>
     </div>
-    
-    <div class="toc-item">
-      
-    </div>
-    
+  </div>
   
-</div>
 
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
 
-          
-          
-          <div class="bd-content col-12 col-md-9 col-xl-7">
-              
-              <article class="bd-article" role="main">
+      </div>
+      <main class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
                 
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
   <section id="hooknet-model-hooknet">
 <h1>hooknet.model.HookNet<a class="headerlink" href="#hooknet-model-hooknet" title="Permalink to this heading">#</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="hooknet.model.HookNet">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HookNet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hook_indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_classes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_convs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_filters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'valid'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'adam'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l2_lambda</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1.0,</span> <span class="pre">0.0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'concat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predict_target_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hooknet/model.html#HookNet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hooknet.model.HookNet" title="Permalink to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></p>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h2>
 <dl class="simple">
 <dt>input_shape<span class="classifier">List[int]</span></dt><dd><p>the input shape of the model for both branches</p>
 </dd>
@@ -273,7 +309,9 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="hooknet.model.HookNet.__init__">
 <span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shape</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hook_indices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_classes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_convs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_filters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">padding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'valid'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_norm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">activation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'relu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5e-05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'adam'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l2_lambda</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1.0,</span> <span class="pre">0.0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">merge_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'concat'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predict_target_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/hooknet/model.html#HookNet.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hooknet.model.HookNet.__init__" title="Permalink to this definition">#</a></dt>
-<dd><dl class="simple">
+<dd><section id="id1">
+<h3>Parameters<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
 <dt>input_shape<span class="classifier">List[int]</span></dt><dd><p>the input shape of the model for both branches</p>
 </dd>
 <dt>n_classes: int</dt><dd><p>the possible number of classes in the output of the model</p>
@@ -305,6 +343,7 @@
 <dt>merge_type: str</dt><dd><p>method used for combining feature maps (either ‘concat’, ‘add’, ‘subtract’, ‘multiply’)</p>
 </dd>
 </dl>
+</section>
 </dd></dl>
 
 <p class="rubric">Methods</p>
@@ -403,73 +442,76 @@ the input shape of the model for both branches</p></td>
 <tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.get_output_shape_at" title="hooknet.model.HookNet.get_output_shape_at"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_output_shape_at</span></code></a>(node_index)</p></td>
 <td><p>Retrieves the output shape(s) of a layer at a given node.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.get_weights" title="hooknet.model.HookNet.get_weights"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_weights</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.get_weight_paths" title="hooknet.model.HookNet.get_weight_paths"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_weight_paths</span></code></a>()</p></td>
+<td><p>Retrieve all the variables and their paths for the model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.get_weights" title="hooknet.model.HookNet.get_weights"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_weights</span></code></a>()</p></td>
 <td><p>Retrieves the weights of the model.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.load_weights" title="hooknet.model.HookNet.load_weights"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_weights</span></code></a>(filepath[, by_name, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.load_weights" title="hooknet.model.HookNet.load_weights"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_weights</span></code></a>(filepath[, by_name, ...])</p></td>
 <td><p>Loads all layer weights, either from a TensorFlow or an HDF5 weight file.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.make_predict_function" title="hooknet.model.HookNet.make_predict_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_predict_function</span></code></a>([force])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.make_predict_function" title="hooknet.model.HookNet.make_predict_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_predict_function</span></code></a>([force])</p></td>
 <td><p>Creates a function that executes one step of inference.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.make_test_function" title="hooknet.model.HookNet.make_test_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_test_function</span></code></a>([force])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.make_test_function" title="hooknet.model.HookNet.make_test_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_test_function</span></code></a>([force])</p></td>
 <td><p>Creates a function that executes one step of evaluation.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.make_train_function" title="hooknet.model.HookNet.make_train_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_train_function</span></code></a>([force])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.make_train_function" title="hooknet.model.HookNet.make_train_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_train_function</span></code></a>([force])</p></td>
 <td><p>Creates a function that executes one step of training.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.predict" title="hooknet.model.HookNet.predict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code></a>(x[, batch_size, verbose, steps, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.predict" title="hooknet.model.HookNet.predict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code></a>(x[, batch_size, verbose, steps, ...])</p></td>
 <td><p>Generates output predictions for the input samples.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.predict_generator" title="hooknet.model.HookNet.predict_generator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict_generator</span></code></a>(generator[, steps, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.predict_generator" title="hooknet.model.HookNet.predict_generator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict_generator</span></code></a>(generator[, steps, ...])</p></td>
 <td><p>Generates predictions for the input samples from a data generator.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.predict_on_batch" title="hooknet.model.HookNet.predict_on_batch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict_on_batch</span></code></a>(x[, reshape, argmax])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.predict_on_batch" title="hooknet.model.HookNet.predict_on_batch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict_on_batch</span></code></a>(x[, reshape, argmax])</p></td>
 <td><p>Returns predictions for a single batch of samples.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.predict_step" title="hooknet.model.HookNet.predict_step"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict_step</span></code></a>(data)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.predict_step" title="hooknet.model.HookNet.predict_step"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict_step</span></code></a>(data)</p></td>
 <td><p>The logic for one inference step.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.reset_metrics" title="hooknet.model.HookNet.reset_metrics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset_metrics</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.reset_metrics" title="hooknet.model.HookNet.reset_metrics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset_metrics</span></code></a>()</p></td>
 <td><p>Resets the state of all the metrics in the model.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset_states</span></code>()</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset_states</span></code>()</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.save" title="hooknet.model.HookNet.save"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save</span></code></a>(filepath[, overwrite, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.save" title="hooknet.model.HookNet.save"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save</span></code></a>(filepath[, overwrite, ...])</p></td>
 <td><p>Saves the model to Tensorflow SavedModel or a single HDF5 file.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.save_spec" title="hooknet.model.HookNet.save_spec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_spec</span></code></a>([dynamic_batch])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.save_spec" title="hooknet.model.HookNet.save_spec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_spec</span></code></a>([dynamic_batch])</p></td>
 <td><p>Returns the <cite>tf.TensorSpec</cite> of call inputs as a tuple <cite>(args, kwargs)</cite>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.save_weights" title="hooknet.model.HookNet.save_weights"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_weights</span></code></a>(filepath[, overwrite, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.save_weights" title="hooknet.model.HookNet.save_weights"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_weights</span></code></a>(filepath[, overwrite, ...])</p></td>
 <td><p>Saves all layer weights.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.set_weights" title="hooknet.model.HookNet.set_weights"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_weights</span></code></a>(weights)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.set_weights" title="hooknet.model.HookNet.set_weights"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_weights</span></code></a>(weights)</p></td>
 <td><p>Sets the weights of the layer, from NumPy arrays.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.summary" title="hooknet.model.HookNet.summary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">summary</span></code></a>([line_length, positions, print_fn, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.summary" title="hooknet.model.HookNet.summary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">summary</span></code></a>([line_length, positions, print_fn, ...])</p></td>
 <td><p>Prints a string summary of the network.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.test_on_batch" title="hooknet.model.HookNet.test_on_batch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_on_batch</span></code></a>(x[, y, sample_weight, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.test_on_batch" title="hooknet.model.HookNet.test_on_batch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_on_batch</span></code></a>(x[, y, sample_weight, ...])</p></td>
 <td><p>Test the model on a single batch of samples.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.test_step" title="hooknet.model.HookNet.test_step"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_step</span></code></a>(data)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.test_step" title="hooknet.model.HookNet.test_step"><code class="xref py py-obj docutils literal notranslate"><span class="pre">test_step</span></code></a>(data)</p></td>
 <td><p>The logic for one evaluation step.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.to_json" title="hooknet.model.HookNet.to_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_json</span></code></a>(**kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.to_json" title="hooknet.model.HookNet.to_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_json</span></code></a>(**kwargs)</p></td>
 <td><p>Returns a JSON string containing the network configuration.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.to_yaml" title="hooknet.model.HookNet.to_yaml"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_yaml</span></code></a>(**kwargs)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.to_yaml" title="hooknet.model.HookNet.to_yaml"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_yaml</span></code></a>(**kwargs)</p></td>
 <td><p>Returns a yaml string containing the network configuration.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.train_on_batch" title="hooknet.model.HookNet.train_on_batch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train_on_batch</span></code></a>(x, y[, sample_weight, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.train_on_batch" title="hooknet.model.HookNet.train_on_batch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train_on_batch</span></code></a>(x, y[, sample_weight, ...])</p></td>
 <td><p>Runs a single gradient update on a single batch of data.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.train_step" title="hooknet.model.HookNet.train_step"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train_step</span></code></a>(data)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.train_step" title="hooknet.model.HookNet.train_step"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train_step</span></code></a>(data)</p></td>
 <td><p>The logic for one training step.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#hooknet.model.HookNet.with_name_scope" title="hooknet.model.HookNet.with_name_scope"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_name_scope</span></code></a>(method)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#hooknet.model.HookNet.with_name_scope" title="hooknet.model.HookNet.with_name_scope"><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_name_scope</span></code></a>(method)</p></td>
 <td><p>Decorator to automatically enter the module name scope.</p></td>
 </tr>
 </tbody>
@@ -602,15 +644,15 @@ the input shape of the model for both branches</p></td>
 <dt class="sig sig-object py" id="hooknet.model.HookNet.add_loss">
 <span class="sig-name descname"><span class="pre">add_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">losses</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hooknet.model.HookNet.add_loss" title="Permalink to this definition">#</a></dt>
 <dd><p>Add loss tensor(s), potentially dependent on layer inputs.</p>
-<p>Some losses (for instance, activity regularization losses) may be dependent
-on the inputs passed when calling a layer. Hence, when reusing the same
-layer on different inputs <cite>a</cite> and <cite>b</cite>, some entries in <cite>layer.losses</cite> may
-be dependent on <cite>a</cite> and some on <cite>b</cite>. This method automatically keeps track
-of dependencies.</p>
+<p>Some losses (for instance, activity regularization losses) may be
+dependent on the inputs passed when calling a layer. Hence, when reusing
+the same layer on different inputs <cite>a</cite> and <cite>b</cite>, some entries in
+<cite>layer.losses</cite> may be dependent on <cite>a</cite> and some on <cite>b</cite>. This method
+automatically keeps track of dependencies.</p>
 <p>This method can be used inside a subclassed layer or model’s <cite>call</cite>
 function, in which case <cite>losses</cite> should be a Tensor or list of Tensors.</p>
 <p>Example:</p>
-<p><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a>python
+<p><a href="#id2"><span class="problematic" id="id3">``</span></a><a href="#id4"><span class="problematic" id="id5">`</span></a>python
 class MyLayer(tf.keras.layers.Layer):</p>
 <blockquote>
 <div><dl class="simple">
@@ -619,11 +661,12 @@ return inputs</p>
 </dd>
 </dl>
 </div></blockquote>
-<p><a href="#id5"><span class="problematic" id="id6">``</span></a><a href="#id7"><span class="problematic" id="id8">`</span></a></p>
+<p><a href="#id6"><span class="problematic" id="id7">``</span></a><a href="#id8"><span class="problematic" id="id9">`</span></a></p>
 <p>This method can also be called directly on a Functional Model during
 construction. In this case, any loss Tensors passed to this Model must
 be symbolic and be able to be traced back to the model’s <cite>Input`s. These
-losses become part of the model’s topology and are tracked in `get_config</cite>.</p>
+losses become part of the model’s topology and are tracked in
+`get_config</cite>.</p>
 <p>Example:</p>
 <p><code class="docutils literal notranslate"><span class="pre">`python</span>
 <span class="pre">inputs</span> <span class="pre">=</span> <span class="pre">tf.keras.Input(shape=(10,))</span>
@@ -633,10 +676,10 @@ losses become part of the model’s topology and are tracked in `get_config</cit
 <span class="pre">#</span> <span class="pre">Activity</span> <span class="pre">regularization.</span>
 <span class="pre">model.add_loss(tf.abs(tf.reduce_mean(x)))</span>
 <span class="pre">`</span></code></p>
-<p>If this is not the case for your loss (if, for example, your loss references
-a <cite>Variable</cite> of one of the model’s layers), you can wrap your loss in a
-zero-argument lambda. These losses are not tracked as part of the model’s
-topology since they can’t be serialized.</p>
+<p>If this is not the case for your loss (if, for example, your loss
+references a <cite>Variable</cite> of one of the model’s layers), you can wrap your
+loss in a zero-argument lambda. These losses are not tracked as part of
+the model’s topology since they can’t be serialized.</p>
 <p>Example:</p>
 <p><code class="docutils literal notranslate"><span class="pre">`python</span>
 <span class="pre">inputs</span> <span class="pre">=</span> <span class="pre">tf.keras.Input(shape=(10,))</span>
@@ -649,10 +692,11 @@ topology since they can’t be serialized.</p>
 <span class="pre">`</span></code></p>
 <dl>
 <dt>Args:</dt><dd><dl class="simple">
-<dt>losses: Loss tensor, or list/tuple of tensors. Rather than tensors, losses</dt><dd><p>may also be zero-argument callables which create a loss tensor.</p>
+<dt>losses: Loss tensor, or list/tuple of tensors. Rather than tensors,</dt><dd><p>losses may also be zero-argument callables which create a loss
+tensor.</p>
 </dd>
 </dl>
-<p><a href="#id9"><span class="problematic" id="id10">**</span></a>kwargs: Used for backwards compatibility only.</p>
+<p><a href="#id10"><span class="problematic" id="id11">**</span></a>kwargs: Used for backwards compatibility only.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -663,7 +707,7 @@ topology since they can’t be serialized.</p>
 <dd><p>Adds metric tensor to the layer.</p>
 <p>This method can be used inside the <cite>call()</cite> method of a subclassed layer
 or model.</p>
-<p><a href="#id11"><span class="problematic" id="id12">``</span></a><a href="#id13"><span class="problematic" id="id14">`</span></a>python
+<p><a href="#id12"><span class="problematic" id="id13">``</span></a><a href="#id14"><span class="problematic" id="id15">`</span></a>python
 class MyMetricLayer(tf.keras.layers.Layer):</p>
 <blockquote>
 <div><dl class="simple">
@@ -676,7 +720,7 @@ return inputs</p>
 </dd>
 </dl>
 </div></blockquote>
-<p><a href="#id15"><span class="problematic" id="id16">``</span></a><a href="#id17"><span class="problematic" id="id18">`</span></a></p>
+<p><a href="#id16"><span class="problematic" id="id17">``</span></a><a href="#id18"><span class="problematic" id="id19">`</span></a></p>
 <p>This method can also be called directly on a Functional Model during
 construction. In this case, any tensor passed to this Model must
 be symbolic and be able to be traced back to the model’s <cite>Input`s. These
@@ -690,8 +734,9 @@ save the model via `save()</cite>.</p>
 <span class="pre">model.add_metric(math_ops.reduce_sum(x),</span> <span class="pre">name='metric_1')</span>
 <span class="pre">`</span></code></p>
 <p>Note: Calling <cite>add_metric()</cite> with the result of a metric object on a
-Functional Model, as shown in the example below, is not supported. This is
-because we cannot trace the metric result tensor back to the model’s inputs.</p>
+Functional Model, as shown in the example below, is not supported. This
+is because we cannot trace the metric result tensor back to the model’s
+inputs.</p>
 <p><code class="docutils literal notranslate"><span class="pre">`python</span>
 <span class="pre">inputs</span> <span class="pre">=</span> <span class="pre">tf.keras.Input(shape=(10,))</span>
 <span class="pre">x</span> <span class="pre">=</span> <span class="pre">tf.keras.layers.Dense(10)(inputs)</span>
@@ -702,12 +747,12 @@ because we cannot trace the metric result tensor back to the model’s inputs.</
 <dl>
 <dt>Args:</dt><dd><p>value: Metric tensor.
 name: String metric name.
-<a href="#id19"><span class="problematic" id="id20">**</span></a>kwargs: Additional keyword arguments for backward compatibility.</p>
+<a href="#id20"><span class="problematic" id="id21">**</span></a>kwargs: Additional keyword arguments for backward compatibility.</p>
 <blockquote>
 <div><p>Accepted values:
-<cite>aggregation</cite> - When the <cite>value</cite> tensor provided is not the result of
-calling a <cite>keras.Metric</cite> instance, it will be aggregated by default
-using a <cite>keras.Metric.Mean</cite>.</p>
+<cite>aggregation</cite> - When the <cite>value</cite> tensor provided is not the result
+of calling a <cite>keras.Metric</cite> instance, it will be aggregated by
+default using a <cite>keras.Metric.Mean</cite>.</p>
 </div></blockquote>
 </dd>
 </dl>
@@ -717,15 +762,15 @@ using a <cite>keras.Metric.Mean</cite>.</p>
 <dt class="sig sig-object py" id="hooknet.model.HookNet.add_update">
 <span class="sig-name descname"><span class="pre">add_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">updates</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hooknet.model.HookNet.add_update" title="Permalink to this definition">#</a></dt>
 <dd><p>Add update op(s), potentially dependent on layer inputs.</p>
-<p>Weight updates (for instance, the updates of the moving mean and variance
-in a BatchNormalization layer) may be dependent on the inputs passed
-when calling a layer. Hence, when reusing the same layer on
+<p>Weight updates (for instance, the updates of the moving mean and
+variance in a BatchNormalization layer) may be dependent on the inputs
+passed when calling a layer. Hence, when reusing the same layer on
 different inputs <cite>a</cite> and <cite>b</cite>, some entries in <cite>layer.updates</cite> may be
 dependent on <cite>a</cite> and some on <cite>b</cite>. This method automatically keeps track
 of dependencies.</p>
-<p>This call is ignored when eager execution is enabled (in that case, variable
-updates are run on the fly and thus do not need to be tracked for later
-execution).</p>
+<p>This call is ignored when eager execution is enabled (in that case,
+variable updates are run on the fly and thus do not need to be tracked
+for later execution).</p>
 <dl class="simple">
 <dt>Args:</dt><dd><dl class="simple">
 <dt>updates: Update op, or list/tuple of update ops, or zero-arg callable</dt><dd><p>that returns an update op. A zero-arg callable should be passed in
@@ -761,27 +806,31 @@ Note that <cite>trainable</cite> cannot be <cite>True</cite> if <cite>synchroniz
 is set to <cite>ON_READ</cite>.</p>
 </div></blockquote>
 <p>constraint: Constraint instance (callable).
-use_resource: Whether to use <cite>ResourceVariable</cite>.
-synchronization: Indicates when a distributed a variable will be</p>
+use_resource: Whether to use a <cite>ResourceVariable</cite> or not.</p>
 <blockquote>
-<div><p>aggregated. Accepted values are constants defined in the class
-<cite>tf.VariableSynchronization</cite>. By default the synchronization is set to
-<cite>AUTO</cite> and the current <cite>DistributionStrategy</cite> chooses
-when to synchronize. If <cite>synchronization</cite> is set to <cite>ON_READ</cite>,
-<cite>trainable</cite> must not be set to <cite>True</cite>.</p>
+<div><p>See [this guide](
+<a class="reference external" href="https://www.tensorflow.org/guide/migrate/tf1_vs_tf2#resourcevariables_instead_of_referencevariables">https://www.tensorflow.org/guide/migrate/tf1_vs_tf2#resourcevariables_instead_of_referencevariables</a>)
+for more information.</p>
 </div></blockquote>
 <dl class="simple">
+<dt>synchronization: Indicates when a distributed a variable will be</dt><dd><p>aggregated. Accepted values are constants defined in the class
+<cite>tf.VariableSynchronization</cite>. By default the synchronization is set
+to <cite>AUTO</cite> and the current <cite>DistributionStrategy</cite> chooses when to
+synchronize. If <cite>synchronization</cite> is set to <cite>ON_READ</cite>, <cite>trainable</cite>
+must not be set to <cite>True</cite>.</p>
+</dd>
 <dt>aggregation: Indicates how a distributed variable will be aggregated.</dt><dd><p>Accepted values are constants defined in the class
 <cite>tf.VariableAggregation</cite>.</p>
 </dd>
-<dt><a href="#id21"><span class="problematic" id="id22">**</span></a>kwargs: Additional keyword arguments. Accepted values are <cite>getter</cite>,</dt><dd><p><cite>collections</cite>, <cite>experimental_autocast</cite> and <cite>caching_device</cite>.</p>
+<dt><a href="#id22"><span class="problematic" id="id23">**</span></a>kwargs: Additional keyword arguments. Accepted values are <cite>getter</cite>,</dt><dd><p><cite>collections</cite>, <cite>experimental_autocast</cite> and <cite>caching_device</cite>.</p>
 </dd>
 </dl>
 </dd>
 <dt>Returns:</dt><dd><p>The variable created.</p>
 </dd>
 <dt>Raises:</dt><dd><dl class="simple">
-<dt>ValueError: When giving unsupported dtype and no initializer or when</dt><dd><p>trainable has been set to True with synchronization set as <cite>ON_READ</cite>.</p>
+<dt>ValueError: When giving unsupported dtype and no initializer or when</dt><dd><p>trainable has been set to True with synchronization set as
+<cite>ON_READ</cite>.</p>
 </dd>
 </dl>
 </dd>
@@ -792,15 +841,16 @@ when to synchronize. If <cite>synchronization</cite> is set to <cite>ON_READ</ci
 <dt class="sig sig-object py" id="hooknet.model.HookNet.build">
 <span class="sig-name descname"><span class="pre">build</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_shape</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hooknet.model.HookNet.build" title="Permalink to this definition">#</a></dt>
 <dd><p>Builds the model based on input shapes received.</p>
-<p>This is to be used for subclassed models, which do not know at instantiation
-time what their inputs look like.</p>
+<p>This is to be used for subclassed models, which do not know at
+instantiation time what their inputs look like.</p>
 <p>This method only exists for users who want to call <cite>model.build()</cite> in a
 standalone way (as a substitute for calling the model on real data to
 build it). It will never be called by the framework (and thus it will
 never throw unexpected errors in an unrelated workflow).</p>
 <dl>
 <dt>Args:</dt><dd><dl class="simple">
-<dt>input_shape: Single tuple, <cite>TensorShape</cite> instance, or list/dict of shapes,</dt><dd><p>where shapes are tuples, integers, or <cite>TensorShape</cite> instances.</p>
+<dt>input_shape: Single tuple, <cite>TensorShape</cite> instance, or list/dict of</dt><dd><p>shapes, where shapes are tuples, integers, or <cite>TensorShape</cite>
+instances.</p>
 </dd>
 </dl>
 </dd>
@@ -809,14 +859,15 @@ never throw unexpected errors in an unrelated workflow).</p>
 <li><p>In case of invalid user-provided data (not of type tuple,
 list, <cite>TensorShape</cite>, or dict).</p></li>
 <li><p>If the model requires call arguments that are agnostic
-to the input shapes (positional or keyword arg in call signature).</p></li>
+to the input shapes (positional or keyword arg in call
+signature).</p></li>
 <li><p>If not all layers were properly built.</p></li>
 <li><p>If float type inputs are not supported within the layers.</p></li>
 </ol>
 </dd>
 </dl>
-<p>In each of these cases, the user should build their model by calling it
-on real tensor data.</p>
+<p>In each of these cases, the user should build their model by calling
+it on real tensor data.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -834,15 +885,13 @@ To call a model on an input, always use the <cite>__call__()</cite> method,
 i.e. <cite>model(inputs)</cite>, which relies on the underlying <cite>call()</cite> method.</p>
 <dl>
 <dt>Args:</dt><dd><p>inputs: Input tensor, or dict/list/tuple of input tensors.
-training: Boolean or boolean scalar tensor, indicating whether to run</p>
+training: Boolean or boolean scalar tensor, indicating whether to</p>
 <blockquote>
-<div><p>the <cite>Network</cite> in training mode or inference mode.</p>
+<div><p>run the <cite>Network</cite> in training mode or inference mode.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>mask: A mask or list of masks. A mask can be either a boolean tensor or</dt><dd><dl class="simple">
-<dt>None (no mask). For more details, check the guide</dt><dd><p>[here](<a class="reference external" href="https://www.tensorflow.org/guide/keras/masking_and_padding">https://www.tensorflow.org/guide/keras/masking_and_padding</a>).</p>
-</dd>
-</dl>
+<dt>mask: A mask or list of masks. A mask can be either a boolean tensor</dt><dd><p>or None (no mask). For more details, check the guide
+[here](<a class="reference external" href="https://www.tensorflow.org/guide/keras/masking_and_padding">https://www.tensorflow.org/guide/keras/masking_and_padding</a>).</p>
 </dd>
 </dl>
 </dd>
@@ -857,7 +906,7 @@ a list of tensors if there are more than one outputs.</p>
 <span class="sig-name descname"><span class="pre">compile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optimizer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'rmsprop'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_weights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weighted_metrics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_eagerly</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps_per_execution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jit_compile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hooknet.model.HookNet.compile" title="Permalink to this definition">#</a></dt>
 <dd><p>Configures the model for training.</p>
 <p>Example:</p>
-<p><a href="#id23"><span class="problematic" id="id24">``</span></a><a href="#id25"><span class="problematic" id="id26">`</span></a>python
+<p><a href="#id24"><span class="problematic" id="id25">``</span></a><a href="#id26"><span class="problematic" id="id27">`</span></a>python
 model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=1e-3),</p>
 <blockquote>
 <div><p>loss=tf.keras.losses.BinaryCrossentropy(),
@@ -866,9 +915,9 @@ metrics=[tf.keras.metrics.BinaryAccuracy(),</p>
 <div><p>tf.keras.metrics.FalseNegatives()])</p>
 </div></blockquote>
 </div></blockquote>
-<p><a href="#id27"><span class="problematic" id="id28">``</span></a><a href="#id29"><span class="problematic" id="id30">`</span></a></p>
+<p><a href="#id28"><span class="problematic" id="id29">``</span></a><a href="#id30"><span class="problematic" id="id31">`</span></a></p>
 <dl>
-<dt>Args:</dt><dd><dl>
+<dt>Args:</dt><dd><dl class="simple">
 <dt>optimizer: String (name of optimizer) or optimizer instance. See</dt><dd><p><cite>tf.keras.optimizers</cite>.</p>
 </dd>
 <dt>loss: Loss function. May be a string (name of loss function), or</dt><dd><p>a <cite>tf.keras.losses.Loss</cite> instance. See <cite>tf.keras.losses</cite>. A loss
@@ -878,47 +927,48 @@ y_pred)</cite>, where <cite>y_true</cite> are the ground truth values, and
 <cite>y_true</cite> should have shape
 <cite>(batch_size, d0, .. dN)</cite> (except in the case of
 sparse loss functions such as
-sparse categorical crossentropy which expects integer arrays of shape
-<cite>(batch_size, d0, .. dN-1)</cite>).
+sparse categorical crossentropy which expects integer arrays of
+shape <cite>(batch_size, d0, .. dN-1)</cite>).
 <cite>y_pred</cite> should have shape <cite>(batch_size, d0, .. dN)</cite>.
 The loss function should return a float tensor.
 If a custom <cite>Loss</cite> instance is
 used and reduction is set to <cite>None</cite>, return value has shape
 <cite>(batch_size, d0, .. dN-1)</cite> i.e. per-sample or per-timestep loss
-values; otherwise, it is a scalar. If the model has multiple outputs,
-you can use a different loss on each output by passing a dictionary
-or a list of losses. The loss value that will be minimized by the
-model will then be the sum of all individual losses, unless
-<cite>loss_weights</cite> is specified.</p>
+values; otherwise, it is a scalar. If the model has multiple
+outputs, you can use a different loss on each output by passing a
+dictionary or a list of losses. The loss value that will be
+minimized by the model will then be the sum of all individual
+losses, unless <cite>loss_weights</cite> is specified.</p>
 </dd>
-<dt>metrics: List of metrics to be evaluated by the model during training</dt><dd><p>and testing. Each of this can be a string (name of a built-in
-function), function or a <cite>tf.keras.metrics.Metric</cite> instance. See
-<cite>tf.keras.metrics</cite>. Typically you will use <cite>metrics=[‘accuracy’]</cite>. A
-function is any callable with the signature <cite>result = fn(y_true,
+<dt>metrics: List of metrics to be evaluated by the model during</dt><dd><p>training and testing. Each of this can be a string (name of a
+built-in function), function or a <cite>tf.keras.metrics.Metric</cite>
+instance. See <cite>tf.keras.metrics</cite>. Typically you will use
+<cite>metrics=[‘accuracy’]</cite>.
+A function is any callable with the signature <cite>result = fn(y_true,
 y_pred)</cite>. To specify different metrics for different outputs of a
 multi-output model, you could also pass a dictionary, such as
-<cite>metrics={‘output_a’: ‘accuracy’, ‘output_b’: [‘accuracy’, ‘mse’]}</cite>.
+<cite>metrics={‘output_a’:’accuracy’, ‘output_b’:[‘accuracy’, ‘mse’]}</cite>.
 You can also pass a list to specify a metric or a list of metrics
-for each output, such as <cite>metrics=[[‘accuracy’], [‘accuracy’, ‘mse’]]</cite>
+for each output, such as
+<cite>metrics=[[‘accuracy’], [‘accuracy’, ‘mse’]]</cite>
 or <cite>metrics=[‘accuracy’, [‘accuracy’, ‘mse’]]</cite>. When you pass the
 strings ‘accuracy’ or ‘acc’, we convert this to one of
 <cite>tf.keras.metrics.BinaryAccuracy</cite>,
 <cite>tf.keras.metrics.CategoricalAccuracy</cite>,
 <cite>tf.keras.metrics.SparseCategoricalAccuracy</cite> based on the loss
 function used and the model output shape. We do a similar
-conversion for the strings ‘crossentropy’ and ‘ce’ as well.</p>
+conversion for the strings ‘crossentropy’ and ‘ce’ as well.
+The metrics passed here are evaluated without sample weighting; if
+you would like sample weighting to apply, you can specify your
+metrics via the <cite>weighted_metrics</cite> argument instead.</p>
 </dd>
-<dt>loss_weights: Optional list or dictionary specifying scalar coefficients</dt><dd><p>(Python floats) to weight the loss contributions of different model
-outputs. The loss value that will be minimized by the model will then
-be the <em>weighted sum</em> of all individual losses, weighted by the
-<cite>loss_weights</cite> coefficients.</p>
-<blockquote>
-<div><dl class="simple">
-<dt>If a list, it is expected to have a 1:1 mapping to the model’s</dt><dd><p>outputs. If a dict, it is expected to map output names (strings)
-to scalar coefficients.</p>
-</dd>
-</dl>
-</div></blockquote>
+<dt>loss_weights: Optional list or dictionary specifying scalar</dt><dd><p>coefficients (Python floats) to weight the loss contributions of
+different model outputs. The loss value that will be minimized by
+the model will then be the <em>weighted sum</em> of all individual
+losses, weighted by the <cite>loss_weights</cite> coefficients.  If a list,
+it is expected to have a 1:1 mapping to the model’s outputs. If a
+dict, it is expected to map output names (strings) to scalar
+coefficients.</p>
 </dd>
 <dt>weighted_metrics: List of metrics to be evaluated and weighted by</dt><dd><p><cite>sample_weight</cite> or <cite>class_weight</cite> during training and testing.</p>
 </dd>
@@ -927,30 +977,30 @@ this as <cite>None</cite> unless your <cite>Model</cite> cannot be run inside a
 <cite>tf.function</cite>. <cite>run_eagerly=True</cite> is not supported when using
 <cite>tf.distribute.experimental.ParameterServerStrategy</cite>.</p>
 </dd>
-<dt>steps_per_execution: Int. Defaults to 1. The number of batches to run</dt><dd><p>during each <cite>tf.function</cite> call. Running multiple batches inside a
-single <cite>tf.function</cite> call can greatly improve performance on TPUs or
-small models with a large Python overhead. At most, one full epoch
-will be run each execution. If a number larger than the size of the
-epoch is passed, the execution will be truncated to the size of the
-epoch. Note that if <cite>steps_per_execution</cite> is set to <cite>N</cite>,
-<cite>Callback.on_batch_begin</cite> and <cite>Callback.on_batch_end</cite> methods will
-only be called every <cite>N</cite> batches (i.e. before/after each <cite>tf.function</cite>
-execution).</p>
+<dt>steps_per_execution: Int. Defaults to 1. The number of batches to</dt><dd><p>run during each <cite>tf.function</cite> call. Running multiple batches
+inside a single <cite>tf.function</cite> call can greatly improve performance
+on TPUs or small models with a large Python overhead. At most, one
+full epoch will be run each execution. If a number larger than the
+size of the epoch is passed, the execution will be truncated to
+the size of the epoch. Note that if <cite>steps_per_execution</cite> is set
+to <cite>N</cite>, <cite>Callback.on_batch_begin</cite> and <cite>Callback.on_batch_end</cite>
+methods will only be called every <cite>N</cite> batches (i.e. before/after
+each <cite>tf.function</cite> execution).</p>
 </dd>
-<dt>jit_compile: If <cite>True</cite>, compile the model training step with XLA.</dt><dd><p>[XLA](<a class="reference external" href="https://www.tensorflow.org/xla">https://www.tensorflow.org/xla</a>) is an optimizing compiler for
-machine learning.
+<dt>jit_compile: If <cite>True</cite>, compile the model training step with XLA.</dt><dd><p>[XLA](<a class="reference external" href="https://www.tensorflow.org/xla">https://www.tensorflow.org/xla</a>) is an optimizing compiler
+for machine learning.
 <cite>jit_compile</cite> is not enabled for by default.
 This option cannot be enabled with <cite>run_eagerly=True</cite>.
-Note that <cite>jit_compile=True</cite> is
+Note that <cite>jit_compile=True</cite>
 may not necessarily work for all models.
 For more information on supported operations please refer to the
 [XLA documentation](<a class="reference external" href="https://www.tensorflow.org/xla">https://www.tensorflow.org/xla</a>).
 Also refer to
-[known XLA issues](<a class="reference external" href="https://www.tensorflow.org/xla/known_issues">https://www.tensorflow.org/xla/known_issues</a>) for
-more details.</p>
+[known XLA issues](<a class="reference external" href="https://www.tensorflow.org/xla/known_issues">https://www.tensorflow.org/xla/known_issues</a>)
+for more details.</p>
 </dd>
 </dl>
-<p><a href="#id31"><span class="problematic" id="id32">**</span></a>kwargs: Arguments supported for backwards compatibility only.</p>
+<p><a href="#id32"><span class="problematic" id="id33">**</span></a>kwargs: Arguments supported for backwards compatibility only.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -962,13 +1012,13 @@ more details.</p>
 <p>This is equivalent to <cite>Layer.dtype_policy.compute_dtype</cite>. Unless
 mixed precision is used, this is the same as <cite>Layer.dtype</cite>, the dtype of
 the weights.</p>
-<p>Layers automatically cast their inputs to the compute dtype, which causes
-computations and the output to be in the compute dtype as well. This is done
-by the base Layer class in <cite>Layer.__call__</cite>, so you do not have to insert
-these casts if implementing your own layer.</p>
-<p>Layers often perform certain internal computations in higher precision when
-<cite>compute_dtype</cite> is float16 or bfloat16 for numeric stability. The output
-will still typically be float16 or bfloat16 in such cases.</p>
+<p>Layers automatically cast their inputs to the compute dtype, which
+causes computations and the output to be in the compute dtype as well.
+This is done by the base Layer class in <cite>Layer.__call__</cite>, so you do not
+have to insert these casts if implementing your own layer.</p>
+<p>Layers often perform certain internal computations in higher precision
+when <cite>compute_dtype</cite> is float16 or bfloat16 for numeric stability. The
+output will still typically be float16 or bfloat16 in such cases.</p>
 <dl class="simple">
 <dt>Returns:</dt><dd><p>The layer’s compute dtype.</p>
 </dd>
@@ -982,11 +1032,11 @@ will still typically be float16 or bfloat16 in such cases.</p>
 <p>Subclasses can optionally override this method to provide custom loss
 computation logic.</p>
 <p>Example:
-<a href="#id33"><span class="problematic" id="id34">``</span></a><a href="#id35"><span class="problematic" id="id36">`</span></a>python
+<a href="#id34"><span class="problematic" id="id35">``</span></a><a href="#id36"><span class="problematic" id="id37">`</span></a>python
 class MyModel(tf.keras.Model):</p>
 <blockquote>
 <div><dl class="simple">
-<dt>def __init__(self, <a href="#id37"><span class="problematic" id="id38">*</span></a>args, <a href="#id39"><span class="problematic" id="id40">**</span></a>kwargs):</dt><dd><p>super(MyModel, self).__init__(<a href="#id41"><span class="problematic" id="id42">*</span></a>args, <a href="#id43"><span class="problematic" id="id44">**</span></a>kwargs)
+<dt>def __init__(self, <a href="#id38"><span class="problematic" id="id39">*</span></a>args, <a href="#id40"><span class="problematic" id="id41">**</span></a>kwargs):</dt><dd><p>super(MyModel, self).__init__(<a href="#id42"><span class="problematic" id="id43">*</span></a>args, <a href="#id44"><span class="problematic" id="id45">**</span></a>kwargs)
 self.loss_tracker = tf.keras.metrics.Mean(name=’loss’)</p>
 </dd>
 <dt>def compute_loss(self, x, y, y_pred, sample_weight):</dt><dd><p>loss = tf.reduce_mean(tf.math.squared_difference(y_pred, y))
@@ -1013,15 +1063,15 @@ model.add_loss(tf.reduce_sum(outputs))</p>
 model.compile(optimizer, loss=’mse’, steps_per_execution=10)
 model.fit(dataset, epochs=2, steps_per_epoch=10)
 print(‘My custom loss: ‘, model.loss_tracker.result().numpy())
-<a href="#id45"><span class="problematic" id="id46">``</span></a><a href="#id47"><span class="problematic" id="id48">`</span></a></p>
+<a href="#id46"><span class="problematic" id="id47">``</span></a><a href="#id48"><span class="problematic" id="id49">`</span></a></p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>x: Input data.
 y: Target data.
 y_pred: Predictions returned by the model (output of <cite>model(x)</cite>)
 sample_weight: Sample weights for weighting the loss function.</p>
 </dd>
-<dt>Returns:</dt><dd><p>The total loss as a <cite>tf.Tensor</cite>, or <cite>None</cite> if no loss results (which is
-the case when called by <cite>Model.test_step</cite>).</p>
+<dt>Returns:</dt><dd><p>The total loss as a <cite>tf.Tensor</cite>, or <cite>None</cite> if no loss results (which
+is the case when called by <cite>Model.test_step</cite>).</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1049,13 +1099,13 @@ mask: Tensor or list of tensors.</p>
 <p>Subclasses can optionally override this method to provide custom metric
 updating and collection logic.</p>
 <p>Example:
-<a href="#id49"><span class="problematic" id="id50">``</span></a><a href="#id51"><span class="problematic" id="id52">`</span></a>python
+<a href="#id50"><span class="problematic" id="id51">``</span></a><a href="#id52"><span class="problematic" id="id53">`</span></a>python
 class MyModel(tf.keras.Sequential):</p>
 <blockquote>
 <div><p>def compute_metrics(self, x, y, y_pred, sample_weight):</p>
 <blockquote>
-<div><p># This super call updates <cite>self.compiled_metrics</cite> and returns results
-# for all metrics listed in <cite>self.metrics</cite>.
+<div><p># This super call updates <cite>self.compiled_metrics</cite> and returns
+# results for all metrics listed in <cite>self.metrics</cite>.
 metric_results = super(MyModel, self).compute_metrics(</p>
 <blockquote>
 <div><p>x, y, y_pred, sample_weight)</p>
@@ -1066,7 +1116,7 @@ metric_results[‘custom_metric_name’] = self.custom_metric.result()
 return metric_results</p>
 </div></blockquote>
 </div></blockquote>
-<p><a href="#id53"><span class="problematic" id="id54">``</span></a><a href="#id55"><span class="problematic" id="id56">`</span></a></p>
+<p><a href="#id54"><span class="problematic" id="id55">``</span></a><a href="#id56"><span class="problematic" id="id57">`</span></a></p>
 <dl class="simple">
 <dt>Args:</dt><dd><p>x: Input data.
 y: Target data.
@@ -1118,7 +1168,7 @@ assume that the output dtype matches the input dtype.</p>
 </dl>
 </dd>
 <dt>Returns:</dt><dd><dl class="simple">
-<dt>Single TensorSpec or nested structure of TensorSpec objects, describing</dt><dd><p>how the layer would transform the provided input.</p>
+<dt>Single TensorSpec or nested structure of TensorSpec objects,</dt><dd><p>describing how the layer would transform the provided input.</p>
 </dd>
 </dl>
 </dd>
@@ -1187,23 +1237,23 @@ if the model has named inputs.</p></li>
 <li><p>A <cite>tf.data</cite> dataset. Should return a tuple
 of either <cite>(inputs, targets)</cite> or
 <cite>(inputs, targets, sample_weights)</cite>.</p></li>
-<li><p>A generator or <cite>keras.utils.Sequence</cite> returning <cite>(inputs, targets)</cite>
-or <cite>(inputs, targets, sample_weights)</cite>.</p></li>
+<li><p>A generator or <cite>keras.utils.Sequence</cite> returning <cite>(inputs,
+targets)</cite> or <cite>(inputs, targets, sample_weights)</cite>.</p></li>
 </ul>
-<p>A more detailed description of unpacking behavior for iterator types
-(Dataset, generator, Sequence) is given in the <cite>Unpacking behavior
-for iterator-like inputs</cite> section of <cite>Model.fit</cite>.</p>
+<p>A more detailed description of unpacking behavior for iterator
+types (Dataset, generator, Sequence) is given in the <cite>Unpacking
+behavior for iterator-like inputs</cite> section of <cite>Model.fit</cite>.</p>
 </dd>
 <dt>y: Target data. Like the input data <cite>x</cite>, it could be either Numpy</dt><dd><p>array(s) or TensorFlow tensor(s). It should be consistent with <cite>x</cite>
-(you cannot have Numpy inputs and tensor targets, or inversely). If
-<cite>x</cite> is a dataset, generator or <cite>keras.utils.Sequence</cite> instance, <cite>y</cite>
-should not be specified (since targets will be obtained from the
-iterator/dataset).</p>
+(you cannot have Numpy inputs and tensor targets, or inversely).
+If <cite>x</cite> is a dataset, generator or <cite>keras.utils.Sequence</cite> instance,
+<cite>y</cite> should not be specified (since targets will be obtained from
+the iterator/dataset).</p>
 </dd>
-<dt>batch_size: Integer or <cite>None</cite>. Number of samples per batch of</dt><dd><p>computation. If unspecified, <cite>batch_size</cite> will default to 32. Do not
-specify the <cite>batch_size</cite> if your data is in the form of a dataset,
-generators, or <cite>keras.utils.Sequence</cite> instances (since they generate
-batches).</p>
+<dt>batch_size: Integer or <cite>None</cite>. Number of samples per batch of</dt><dd><p>computation. If unspecified, <cite>batch_size</cite> will default to 32. Do
+not specify the <cite>batch_size</cite> if your data is in the form of a
+dataset, generators, or <cite>keras.utils.Sequence</cite> instances (since
+they generate batches).</p>
 </dd>
 <dt>verbose: <cite>“auto”</cite>, 0, 1, or 2. Verbosity mode.</dt><dd><p>0 = silent, 1 = progress bar, 2 = single line.
 <cite>“auto”</cite> defaults to 1 for most cases, and to 2 when used with
@@ -1212,43 +1262,46 @@ particularly useful when logged to a file, so <cite>verbose=2</cite> is
 recommended when not running interactively (e.g. in a production
 environment).</p>
 </dd>
-<dt>sample_weight: Optional Numpy array of weights for the test samples,</dt><dd><p>used for weighting the loss function. You can either pass a flat (1D)
-Numpy array with the same length as the input samples</p>
+<dt>sample_weight: Optional Numpy array of weights for the test samples,</dt><dd><p>used for weighting the loss function. You can either pass a flat
+(1D) Numpy array with the same length as the input samples</p>
 <blockquote>
 <div><dl class="simple">
 <dt>(1:1 mapping between weights and samples), or in the case of</dt><dd><p>temporal data, you can pass a 2D array with shape <cite>(samples,
-sequence_length)</cite>, to apply a different weight to every timestep
-of every sample. This argument is not supported when <cite>x</cite> is a
-dataset, instead pass sample weights as the third element of <cite>x</cite>.</p>
+sequence_length)</cite>, to apply a different weight to every
+timestep of every sample. This argument is not supported when
+<cite>x</cite> is a dataset, instead pass sample weights as the third
+element of <cite>x</cite>.</p>
 </dd>
 </dl>
 </div></blockquote>
 </dd>
 <dt>steps: Integer or <cite>None</cite>. Total number of steps (batches of samples)</dt><dd><p>before declaring the evaluation round finished. Ignored with the
-default value of <cite>None</cite>. If x is a <cite>tf.data</cite> dataset and <cite>steps</cite> is
-None, ‘evaluate’ will run until the dataset is exhausted. This
+default value of <cite>None</cite>. If x is a <cite>tf.data</cite> dataset and <cite>steps</cite>
+is None, ‘evaluate’ will run until the dataset is exhausted. This
 argument is not supported with array inputs.</p>
 </dd>
 <dt>callbacks: List of <cite>keras.callbacks.Callback</cite> instances. List of</dt><dd><p>callbacks to apply during evaluation. See
 [callbacks](/api_docs/python/tf/keras/callbacks).</p>
 </dd>
-<dt>max_queue_size: Integer. Used for generator or <cite>keras.utils.Sequence</cite></dt><dd><p>input only. Maximum size for the generator queue. If unspecified,
-<cite>max_queue_size</cite> will default to 10.</p>
+<dt>max_queue_size: Integer. Used for generator or</dt><dd><p><cite>keras.utils.Sequence</cite> input only. Maximum size for the generator
+queue. If unspecified, <cite>max_queue_size</cite> will default to 10.</p>
 </dd>
-<dt>workers: Integer. Used for generator or <cite>keras.utils.Sequence</cite> input</dt><dd><p>only. Maximum number of processes to spin up when using process-based
-threading. If unspecified, <cite>workers</cite> will default to 1.</p>
+<dt>workers: Integer. Used for generator or <cite>keras.utils.Sequence</cite> input</dt><dd><p>only. Maximum number of processes to spin up when using
+process-based threading. If unspecified, <cite>workers</cite> will default to
+1.</p>
 </dd>
 <dt>use_multiprocessing: Boolean. Used for generator or</dt><dd><p><cite>keras.utils.Sequence</cite> input only. If <cite>True</cite>, use process-based
 threading. If unspecified, <cite>use_multiprocessing</cite> will default to
 <cite>False</cite>. Note that because this implementation relies on
-multiprocessing, you should not pass non-picklable arguments to the
-generator as they can’t be passed easily to children processes.</p>
+multiprocessing, you should not pass non-picklable arguments to
+the generator as they can’t be passed easily to children
+processes.</p>
 </dd>
-<dt>return_dict: If <cite>True</cite>, loss and metric results are returned as a dict,</dt><dd><p>with each key being the name of the metric. If <cite>False</cite>, they are
-returned as a list.</p>
+<dt>return_dict: If <cite>True</cite>, loss and metric results are returned as a</dt><dd><p>dict, with each key being the name of the metric. If <cite>False</cite>, they
+are returned as a list.</p>
 </dd>
 </dl>
-<p><a href="#id57"><span class="problematic" id="id58">**</span></a>kwargs: Unused at this time.</p>
+<p><a href="#id58"><span class="problematic" id="id59">**</span></a>kwargs: Unused at this time.</p>
 </dd>
 </dl>
 <p>See the discussion of <cite>Unpacking behavior for iterator-like inputs</cite> for
@@ -1269,8 +1322,8 @@ the display labels for the scalar outputs.</p>
 <span class="sig-name descname"><span class="pre">evaluate_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">generator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callbacks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_queue_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_multiprocessing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hooknet.model.HookNet.evaluate_generator" title="Permalink to this definition">#</a></dt>
 <dd><p>Evaluates the model on a data generator.</p>
 <dl class="simple">
-<dt>DEPRECATED:</dt><dd><p><cite>Model.evaluate</cite> now supports generators, so there is no longer any need
-to use this endpoint.</p>
+<dt>DEPRECATED:</dt><dd><p><cite>Model.evaluate</cite> now supports generators, so there is no longer any
+need to use this endpoint.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1279,9 +1332,9 @@ to use this endpoint.</p>
 <dt class="sig sig-object py" id="hooknet.model.HookNet.finalize_state">
 <span class="sig-name descname"><span class="pre">finalize_state</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hooknet.model.HookNet.finalize_state" title="Permalink to this definition">#</a></dt>
 <dd><p>Finalizes the layers state after updating layer weights.</p>
-<p>This function can be subclassed in a layer and will be called after updating
-a layer weights. It can be overridden to finalize any additional layer state
-after a weight update.</p>
+<p>This function can be subclassed in a layer and will be called after
+updating a layer weights. It can be overridden to finalize any
+additional layer state after a weight update.</p>
 <p>This function will be called after weights of a layer have been restored
 from a loaded model.</p>
 </dd></dl>
@@ -1302,8 +1355,8 @@ if the model has named inputs.</p></li>
 <li><p>A <cite>tf.data</cite> dataset. Should return a tuple
 of either <cite>(inputs, targets)</cite> or
 <cite>(inputs, targets, sample_weights)</cite>.</p></li>
-<li><p>A generator or <cite>keras.utils.Sequence</cite> returning <cite>(inputs, targets)</cite>
-or <cite>(inputs, targets, sample_weights)</cite>.</p></li>
+<li><p>A generator or <cite>keras.utils.Sequence</cite> returning <cite>(inputs,
+targets)</cite> or <cite>(inputs, targets, sample_weights)</cite>.</p></li>
 <li><p>A <cite>tf.keras.utils.experimental.DatasetCreator</cite>, which wraps a
 callable that takes a single argument of type
 <cite>tf.distribute.InputContext</cite>, and returns a <cite>tf.data.Dataset</cite>.
@@ -1312,8 +1365,11 @@ per-replica batching and sharding logic for the <cite>Dataset</cite>.
 See <cite>tf.keras.utils.experimental.DatasetCreator</cite> doc for more
 information.</p></li>
 </ul>
-<p>A more detailed description of unpacking behavior for iterator types
-(Dataset, generator, Sequence) is given below. If using
+<p>A more detailed description of unpacking behavior for iterator
+types (Dataset, generator, Sequence) is given below. If these
+include <cite>sample_weights</cite> as a third component, note that sample
+weighting applies to the <cite>weighted_metrics</cite> argument but not the
+<cite>metrics</cite> argument in <cite>compile()</cite>. If using
 <cite>tf.distribute.experimental.ParameterServerStrategy</cite>, only
 <cite>DatasetCreator</cite> type is supported for <cite>x</cite>.</p>
 </dd>
@@ -1326,8 +1382,8 @@ not be specified (since targets will be obtained from <cite>x</cite>).</p>
 <dt>batch_size: Integer or <cite>None</cite>.</dt><dd><p>Number of samples per gradient update.
 If unspecified, <cite>batch_size</cite> will default to 32.
 Do not specify the <cite>batch_size</cite> if your data is in the
-form of datasets, generators, or <cite>keras.utils.Sequence</cite> instances
-(since they generate batches).</p>
+form of datasets, generators, or <cite>keras.utils.Sequence</cite>
+instances (since they generate batches).</p>
 </dd>
 <dt>epochs: Integer. Number of epochs to train the model.</dt><dd><p>An epoch is an iteration over the entire <cite>x</cite> and <cite>y</cite>
 data provided
@@ -1347,15 +1403,16 @@ recommended when not running interactively (eg, in a production
 environment).</p>
 </dd>
 <dt>callbacks: List of <cite>keras.callbacks.Callback</cite> instances.</dt><dd><p>List of callbacks to apply during training.
-See <cite>tf.keras.callbacks</cite>. Note <cite>tf.keras.callbacks.ProgbarLogger</cite>
-and <cite>tf.keras.callbacks.History</cite> callbacks are created automatically
+See <cite>tf.keras.callbacks</cite>. Note
+<cite>tf.keras.callbacks.ProgbarLogger</cite> and
+<cite>tf.keras.callbacks.History</cite> callbacks are created automatically
 and need not be passed into <cite>model.fit</cite>.
 <cite>tf.keras.callbacks.ProgbarLogger</cite> is created or not based on
 <cite>verbose</cite> argument to <cite>model.fit</cite>.
 Callbacks with batch-level calls are currently unsupported with
-<cite>tf.distribute.experimental.ParameterServerStrategy</cite>, and users are
-advised to implement epoch-level calls instead with an appropriate
-<cite>steps_per_epoch</cite> value.</p>
+<cite>tf.distribute.experimental.ParameterServerStrategy</cite>, and users
+are advised to implement epoch-level calls instead with an
+appropriate <cite>steps_per_epoch</cite> value.</p>
 </dd>
 <dt>validation_split: Float between 0 and 1.</dt><dd><p>Fraction of the training data to be used as validation data.
 The model will set apart this fraction of the training data,
@@ -1363,8 +1420,8 @@ will not train on it, and will evaluate
 the loss and any model metrics
 on this data at the end of each epoch.
 The validation data is selected from the last samples
-in the <cite>x</cite> and <cite>y</cite> data provided, before shuffling. This argument is
-not supported when <cite>x</cite> is a dataset, generator or
+in the <cite>x</cite> and <cite>y</cite> data provided, before shuffling. This
+argument is not supported when <cite>x</cite> is a dataset, generator or
 <cite>keras.utils.Sequence</cite> instance.
 If both <cite>validation_data</cite> and <cite>validation_split</cite> are provided,
 <cite>validation_data</cite> will override <cite>validation_split</cite>.
@@ -1373,15 +1430,16 @@ If both <cite>validation_data</cite> and <cite>validation_split</cite> are provi
 </dd>
 <dt>validation_data: Data on which to evaluate</dt><dd><p>the loss and any model metrics at the end of each epoch.
 The model will not be trained on this data. Thus, note the fact
-that the validation loss of data provided using <cite>validation_split</cite>
-or <cite>validation_data</cite> is not affected by regularization layers like
-noise and dropout.
+that the validation loss of data provided using
+<cite>validation_split</cite> or <cite>validation_data</cite> is not affected by
+regularization layers like noise and dropout.
 <cite>validation_data</cite> will override <cite>validation_split</cite>.
 <cite>validation_data</cite> could be:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>A tuple <cite>(x_val, y_val)</cite> of Numpy arrays or tensors.</p></li>
-<li><p>A tuple <cite>(x_val, y_val, val_sample_weights)</cite> of NumPy arrays.</p></li>
+<li><p>A tuple <cite>(x_val, y_val, val_sample_weights)</cite> of NumPy
+arrays.</p></li>
 <li><p>A <cite>tf.data.Dataset</cite>.</p></li>
 <li><p>A Python generator or <cite>keras.utils.Sequence</cite> returning</p></li>
 </ul>
@@ -1390,8 +1448,8 @@ noise and dropout.
 <p><cite>validation_data</cite> is not yet supported with
 <cite>tf.distribute.experimental.ParameterServerStrategy</cite>.</p>
 </dd>
-<dt>shuffle: Boolean (whether to shuffle the training data</dt><dd><p>before each epoch) or str (for ‘batch’). This argument is ignored
-when <cite>x</cite> is a generator or an object of tf.data.Dataset.
+<dt>shuffle: Boolean (whether to shuffle the training data</dt><dd><p>before each epoch) or str (for ‘batch’). This argument is
+ignored when <cite>x</cite> is a generator or an object of tf.data.Dataset.
 ‘batch’ is a special option for dealing
 with the limitations of HDF5 data; it shuffles in batch-sized
 chunks. Has no effect when <cite>steps_per_epoch</cite> is not <cite>None</cite>.</p>
@@ -1402,21 +1460,21 @@ This can be useful to tell the model to
 “pay more attention” to samples from
 an under-represented class.</p>
 </dd>
-<dt>sample_weight: Optional Numpy array of weights for</dt><dd><blockquote>
-<div><p>the training samples, used for weighting the loss function
+<dt>sample_weight: Optional Numpy array of weights for</dt><dd><p>the training samples, used for weighting the loss function
 (during training only). You can either pass a flat (1D)
 Numpy array with the same length as the input samples
 (1:1 mapping between weights and samples),
 or in the case of temporal data,
 you can pass a 2D array with shape
 <cite>(samples, sequence_length)</cite>,
-to apply a different weight to every timestep of every sample. This
-argument is not supported when <cite>x</cite> is a dataset, generator, or</p>
-</div></blockquote>
-<dl class="simple">
-<dt><cite>keras.utils.Sequence</cite> instance, instead provide the sample_weights</dt><dd><p>as the third element of <cite>x</cite>.</p>
-</dd>
-</dl>
+to apply a different weight to every timestep of every sample.
+This argument is not supported when <cite>x</cite> is a dataset, generator,
+or <cite>keras.utils.Sequence</cite> instance, instead provide the
+sample_weights as the third element of <cite>x</cite>.
+Note that sample weighting does not apply to metrics specified
+via the <cite>metrics</cite> argument in <cite>compile()</cite>. To apply sample
+weighting to your metrics, you can specify them via the
+<cite>weighted_metrics</cite> in <cite>compile()</cite> instead.</p>
 </dd>
 <dt>initial_epoch: Integer.</dt><dd><p>Epoch at which to start training
 (useful for resuming a previous training run).</p>
@@ -1428,11 +1486,12 @@ TensorFlow data tensors, the default <cite>None</cite> is equal to
 the number of samples in your dataset divided by
 the batch size, or 1 if that cannot be determined. If x is a
 <cite>tf.data</cite> dataset, and ‘steps_per_epoch’
-is None, the epoch will run until the input dataset is exhausted.
-When passing an infinitely repeating dataset, you must specify the
-<cite>steps_per_epoch</cite> argument. If <cite>steps_per_epoch=-1</cite> the training
-will run indefinitely with an infinitely repeating dataset.
-This argument is not supported with array inputs.
+is None, the epoch will run until the input dataset is
+exhausted.  When passing an infinitely repeating dataset, you
+must specify the <cite>steps_per_epoch</cite> argument. If
+<cite>steps_per_epoch=-1</cite> the training will run indefinitely with an
+infinitely repeating dataset.  This argument is not supported
+with array inputs.
 When using <cite>tf.distribute.experimental.ParameterServerStrategy</cite>:</p>
 <blockquote>
 <div><ul class="simple">
@@ -1442,29 +1501,31 @@ When using <cite>tf.distribute.experimental.ParameterServerStrategy</cite>:</p>
 </dd>
 <dt>validation_steps: Only relevant if <cite>validation_data</cite> is provided and</dt><dd><p>is a <cite>tf.data</cite> dataset. Total number of steps (batches of
 samples) to draw before stopping when performing validation
-at the end of every epoch. If ‘validation_steps’ is None, validation
-will run until the <cite>validation_data</cite> dataset is exhausted. In the
-case of an infinitely repeated dataset, it will run into an
-infinite loop. If ‘validation_steps’ is specified and only part of
-the dataset will be consumed, the evaluation will start from the
-beginning of the dataset at each epoch. This ensures that the same
-validation samples are used every time.</p>
+at the end of every epoch. If ‘validation_steps’ is None,
+validation will run until the <cite>validation_data</cite> dataset is
+exhausted. In the case of an infinitely repeated dataset, it
+will run into an infinite loop. If ‘validation_steps’ is
+specified and only part of the dataset will be consumed, the
+evaluation will start from the beginning of the dataset at each
+epoch. This ensures that the same validation samples are used
+every time.</p>
 </dd>
 <dt>validation_batch_size: Integer or <cite>None</cite>.</dt><dd><p>Number of samples per validation batch.
 If unspecified, will default to <cite>batch_size</cite>.
-Do not specify the <cite>validation_batch_size</cite> if your data is in the
-form of datasets, generators, or <cite>keras.utils.Sequence</cite> instances
-(since they generate batches).</p>
+Do not specify the <cite>validation_batch_size</cite> if your data is in
+the form of datasets, generators, or <cite>keras.utils.Sequence</cite>
+instances (since they generate batches).</p>
 </dd>
-<dt>validation_freq: Only relevant if validation data is provided. Integer</dt><dd><p>or <cite>collections.abc.Container</cite> instance (e.g. list, tuple, etc.).
-If an integer, specifies how many training epochs to run before a
-new validation run is performed, e.g. <cite>validation_freq=2</cite> runs
-validation every 2 epochs. If a Container, specifies the epochs on
-which to run validation, e.g. <cite>validation_freq=[1, 2, 10]</cite> runs
-validation at the end of the 1st, 2nd, and 10th epochs.</p>
+<dt>validation_freq: Only relevant if validation data is provided.</dt><dd><p>Integer or <cite>collections.abc.Container</cite> instance (e.g. list, tuple,
+etc.).  If an integer, specifies how many training epochs to run
+before a new validation run is performed, e.g. <cite>validation_freq=2</cite>
+runs validation every 2 epochs. If a Container, specifies the
+epochs on which to run validation, e.g.
+<cite>validation_freq=[1, 2, 10]</cite> runs validation at the end of the
+1st, 2nd, and 10th epochs.</p>
 </dd>
-<dt>max_queue_size: Integer. Used for generator or <cite>keras.utils.Sequence</cite></dt><dd><p>input only. Maximum size for the generator queue.
-If unspecified, <cite>max_queue_size</cite> will default to 10.</p>
+<dt>max_queue_size: Integer. Used for generator or</dt><dd><p><cite>keras.utils.Sequence</cite> input only. Maximum size for the generator
+queue.  If unspecified, <cite>max_queue_size</cite> will default to 10.</p>
 </dd>
 <dt>workers: Integer. Used for generator or <cite>keras.utils.Sequence</cite> input</dt><dd><p>only. Maximum number of processes to spin up
 when using process-based threading. If unspecified, <cite>workers</cite>
@@ -1474,7 +1535,8 @@ will default to 1.</p>
 threading. If unspecified, <cite>use_multiprocessing</cite> will default to
 <cite>False</cite>. Note that because this implementation relies on
 multiprocessing, you should not pass non-picklable arguments to
-the generator as they can’t be passed easily to children processes.</p>
+the generator as they can’t be passed easily to children
+processes.</p>
 </dd>
 </dl>
 </dd>
@@ -1482,19 +1544,20 @@ the generator as they can’t be passed easily to children processes.</p>
 <div><p>A common pattern is to pass a tf.data.Dataset, generator, or</p>
 </div></blockquote>
 <p>tf.keras.utils.Sequence to the <cite>x</cite> argument of fit, which will in fact
-yield not only features (x) but optionally targets (y) and sample weights.
-Keras requires that the output of such iterator-likes be unambiguous. The
-iterator should return a tuple of length 1, 2, or 3, where the optional
-second and third elements will be used for y and sample_weight
-respectively. Any other type provided will be wrapped in a length one
-tuple, effectively treating everything as ‘x’. When yielding dicts, they
-should still adhere to the top-level tuple structure.
+yield not only features (x) but optionally targets (y) and sample
+weights.  Keras requires that the output of such iterator-likes be
+unambiguous. The iterator should return a tuple of length 1, 2, or 3,
+where the optional second and third elements will be used for y and
+sample_weight respectively. Any other type provided will be wrapped in
+a length one tuple, effectively treating everything as ‘x’. When
+yielding dicts, they should still adhere to the top-level tuple
+structure.
 e.g. <cite>({“x0”: x0, “x1”: x1}, y)</cite>. Keras will not attempt to separate
 features, targets, and weights from the keys of a single dict.</p>
 <blockquote>
-<div><p>A notable unsupported data type is the namedtuple. The reason is that</p>
+<div><p>A notable unsupported data type is the namedtuple. The reason is</p>
 </div></blockquote>
-<p>it behaves like both an ordered datatype (tuple) and a mapping
+<p>that it behaves like both an ordered datatype (tuple) and a mapping
 datatype (dict). So given a namedtuple of the form:</p>
 <blockquote>
 <div><p><cite>namedtuple(“example_tuple”, [“y”, “x”])</cite></p>
@@ -1504,10 +1567,11 @@ interpreting the value. Even worse is a tuple of the form:</p>
 <blockquote>
 <div><p><cite>namedtuple(“other_tuple”, [“x”, “y”, “z”])</cite></p>
 </div></blockquote>
-<p>where it is unclear if the tuple was intended to be unpacked into x, y,
-and sample_weight or passed through as a single element to <cite>x</cite>. As a
-result the data processing code will simply raise a ValueError if it
-encounters a namedtuple. (Along with instructions to remedy the issue.)</p>
+<p>where it is unclear if the tuple was intended to be unpacked into x,
+y, and sample_weight or passed through as a single element to <cite>x</cite>. As
+a result the data processing code will simply raise a ValueError if it
+encounters a namedtuple. (Along with instructions to remedy the
+issue.)</p>
 </dd>
 <dt>Returns:</dt><dd><p>A <cite>History</cite> object. Its <cite>History.history</cite> attribute is
 a record of training loss values and metrics values
@@ -1529,8 +1593,8 @@ and validation metrics values (if applicable).</p>
 <span class="sig-name descname"><span class="pre">fit_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">generator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps_per_epoch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callbacks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validation_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validation_steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validation_freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">class_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_queue_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_multiprocessing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_epoch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hooknet.model.HookNet.fit_generator" title="Permalink to this definition">#</a></dt>
 <dd><p>Fits the model on data yielded batch-by-batch by a Python generator.</p>
 <dl class="simple">
-<dt>DEPRECATED:</dt><dd><p><cite>Model.fit</cite> now supports generators, so there is no longer any need to use
-this endpoint.</p>
+<dt>DEPRECATED:</dt><dd><p><cite>Model.fit</cite> now supports generators, so there is no longer any need to
+use this endpoint.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1558,18 +1622,18 @@ dictionary. It does not handle layer connectivity
 <dt class="sig sig-object py" id="hooknet.model.HookNet.get_config">
 <span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hooknet.model.HookNet.get_config" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns the config of the <cite>Model</cite>.</p>
-<p>Config is a Python dictionary (serializable) containing the configuration of
-an object, which in this case is a <cite>Model</cite>. This allows the <cite>Model</cite> to be
-be reinstantiated later (without its trained weights) from this
-configuration.</p>
-<p>Note that <cite>get_config()</cite> does not guarantee to return a fresh copy of dict
-every time it is called. The callers should make a copy of the returned dict
-if they want to modify it.</p>
-<p>Developers of subclassed <cite>Model</cite> are advised to override this method, and
-continue to update the dict from <cite>super(MyModel, self).get_config()</cite>
+<p>Config is a Python dictionary (serializable) containing the
+configuration of an object, which in this case is a <cite>Model</cite>. This allows
+the <cite>Model</cite> to be be reinstantiated later (without its trained weights)
+from this configuration.</p>
+<p>Note that <cite>get_config()</cite> does not guarantee to return a fresh copy of
+dict every time it is called. The callers should make a copy of the
+returned dict if they want to modify it.</p>
+<p>Developers of subclassed <cite>Model</cite> are advised to override this method,
+and continue to update the dict from <cite>super(MyModel, self).get_config()</cite>
 to provide the proper configuration of this <cite>Model</cite>. The default config
-is an empty dict. Optionally, raise <cite>NotImplementedError</cite> to allow Keras to
-attempt a default serialization.</p>
+is an empty dict. Optionally, raise <cite>NotImplementedError</cite> to allow Keras
+to attempt a default serialization.</p>
 <dl class="simple">
 <dt>Returns:</dt><dd><p>Python dictionary containing the configuration of this <cite>Model</cite>.</p>
 </dd>
@@ -1706,6 +1770,66 @@ first time the layer was called.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="hooknet.model.HookNet.get_weight_paths">
+<span class="sig-name descname"><span class="pre">get_weight_paths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hooknet.model.HookNet.get_weight_paths" title="Permalink to this definition">#</a></dt>
+<dd><p>Retrieve all the variables and their paths for the model.</p>
+<p>The variable path (string) is a stable key to indentify a <cite>tf.Variable</cite>
+instance owned by the model. It can be used to specify variable-specific
+configurations (e.g. DTensor, quantization) from a global view.</p>
+<p>This method returns a dict with weight object paths as keys
+and the corresponding <cite>tf.Variable</cite> instances as values.</p>
+<p>Note that if the model is a subclassed model and the weights haven’t
+been initialized, an empty dict will be returned.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>A dict where keys are variable paths and values are <cite>tf.Variable</cite></dt><dd><p>instances.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>Example:</p>
+<p><a href="#id60"><span class="problematic" id="id61">``</span></a><a href="#id62"><span class="problematic" id="id63">`</span></a>python
+class SubclassModel(tf.keras.Model):</p>
+<blockquote>
+<div><dl class="simple">
+<dt>def __init__(self, name=None):</dt><dd><p>super().__init__(name=name)
+self.d1 = tf.keras.layers.Dense(10)
+self.d2 = tf.keras.layers.Dense(20)</p>
+</dd>
+<dt>def call(self, inputs):</dt><dd><p>x = self.d1(inputs)
+return self.d2(x)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>model = SubclassModel()
+model(tf.zeros((10, 10)))
+weight_paths = model.get_weight_paths()
+# weight_paths:
+# {
+#    ‘d1.kernel’: model.d1.kernel,
+#    ‘d1.bias’: model.d1.bias,
+#    ‘d2.kernel’: model.d2.kernel,
+#    ‘d2.bias’: model.d2.bias,
+# }</p>
+<p># Functional model
+inputs = tf.keras.Input((10,), batch_size=10)
+x = tf.keras.layers.Dense(20, name=’d1’)(inputs)
+output = tf.keras.layers.Dense(30, name=’d2’)(x)
+model = tf.keras.Model(inputs, output)
+d1 = model.layers[1]
+d2 = model.layers[2]
+weight_paths = model.get_weight_paths()
+# weight_paths:
+# {
+#    ‘d1.kernel’: d1.kernel,
+#    ‘d1.bias’: d1.bias,
+#    ‘d2.kernel’: d2.kernel,
+#    ‘d2.bias’: d2.bias,
+# }
+<a href="#id64"><span class="problematic" id="id65">``</span></a><a href="#id66"><span class="problematic" id="id67">`</span></a></p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="hooknet.model.HookNet.get_weights">
 <span class="sig-name descname"><span class="pre">get_weights</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#hooknet.model.HookNet.get_weights" title="Permalink to this definition">#</a></dt>
 <dd><p>Retrieves the weights of the model.</p>
@@ -1767,16 +1891,16 @@ more than one incoming layers.</p>
 <dt class="sig sig-object py" id="hooknet.model.HookNet.input_spec">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">input_spec</span></span><a class="headerlink" href="#hooknet.model.HookNet.input_spec" title="Permalink to this definition">#</a></dt>
 <dd><p><cite>InputSpec</cite> instance(s) describing the input format for this layer.</p>
-<p>When you create a layer subclass, you can set <cite>self.input_spec</cite> to enable
-the layer to run input compatibility checks when it is called.
-Consider a <cite>Conv2D</cite> layer: it can only be called on a single input tensor
-of rank 4. As such, you can set, in <cite>__init__()</cite>:</p>
+<p>When you create a layer subclass, you can set <cite>self.input_spec</cite> to
+enable the layer to run input compatibility checks when it is called.
+Consider a <cite>Conv2D</cite> layer: it can only be called on a single input
+tensor of rank 4. As such, you can set, in <cite>__init__()</cite>:</p>
 <p><code class="docutils literal notranslate"><span class="pre">`python</span>
 <span class="pre">self.input_spec</span> <span class="pre">=</span> <span class="pre">tf.keras.layers.InputSpec(ndim=4)</span>
 <span class="pre">`</span></code></p>
 <p>Now, if you try to call the layer on an input that isn’t rank 4
-(for instance, an input of shape <cite>(2,)</cite>, it will raise a nicely-formatted
-error:</p>
+(for instance, an input of shape <cite>(2,)</cite>, it will raise a
+nicely-formatted error:</p>
 <p><code class="docutils literal notranslate"><span class="pre">`</span>
 <span class="pre">ValueError:</span> <span class="pre">Input</span> <span class="pre">0</span> <span class="pre">of</span> <span class="pre">layer</span> <span class="pre">conv2d</span> <span class="pre">is</span> <span class="pre">incompatible</span> <span class="pre">with</span> <span class="pre">the</span> <span class="pre">layer:</span>
 <span class="pre">expected</span> <span class="pre">ndim=4,</span> <span class="pre">found</span> <span class="pre">ndim=1.</span> <span class="pre">Full</span> <span class="pre">shape</span> <span class="pre">received:</span> <span class="pre">[2]</span>
@@ -1798,44 +1922,45 @@ error:</p>
 <span class="sig-name descname"><span class="pre">load_weights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">by_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_mismatch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hooknet.model.HookNet.load_weights" title="Permalink to this definition">#</a></dt>
 <dd><p>Loads all layer weights, either from a TensorFlow or an HDF5 weight file.</p>
 <p>If <cite>by_name</cite> is False weights are loaded based on the network’s
-topology. This means the architecture should be the same as when the weights
-were saved.  Note that layers that don’t have weights are not taken into
-account in the topological ordering, so adding or removing layers is fine as
-long as they don’t have weights.</p>
-<p>If <cite>by_name</cite> is True, weights are loaded into layers only if they share the
-same name. This is useful for fine-tuning or transfer-learning models where
-some of the layers have changed.</p>
-<p>Only topological loading (<cite>by_name=False</cite>) is supported when loading weights
-from the TensorFlow format. Note that topological loading differs slightly
-between TensorFlow and HDF5 formats for user-defined classes inheriting from
-<cite>tf.keras.Model</cite>: HDF5 loads based on a flattened list of weights, while the
-TensorFlow format loads based on the object-local names of attributes to
-which layers are assigned in the <cite>Model</cite>’s constructor.</p>
+topology. This means the architecture should be the same as when the
+weights were saved.  Note that layers that don’t have weights are not
+taken into account in the topological ordering, so adding or removing
+layers is fine as long as they don’t have weights.</p>
+<p>If <cite>by_name</cite> is True, weights are loaded into layers only if they share
+the same name. This is useful for fine-tuning or transfer-learning
+models where some of the layers have changed.</p>
+<p>Only topological loading (<cite>by_name=False</cite>) is supported when loading
+weights from the TensorFlow format. Note that topological loading
+differs slightly between TensorFlow and HDF5 formats for user-defined
+classes inheriting from <cite>tf.keras.Model</cite>: HDF5 loads based on a
+flattened list of weights, while the TensorFlow format loads based on
+the object-local names of attributes to which layers are assigned in the
+<cite>Model</cite>’s constructor.</p>
 <dl>
 <dt>Args:</dt><dd><dl class="simple">
-<dt>filepath: String, path to the weights file to load. For weight files in</dt><dd><p>TensorFlow format, this is the file prefix (the same as was passed
-to <cite>save_weights</cite>). This can also be a path to a SavedModel
-saved from <cite>model.save</cite>.</p>
+<dt>filepath: String, path to the weights file to load. For weight files</dt><dd><p>in TensorFlow format, this is the file prefix (the same as was
+passed to <cite>save_weights</cite>). This can also be a path to a
+SavedModel saved from <cite>model.save</cite>.</p>
 </dd>
 <dt>by_name: Boolean, whether to load weights by name or by topological</dt><dd><p>order. Only topological loading is supported for weight files in
 TensorFlow format.</p>
 </dd>
-<dt>skip_mismatch: Boolean, whether to skip loading of layers where there is</dt><dd><p>a mismatch in the number of weights, or a mismatch in the shape of
-the weight (only valid when <cite>by_name=True</cite>).</p>
+<dt>skip_mismatch: Boolean, whether to skip loading of layers where</dt><dd><p>there is a mismatch in the number of weights, or a mismatch in
+the shape of the weight (only valid when <cite>by_name=True</cite>).</p>
 </dd>
 <dt>options: Optional <cite>tf.train.CheckpointOptions</cite> object that specifies</dt><dd><p>options for loading weights.</p>
 </dd>
 </dl>
 </dd>
-<dt>Returns:</dt><dd><p>When loading a weight file in TensorFlow format, returns the same status
-object as <cite>tf.train.Checkpoint.restore</cite>. When graph building, restore
-ops are run automatically as soon as the network is built (on first call
-for user-defined classes inheriting from <cite>Model</cite>, immediately if it is
-already built).</p>
+<dt>Returns:</dt><dd><p>When loading a weight file in TensorFlow format, returns the same
+status object as <cite>tf.train.Checkpoint.restore</cite>. When graph building,
+restore ops are run automatically as soon as the network is built
+(on first call for user-defined classes inheriting from <cite>Model</cite>,
+immediately if it is already built).</p>
 <p>When loading weights in HDF5 format, returns <cite>None</cite>.</p>
 </dd>
 <dt>Raises:</dt><dd><dl class="simple">
-<dt>ImportError: If <cite>h5py</cite> is not available and the weight file is in HDF5</dt><dd><p>format.</p>
+<dt>ImportError: If <cite>h5py</cite> is not available and the weight file is in</dt><dd><p>HDF5 format.</p>
 </dd>
 <dt>ValueError: If <cite>skip_mismatch</cite> is set to <cite>True</cite> when <cite>by_name</cite> is</dt><dd><p><cite>False</cite>.</p>
 </dd>
@@ -1848,9 +1973,10 @@ already built).</p>
 <dt class="sig sig-object py" id="hooknet.model.HookNet.losses">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">losses</span></span><a class="headerlink" href="#hooknet.model.HookNet.losses" title="Permalink to this definition">#</a></dt>
 <dd><p>List of losses added using the <cite>add_loss()</cite> API.</p>
-<p>Variable regularization tensors are created when this property is accessed,
-so it is eager safe: accessing <cite>losses</cite> under a <cite>tf.GradientTape</cite> will
-propagate gradients back to the corresponding variables.</p>
+<p>Variable regularization tensors are created when this property is
+accessed, so it is eager safe: accessing <cite>losses</cite> under a
+<cite>tf.GradientTape</cite> will propagate gradients back to the corresponding
+variables.</p>
 <p>Examples:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyLayer</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Layer</span><span class="p">):</span>
 <span class="gp">... </span>  <span class="k">def</span> <span class="nf">call</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
@@ -1973,8 +2099,8 @@ be passed to <cite>tf.keras.Callbacks.on_train_batch_end</cite>, such as
 <dt class="sig sig-object py" id="hooknet.model.HookNet.metrics">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">metrics</span></span><a class="headerlink" href="#hooknet.model.HookNet.metrics" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns the model’s metrics added using <cite>compile()</cite>, <cite>add_metric()</cite> APIs.</p>
-<p>Note: Metrics passed to <cite>compile()</cite> are available only after a <cite>keras.Model</cite>
-has been trained/evaluated on actual data.</p>
+<p>Note: Metrics passed to <cite>compile()</cite> are available only after a
+<cite>keras.Model</cite> has been trained/evaluated on actual data.</p>
 <p>Examples:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">inputs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">outputs</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">2</span><span class="p">)(</span><span class="n">inputs</span><span class="p">)</span>
@@ -2076,8 +2202,8 @@ first).</p>
 <dt class="sig sig-object py" id="hooknet.model.HookNet.non_trainable_weights">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">non_trainable_weights</span></span><a class="headerlink" href="#hooknet.model.HookNet.non_trainable_weights" title="Permalink to this definition">#</a></dt>
 <dd><p>List of all non-trainable weights tracked by this layer.</p>
-<p>Non-trainable weights are <em>not</em> updated during training. They are expected
-to be updated manually in <cite>call()</cite>.</p>
+<p>Non-trainable weights are <em>not</em> updated during training. They are
+expected to be updated manually in <cite>call()</cite>.</p>
 <dl class="simple">
 <dt>Returns:</dt><dd><p>A list of non-trainable variables.</p>
 </dd>
@@ -2139,9 +2265,10 @@ more than one incoming layers.</p>
 <dt class="sig sig-object py" id="hooknet.model.HookNet.predict">
 <span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callbacks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_queue_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_multiprocessing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hooknet.model.HookNet.predict" title="Permalink to this definition">#</a></dt>
 <dd><p>Generates output predictions for the input samples.</p>
-<p>Computation is done in batches. This method is designed for batch processing
-of large numbers of inputs. It is not intended for use inside of loops
-that iterate over your data and process small numbers of inputs at a time.</p>
+<p>Computation is done in batches. This method is designed for batch
+processing of large numbers of inputs. It is not intended for use inside
+of loops that iterate over your data and process small numbers of inputs
+at a time.</p>
 <p>For small numbers of inputs that fit in one batch,
 directly use <cite>__call__()</cite> for faster execution, e.g.,
 <cite>model(x)</cite>, or <cite>model(x, training=False)</cite> if you have layers such as
@@ -2155,8 +2282,8 @@ an eager tensor.</p>
 regularization layers like noise and dropout.</p>
 <p>Note: See [this FAQ entry](
 <a class="reference external" href="https://keras.io/getting_started/faq/#whats-the-difference-between-model-methods-predict-and-call">https://keras.io/getting_started/faq/#whats-the-difference-between-model-methods-predict-and-call</a>)
-for more details about the difference between <cite>Model</cite> methods <cite>predict()</cite>
-and <cite>__call__()</cite>.</p>
+for more details about the difference between <cite>Model</cite> methods
+<cite>predict()</cite> and <cite>__call__()</cite>.</p>
 <dl>
 <dt>Args:</dt><dd><dl>
 <dt>x: Input samples. It could be:</dt><dd><ul class="simple">
@@ -2167,9 +2294,9 @@ and <cite>__call__()</cite>.</p>
 <li><p>A <cite>tf.data</cite> dataset.</p></li>
 <li><p>A generator or <cite>keras.utils.Sequence</cite> instance.</p></li>
 </ul>
-<p>A more detailed description of unpacking behavior for iterator types
-(Dataset, generator, Sequence) is given in the <cite>Unpacking behavior
-for iterator-like inputs</cite> section of <cite>Model.fit</cite>.</p>
+<p>A more detailed description of unpacking behavior for iterator
+types (Dataset, generator, Sequence) is given in the <cite>Unpacking
+behavior for iterator-like inputs</cite> section of <cite>Model.fit</cite>.</p>
 </dd>
 <dt>batch_size: Integer or <cite>None</cite>.</dt><dd><p>Number of samples per batch.
 If unspecified, <cite>batch_size</cite> will default to 32.
@@ -2192,8 +2319,9 @@ run until the input dataset is exhausted.</p>
 <dt>callbacks: List of <cite>keras.callbacks.Callback</cite> instances.</dt><dd><p>List of callbacks to apply during prediction.
 See [callbacks](/api_docs/python/tf/keras/callbacks).</p>
 </dd>
-<dt>max_queue_size: Integer. Used for generator or <cite>keras.utils.Sequence</cite></dt><dd><p>input only. Maximum size for the generator queue.
-If unspecified, <cite>max_queue_size</cite> will default to 10.</p>
+<dt>max_queue_size: Integer. Used for generator or</dt><dd><p><cite>keras.utils.Sequence</cite> input only. Maximum size for the
+generator queue. If unspecified, <cite>max_queue_size</cite> will default
+to 10.</p>
 </dd>
 <dt>workers: Integer. Used for generator or <cite>keras.utils.Sequence</cite> input</dt><dd><p>only. Maximum number of processes to spin up when using
 process-based threading. If unspecified, <cite>workers</cite> will default
@@ -2203,15 +2331,16 @@ to 1.</p>
 threading. If unspecified, <cite>use_multiprocessing</cite> will default to
 <cite>False</cite>. Note that because this implementation relies on
 multiprocessing, you should not pass non-picklable arguments to
-the generator as they can’t be passed easily to children processes.</p>
+the generator as they can’t be passed easily to children
+processes.</p>
 </dd>
 </dl>
 </dd>
 </dl>
 <p>See the discussion of <cite>Unpacking behavior for iterator-like inputs</cite> for
-<cite>Model.fit</cite>. Note that Model.predict uses the same interpretation rules as
-<cite>Model.fit</cite> and <cite>Model.evaluate</cite>, so inputs must be unambiguous for all
-three methods.</p>
+<cite>Model.fit</cite>. Note that Model.predict uses the same interpretation rules
+as <cite>Model.fit</cite> and <cite>Model.evaluate</cite>, so inputs must be unambiguous for
+all three methods.</p>
 <dl>
 <dt>Returns:</dt><dd><p>Numpy array(s) of predictions.</p>
 </dd>
@@ -2231,8 +2360,8 @@ that is not a multiple of the batch size.</p>
 <span class="sig-name descname"><span class="pre">predict_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">generator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callbacks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_queue_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_multiprocessing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hooknet.model.HookNet.predict_generator" title="Permalink to this definition">#</a></dt>
 <dd><p>Generates predictions for the input samples from a data generator.</p>
 <dl class="simple">
-<dt>DEPRECATED:</dt><dd><p><cite>Model.predict</cite> now supports generators, so there is no longer any need
-to use this endpoint.</p>
+<dt>DEPRECATED:</dt><dd><p><cite>Model.predict</cite> now supports generators, so there is no longer any
+need to use this endpoint.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -2260,7 +2389,10 @@ to use this endpoint.</p>
 </dd>
 <dt>Returns:</dt><dd><p>Numpy array(s) of predictions.</p>
 </dd>
-<dt>Raises:</dt><dd><p>RuntimeError: If <cite>model.predict_on_batch</cite> is wrapped in a <cite>tf.function</cite>.</p>
+<dt>Raises:</dt><dd><dl class="simple">
+<dt>RuntimeError: If <cite>model.predict_on_batch</cite> is wrapped in a</dt><dd><p><cite>tf.function</cite>.</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -2271,13 +2403,13 @@ to use this endpoint.</p>
 <dd><p>The logic for one inference step.</p>
 <p>This method can be overridden to support custom inference logic.
 This method is called by <cite>Model.make_predict_function</cite>.</p>
-<p>This method should contain the mathematical logic for one step of inference.
-This typically includes the forward pass.</p>
-<p>Configuration details for <em>how</em> this logic is run (e.g. <cite>tf.function</cite> and
-<cite>tf.distribute.Strategy</cite> settings), should be left to
+<p>This method should contain the mathematical logic for one step of
+inference.  This typically includes the forward pass.</p>
+<p>Configuration details for <em>how</em> this logic is run (e.g. <cite>tf.function</cite>
+and <cite>tf.distribute.Strategy</cite> settings), should be left to
 <cite>Model.make_predict_function</cite>, which can also be overridden.</p>
 <dl class="simple">
-<dt>Args:</dt><dd><p>data: A nested structure of <a href="#id59"><span class="problematic" id="id60">`</span></a>Tensor`s.</p>
+<dt>Args:</dt><dd><p>data: A nested structure of <a href="#id68"><span class="problematic" id="id69">`</span></a>Tensor`s.</p>
 </dd>
 <dt>Returns:</dt><dd><p>The result of one inference step, typically the output of calling the
 <cite>Model</cite> on data.</p>
@@ -2313,8 +2445,8 @@ This typically includes the forward pass.</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">run_eagerly</span></span><a class="headerlink" href="#hooknet.model.HookNet.run_eagerly" title="Permalink to this definition">#</a></dt>
 <dd><p>Settable attribute indicating whether the model should run eagerly.</p>
 <p>Running eagerly means that your model will be run step by step,
-like Python code. Your model might run slower, but it should become easier
-for you to debug it by stepping into individual layer calls.</p>
+like Python code. Your model might run slower, but it should become
+easier for you to debug it by stepping into individual layer calls.</p>
 <p>By default, we will attempt to compile your model to a static graph to
 deliver the best execution performance.</p>
 <dl class="simple">
@@ -2328,11 +2460,12 @@ deliver the best execution performance.</p>
 <span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_optimizer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signatures</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_traces</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hooknet.model.HookNet.save" title="Permalink to this definition">#</a></dt>
 <dd><p>Saves the model to Tensorflow SavedModel or a single HDF5 file.</p>
 <p>Please see <cite>tf.keras.models.save_model</cite> or the
-[Serialization and Saving guide](<a class="reference external" href="https://keras.io/guides/serialization_and_saving/">https://keras.io/guides/serialization_and_saving/</a>)
+[Serialization and Saving guide](
+<a class="reference external" href="https://keras.io/guides/serialization_and_saving/">https://keras.io/guides/serialization_and_saving/</a>)
 for details.</p>
 <dl>
 <dt>Args:</dt><dd><dl class="simple">
-<dt>filepath: String, PathLike, path to SavedModel or H5 file to save the</dt><dd><p>model.</p>
+<dt>filepath: String, PathLike, path to SavedModel or H5 file to save</dt><dd><p>the model.</p>
 </dd>
 <dt>overwrite: Whether to silently overwrite any existing file at the</dt><dd><p>target location, or provide the user with a manual prompt.</p>
 </dd>
@@ -2340,59 +2473,66 @@ for details.</p>
 <p>include_optimizer: If True, save optimizer’s state together.
 save_format: Either <cite>‘tf’</cite> or <cite>‘h5’</cite>, indicating whether to save the</p>
 <blockquote>
-<div><p>model to Tensorflow SavedModel or HDF5. Defaults to ‘tf’ in TF 2.X,
-and ‘h5’ in TF 1.X.</p>
+<div><p>model to Tensorflow SavedModel or HDF5. Defaults to ‘tf’ in TF
+2.X, and ‘h5’ in TF 1.X.</p>
 </div></blockquote>
 <dl class="simple">
-<dt>signatures: Signatures to save with the SavedModel. Applicable to the</dt><dd><p>‘tf’ format only. Please see the <cite>signatures</cite> argument in
+<dt>signatures: Signatures to save with the SavedModel. Applicable to</dt><dd><p>the ‘tf’ format only. Please see the <cite>signatures</cite> argument in
 <cite>tf.saved_model.save</cite> for details.</p>
 </dd>
 <dt>options: (only applies to SavedModel format)</dt><dd><p><cite>tf.saved_model.SaveOptions</cite> object that specifies options for
 saving to SavedModel.</p>
 </dd>
 <dt>save_traces: (only applies to SavedModel format) When enabled, the</dt><dd><p>SavedModel will store the function traces for each layer. This
-can be disabled, so that only the configs of each layer are stored.
-Defaults to <cite>True</cite>. Disabling this will decrease serialization time
-and reduce file size, but it requires that all custom layers/models
-implement a <cite>get_config()</cite> method.</p>
+can be disabled, so that only the configs of each layer are
+stored.  Defaults to <cite>True</cite>. Disabling this will decrease
+serialization time and reduce file size, but it requires that
+all custom layers/models implement a <cite>get_config()</cite> method.</p>
 </dd>
 </dl>
 </dd>
 </dl>
 <p>Example:</p>
-<p><a href="#id61"><span class="problematic" id="id62">``</span></a><a href="#id63"><span class="problematic" id="id64">`</span></a>python
+<p><a href="#id70"><span class="problematic" id="id71">``</span></a><a href="#id72"><span class="problematic" id="id73">`</span></a>python
 from keras.models import load_model</p>
 <p>model.save(‘my_model.h5’)  # creates a HDF5 file ‘my_model.h5’
 del model  # deletes the existing model</p>
 <p># returns a compiled model
 # identical to the previous one
 model = load_model(‘my_model.h5’)
-<a href="#id65"><span class="problematic" id="id66">``</span></a><a href="#id67"><span class="problematic" id="id68">`</span></a></p>
+<a href="#id74"><span class="problematic" id="id75">``</span></a><a href="#id76"><span class="problematic" id="id77">`</span></a></p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hooknet.model.HookNet.save_spec">
 <span class="sig-name descname"><span class="pre">save_spec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dynamic_batch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hooknet.model.HookNet.save_spec" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns the <cite>tf.TensorSpec</cite> of call inputs as a tuple <cite>(args, kwargs)</cite>.</p>
-<p>This value is automatically defined after calling the model for the first
-time. Afterwards, you can use it when exporting the model for serving:</p>
-<p><a href="#id69"><span class="problematic" id="id70">``</span></a><a href="#id71"><span class="problematic" id="id72">`</span></a>python
+<p>This value is automatically defined after calling the model for the
+first time. Afterwards, you can use it when exporting the model for
+serving:</p>
+<p><a href="#id78"><span class="problematic" id="id79">``</span></a><a href="#id80"><span class="problematic" id="id81">`</span></a>python
 model = tf.keras.Model(…)</p>
 <p>&#64;tf.function
-def serve(<a href="#id73"><span class="problematic" id="id74">*</span></a>args, <a href="#id75"><span class="problematic" id="id76">**</span></a>kwargs):</p>
+def serve(<a href="#id82"><span class="problematic" id="id83">*</span></a>args, <a href="#id84"><span class="problematic" id="id85">**</span></a>kwargs):</p>
 <blockquote>
-<div><p>outputs = model(<a href="#id77"><span class="problematic" id="id78">*</span></a>args, <a href="#id79"><span class="problematic" id="id80">**</span></a>kwargs)
+<div><p>outputs = model(<a href="#id86"><span class="problematic" id="id87">*</span></a>args, <a href="#id88"><span class="problematic" id="id89">**</span></a>kwargs)
 # Apply postprocessing steps, or add additional outputs.
 …
 return outputs</p>
 </div></blockquote>
-<p># arg_specs is <cite>[tf.TensorSpec(…), …]</cite>. kwarg_specs, in this example, is
-# an empty dict since functional models do not use keyword arguments.
+<p># arg_specs is <cite>[tf.TensorSpec(…), …]</cite>. kwarg_specs, in this
+# example, is an empty dict since functional models do not use keyword
+# arguments.
 arg_specs, kwarg_specs = model.save_spec()</p>
 <dl class="simple">
-<dt>model.save(path, signatures={</dt><dd><p>‘serving_default’: serve.get_concrete_function(<a href="#id81"><span class="problematic" id="id82">*</span></a>arg_specs, <a href="#id83"><span class="problematic" id="id84">**</span></a>kwarg_specs)</p>
+<dt>model.save(path, signatures={</dt><dd><dl class="simple">
+<dt>‘serving_default’: serve.get_concrete_function(<a href="#id90"><span class="problematic" id="id91">*</span></a>arg_specs,</dt><dd><p><a href="#id92"><span class="problematic" id="id93">**</span></a>kwarg_specs)</p>
 </dd>
 </dl>
+</dd>
+</dl>
+<section id="id94">
+<h3>})<a class="headerlink" href="#id94" title="Permalink to this heading">#</a></h3>
 <dl class="simple">
 <dt>Args:</dt><dd><dl class="simple">
 <dt>dynamic_batch: Whether to set the batch sizes of all the returned</dt><dd><p><cite>tf.TensorSpec</cite> to <cite>None</cite>. (Note that when defining functional or
@@ -2408,6 +2548,7 @@ The model inputs are automatically set when calling the model,
 <cite>model.fit</cite>, <cite>model.evaluate</cite> or <cite>model.predict</cite>.</p>
 </dd>
 </dl>
+</section>
 </dd></dl>
 
 <dl class="py method">
@@ -2443,47 +2584,48 @@ argument.</p>
 </ul>
 </dd>
 </dl>
-<p>When saving in TensorFlow format, all objects referenced by the network are
-saved in the same format as <cite>tf.train.Checkpoint</cite>, including any <cite>Layer</cite>
-instances or <cite>Optimizer</cite> instances assigned to object attributes. For
-networks constructed from inputs and outputs using <cite>tf.keras.Model(inputs,
-outputs)</cite>, <cite>Layer</cite> instances used by the network are tracked/saved
-automatically. For user-defined classes which inherit from <cite>tf.keras.Model</cite>,
-<cite>Layer</cite> instances must be assigned to object attributes, typically in the
-constructor. See the documentation of <cite>tf.train.Checkpoint</cite> and
-<cite>tf.keras.Model</cite> for details.</p>
+<p>When saving in TensorFlow format, all objects referenced by the network
+are saved in the same format as <cite>tf.train.Checkpoint</cite>, including any
+<cite>Layer</cite> instances or <cite>Optimizer</cite> instances assigned to object
+attributes. For networks constructed from inputs and outputs using
+<cite>tf.keras.Model(inputs, outputs)</cite>, <cite>Layer</cite> instances used by the network
+are tracked/saved automatically. For user-defined classes which inherit
+from <cite>tf.keras.Model</cite>, <cite>Layer</cite> instances must be assigned to object
+attributes, typically in the constructor. See the documentation of
+<cite>tf.train.Checkpoint</cite> and <cite>tf.keras.Model</cite> for details.</p>
 <p>While the formats are the same, do not mix <cite>save_weights</cite> and
-<cite>tf.train.Checkpoint</cite>. Checkpoints saved by <cite>Model.save_weights</cite> should be
-loaded using <cite>Model.load_weights</cite>. Checkpoints saved using
+<cite>tf.train.Checkpoint</cite>. Checkpoints saved by <cite>Model.save_weights</cite> should
+be loaded using <cite>Model.load_weights</cite>. Checkpoints saved using
 <cite>tf.train.Checkpoint.save</cite> should be restored using the corresponding
 <cite>tf.train.Checkpoint.restore</cite>. Prefer <cite>tf.train.Checkpoint</cite> over
 <cite>save_weights</cite> for training checkpoints.</p>
-<p>The TensorFlow format matches objects and variables by starting at a root
-object, <cite>self</cite> for <cite>save_weights</cite>, and greedily matching attribute
-names. For <cite>Model.save</cite> this is the <cite>Model</cite>, and for <cite>Checkpoint.save</cite> this
-is the <cite>Checkpoint</cite> even if the <cite>Checkpoint</cite> has a model attached. This
-means saving a <cite>tf.keras.Model</cite> using <cite>save_weights</cite> and loading into a
-<cite>tf.train.Checkpoint</cite> with a <cite>Model</cite> attached (or vice versa) will not match
-the <cite>Model</cite>’s variables. See the
-[guide to training checkpoints](<a class="reference external" href="https://www.tensorflow.org/guide/checkpoint">https://www.tensorflow.org/guide/checkpoint</a>)
-for details on the TensorFlow format.</p>
+<p>The TensorFlow format matches objects and variables by starting at a
+root object, <cite>self</cite> for <cite>save_weights</cite>, and greedily matching attribute
+names. For <cite>Model.save</cite> this is the <cite>Model</cite>, and for <cite>Checkpoint.save</cite>
+this is the <cite>Checkpoint</cite> even if the <cite>Checkpoint</cite> has a model attached.
+This means saving a <cite>tf.keras.Model</cite> using <cite>save_weights</cite> and loading
+into a <cite>tf.train.Checkpoint</cite> with a <cite>Model</cite> attached (or vice versa)
+will not match the <cite>Model</cite>’s variables. See the
+[guide to training checkpoints](
+<a class="reference external" href="https://www.tensorflow.org/guide/checkpoint">https://www.tensorflow.org/guide/checkpoint</a>) for details on
+the TensorFlow format.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><dl class="simple">
-<dt>filepath: String or PathLike, path to the file to save the weights to.</dt><dd><p>When saving in TensorFlow format, this is the prefix used for
-checkpoint files (multiple files are generated). Note that the ‘.h5’
-suffix causes weights to be saved in HDF5 format.</p>
+<dt>filepath: String or PathLike, path to the file to save the weights</dt><dd><p>to. When saving in TensorFlow format, this is the prefix used
+for checkpoint files (multiple files are generated). Note that
+the ‘.h5’ suffix causes weights to be saved in HDF5 format.</p>
 </dd>
 <dt>overwrite: Whether to silently overwrite any existing file at the</dt><dd><p>target location, or provide the user with a manual prompt.</p>
 </dd>
-<dt>save_format: Either ‘tf’ or ‘h5’. A <cite>filepath</cite> ending in ‘.h5’ or</dt><dd><p>‘.keras’ will default to HDF5 if <cite>save_format</cite> is <cite>None</cite>. Otherwise
-<cite>None</cite> defaults to ‘tf’.</p>
+<dt>save_format: Either ‘tf’ or ‘h5’. A <cite>filepath</cite> ending in ‘.h5’ or</dt><dd><p>‘.keras’ will default to HDF5 if <cite>save_format</cite> is <cite>None</cite>.
+Otherwise <cite>None</cite> defaults to ‘tf’.</p>
 </dd>
 <dt>options: Optional <cite>tf.train.CheckpointOptions</cite> object that specifies</dt><dd><p>options for saving weights.</p>
 </dd>
 </dl>
 </dd>
 <dt>Raises:</dt><dd><dl class="simple">
-<dt>ImportError: If <cite>h5py</cite> is not available when attempting to save in HDF5</dt><dd><p>format.</p>
+<dt>ImportError: If <cite>h5py</cite> is not available when attempting to save in</dt><dd><p>HDF5 format.</p>
 </dd>
 </dl>
 </dd>
@@ -2499,9 +2641,9 @@ sets the weight values from numpy arrays. The weight values should be
 passed in the order they are created by the layer. Note that the layer’s
 weights must be instantiated before calling this function, by calling
 the layer.</p>
-<p>For example, a <cite>Dense</cite> layer returns a list of two values: the kernel matrix
-and the bias vector. These can be used to set the weights of another
-<cite>Dense</cite> layer:</p>
+<p>For example, a <cite>Dense</cite> layer returns a list of two values: the kernel
+matrix and the bias vector. These can be used to set the weights of
+another <cite>Dense</cite> layer:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">layer_a</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span>
 <span class="gp">... </span>  <span class="n">kernel_initializer</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">constant_initializer</span><span class="p">(</span><span class="mf">1.</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">a_out</span> <span class="o">=</span> <span class="n">layer_a</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">convert_to_tensor</span><span class="p">([[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">]]))</span>
@@ -2581,7 +2723,7 @@ properties of modules which are properties of this module (and so on).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="hooknet.model.HookNet.summary">
-<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_fn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expand_nested</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_trainable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hooknet.model.HookNet.summary" title="Permalink to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_fn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expand_nested</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_trainable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">layer_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#hooknet.model.HookNet.summary" title="Permalink to this definition">#</a></dt>
 <dd><p>Prints a string summary of the network.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><dl class="simple">
@@ -2598,6 +2740,14 @@ in order to capture the string summary.</p>
 <dt>expand_nested: Whether to expand the nested models.</dt><dd><p>If not provided, defaults to <cite>False</cite>.</p>
 </dd>
 <dt>show_trainable: Whether to show if a layer is trainable.</dt><dd><p>If not provided, defaults to <cite>False</cite>.</p>
+</dd>
+<dt>layer_range: a list or tuple of 2 strings,</dt><dd><p>which is the starting layer name and ending layer name
+(both inclusive) indicating the range of layers to be printed
+in summary. It also accepts regex patterns instead of exact
+name. In such case, start predicate will be the first element
+it matches to <cite>layer_range[0]</cite> and the end predicate will be
+the last element it matches to <cite>layer_range[1]</cite>.
+By default <cite>None</cite> which considers all layers of model.</p>
 </dd>
 </dl>
 </dd>
@@ -2630,7 +2780,7 @@ in order to capture the string summary.</p>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>A dict mapping input names to the corresponding array/tensors, if</dt><dd><p>the model has named inputs.</p>
+<dt>A dict mapping input names to the corresponding array/tensors,</dt><dd><p>if the model has named inputs.</p>
 </dd>
 </dl>
 </li>
@@ -2639,16 +2789,16 @@ in order to capture the string summary.</p>
 <dt>y: Target data. Like the input data <cite>x</cite>, it could be either Numpy</dt><dd><p>array(s) or TensorFlow tensor(s). It should be consistent with <cite>x</cite>
 (you cannot have Numpy inputs and tensor targets, or inversely).</p>
 </dd>
-<dt>sample_weight: Optional array of the same length as x, containing</dt><dd><p>weights to apply to the model’s loss for each sample. In the case of
-temporal data, you can pass a 2D array with shape (samples,
+<dt>sample_weight: Optional array of the same length as x, containing</dt><dd><p>weights to apply to the model’s loss for each sample. In the case
+of temporal data, you can pass a 2D array with shape (samples,
 sequence_length), to apply a different weight to every timestep of
 every sample.</p>
 </dd>
-<dt>reset_metrics: If <cite>True</cite>, the metrics returned will be only for this</dt><dd><p>batch. If <cite>False</cite>, the metrics will be statefully accumulated across
-batches.</p>
+<dt>reset_metrics: If <cite>True</cite>, the metrics returned will be only for this</dt><dd><p>batch. If <cite>False</cite>, the metrics will be statefully accumulated
+across batches.</p>
 </dd>
-<dt>return_dict: If <cite>True</cite>, loss and metric results are returned as a dict,</dt><dd><p>with each key being the name of the metric. If <cite>False</cite>, they are
-returned as a list.</p>
+<dt>return_dict: If <cite>True</cite>, loss and metric results are returned as a</dt><dd><p>dict, with each key being the name of the metric. If <cite>False</cite>, they
+are returned as a list.</p>
 </dd>
 </dl>
 </dd>
@@ -2657,7 +2807,10 @@ or list of scalars (if the model has multiple outputs
 and/or metrics). The attribute <cite>model.metrics_names</cite> will give you
 the display labels for the scalar outputs.</p>
 </dd>
-<dt>Raises:</dt><dd><p>RuntimeError: If <cite>model.test_on_batch</cite> is wrapped in a <cite>tf.function</cite>.</p>
+<dt>Raises:</dt><dd><dl class="simple">
+<dt>RuntimeError: If <cite>model.test_on_batch</cite> is wrapped in a</dt><dd><p><cite>tf.function</cite>.</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -2672,11 +2825,11 @@ This method is called by <cite>Model.make_test_function</cite>.</p>
 evaluation.
 This typically includes the forward pass, loss calculation, and metrics
 updates.</p>
-<p>Configuration details for <em>how</em> this logic is run (e.g. <cite>tf.function</cite> and
-<cite>tf.distribute.Strategy</cite> settings), should be left to
+<p>Configuration details for <em>how</em> this logic is run (e.g. <cite>tf.function</cite>
+and <cite>tf.distribute.Strategy</cite> settings), should be left to
 <cite>Model.make_test_function</cite>, which can also be overridden.</p>
 <dl class="simple">
-<dt>Args:</dt><dd><p>data: A nested structure of <a href="#id85"><span class="problematic" id="id86">`</span></a>Tensor`s.</p>
+<dt>Args:</dt><dd><p>data: A nested structure of <a href="#id95"><span class="problematic" id="id96">`</span></a>Tensor`s.</p>
 </dd>
 <dt>Returns:</dt><dd><p>A <cite>dict</cite> containing values that will be passed to
 <cite>tf.keras.callbacks.CallbackList.on_train_batch_end</cite>. Typically, the
@@ -2693,7 +2846,7 @@ values of the <cite>Model</cite>’s metrics are returned.</p>
 <cite>keras.models.model_from_json(json_string, custom_objects={})</cite>.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><dl class="simple">
-<dt><a href="#id87"><span class="problematic" id="id88">**</span></a>kwargs: Additional keyword arguments</dt><dd><p>to be passed to <cite>json.dumps()</cite>.</p>
+<dt><a href="#id97"><span class="problematic" id="id98">**</span></a>kwargs: Additional keyword arguments to be passed to</dt><dd><p><a href="#id99"><span class="problematic" id="id100">*</span></a><cite>json.dumps()</cite>.</p>
 </dd>
 </dl>
 </dd>
@@ -2715,7 +2868,7 @@ the names of custom losses / layers / etc to the corresponding
 functions / classes.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><dl class="simple">
-<dt><a href="#id89"><span class="problematic" id="id90">**</span></a>kwargs: Additional keyword arguments</dt><dd><p>to be passed to <cite>yaml.dump()</cite>.</p>
+<dt><a href="#id101"><span class="problematic" id="id102">**</span></a>kwargs: Additional keyword arguments</dt><dd><p>to be passed to <cite>yaml.dump()</cite>.</p>
 </dd>
 </dl>
 </dd>
@@ -2752,20 +2905,21 @@ functions / classes.</p>
 </dd>
 <dt>y: Target data. Like the input data <cite>x</cite>, it could be either Numpy</dt><dd><p>array(s) or TensorFlow tensor(s).</p>
 </dd>
-<dt>sample_weight: Optional array of the same length as x, containing</dt><dd><p>weights to apply to the model’s loss for each sample. In the case of
-temporal data, you can pass a 2D array with shape (samples,
+<dt>sample_weight: Optional array of the same length as x, containing</dt><dd><p>weights to apply to the model’s loss for each sample. In the case
+of temporal data, you can pass a 2D array with shape (samples,
 sequence_length), to apply a different weight to every timestep of
 every sample.</p>
 </dd>
-<dt>class_weight: Optional dictionary mapping class indices (integers) to a</dt><dd><p>weight (float) to apply to the model’s loss for the samples from this
-class during training. This can be useful to tell the model to “pay
-more attention” to samples from an under-represented class.</p>
+<dt>class_weight: Optional dictionary mapping class indices (integers)</dt><dd><p>to a weight (float) to apply to the model’s loss for the samples
+from this class during training. This can be useful to tell the
+model to “pay more attention” to samples from an under-represented
+class.</p>
 </dd>
-<dt>reset_metrics: If <cite>True</cite>, the metrics returned will be only for this</dt><dd><p>batch. If <cite>False</cite>, the metrics will be statefully accumulated across
-batches.</p>
+<dt>reset_metrics: If <cite>True</cite>, the metrics returned will be only for this</dt><dd><p>batch. If <cite>False</cite>, the metrics will be statefully accumulated
+across batches.</p>
 </dd>
-<dt>return_dict: If <cite>True</cite>, loss and metric results are returned as a dict,</dt><dd><p>with each key being the name of the metric. If <cite>False</cite>, they are
-returned as a list.</p>
+<dt>return_dict: If <cite>True</cite>, loss and metric results are returned as a</dt><dd><p>dict, with each key being the name of the metric. If <cite>False</cite>, they
+are returned as a list.</p>
 </dd>
 </dl>
 </dd>
@@ -2786,16 +2940,17 @@ the display labels for the scalar outputs.</p>
 <dd><p>The logic for one training step.</p>
 <p>This method can be overridden to support custom training logic.
 For concrete examples of how to override this method see
-[Customizing what happends in fit](<a class="reference external" href="https://www.tensorflow.org/guide/keras/customizing_what_happens_in_fit">https://www.tensorflow.org/guide/keras/customizing_what_happens_in_fit</a>).
+[Customizing what happens in fit](
+<a class="reference external" href="https://www.tensorflow.org/guide/keras/customizing_what_happens_in_fit">https://www.tensorflow.org/guide/keras/customizing_what_happens_in_fit</a>).
 This method is called by <cite>Model.make_train_function</cite>.</p>
-<p>This method should contain the mathematical logic for one step of training.
-This typically includes the forward pass, loss calculation, backpropagation,
-and metric updates.</p>
-<p>Configuration details for <em>how</em> this logic is run (e.g. <cite>tf.function</cite> and
-<cite>tf.distribute.Strategy</cite> settings), should be left to
+<p>This method should contain the mathematical logic for one step of
+training.  This typically includes the forward pass, loss calculation,
+backpropagation, and metric updates.</p>
+<p>Configuration details for <em>how</em> this logic is run (e.g. <cite>tf.function</cite>
+and <cite>tf.distribute.Strategy</cite> settings), should be left to
 <cite>Model.make_train_function</cite>, which can also be overridden.</p>
 <dl class="simple">
-<dt>Args:</dt><dd><p>data: A nested structure of <a href="#id91"><span class="problematic" id="id92">`</span></a>Tensor`s.</p>
+<dt>Args:</dt><dd><p>data: A nested structure of <a href="#id103"><span class="problematic" id="id104">`</span></a>Tensor`s.</p>
 </dd>
 <dt>Returns:</dt><dd><p>A <cite>dict</cite> containing values that will be passed to
 <cite>tf.keras.callbacks.CallbackList.on_train_batch_end</cite>. Typically, the
@@ -2842,8 +2997,8 @@ first).</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">variables</span></span><a class="headerlink" href="#hooknet.model.HookNet.variables" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns the list of all layer variables/weights.</p>
 <p>Alias of <cite>self.weights</cite>.</p>
-<p>Note: This will not track the weights of nested <cite>tf.Modules</cite> that are not
-themselves Keras layers.</p>
+<p>Note: This will not track the weights of nested <cite>tf.Modules</cite> that are
+not themselves Keras layers.</p>
 <dl class="simple">
 <dt>Returns:</dt><dd><p>A list of variables.</p>
 </dd>
@@ -2854,8 +3009,8 @@ themselves Keras layers.</p>
 <dt class="sig sig-object py" id="hooknet.model.HookNet.weights">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">weights</span></span><a class="headerlink" href="#hooknet.model.HookNet.weights" title="Permalink to this definition">#</a></dt>
 <dd><p>Returns the list of all layer variables/weights.</p>
-<p>Note: This will not track the weights of nested <cite>tf.Modules</cite> that are not
-themselves Keras layers.</p>
+<p>Note: This will not track the weights of nested <cite>tf.Modules</cite> that are
+not themselves Keras layers.</p>
 <dl class="simple">
 <dt>Returns:</dt><dd><p>A list of variables.</p>
 </dd>
@@ -2874,7 +3029,7 @@ themselves Keras layers.</p>
 <span class="gp">... </span>    <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Using the above module would produce <a href="#id93"><span class="problematic" id="id94">`</span></a>tf.Variable`s and <a href="#id95"><span class="problematic" id="id96">`</span></a>tf.Tensor`s whose
+<p>Using the above module would produce <a href="#id105"><span class="problematic" id="id106">`</span></a>tf.Variable`s and <a href="#id107"><span class="problematic" id="id108">`</span></a>tf.Tensor`s whose
 names included the module name:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mod</span> <span class="o">=</span> <span class="n">MyModule</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mod</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]))</span>
@@ -2892,46 +3047,851 @@ names included the module name:</p>
 </dl>
 </dd></dl>
 
+</section>
 </dd></dl>
 
 </section>
 
 
-              </article>
-              
-
-              
-              <footer class="bd-footer-article">
-                  <!-- Previous / next buttons -->
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'>
 </div>
-              </footer>
-              
+            </footer>
+            
           </div>
           
-      </div>
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div class="tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav" class="page-toc">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hooknet.model.HookNet">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     HookNet
+    </span>
+   </code>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.__init__">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.__init__()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.activity_regularizer">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.activity_regularizer
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.add_loss">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.add_loss()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.add_metric">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.add_metric()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.add_update">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.add_update()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.add_variable">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.add_variable()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.add_weight">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.add_weight()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.build">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.build()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.call">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.call()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.compile">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.compile()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.compute_dtype">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.compute_dtype
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.compute_loss">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.compute_loss()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.compute_mask">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.compute_mask()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.compute_metrics">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.compute_metrics()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.compute_output_shape">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.compute_output_shape()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.compute_output_signature">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.compute_output_signature()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.count_params">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.count_params()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.distribute_strategy">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.distribute_strategy
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.dtype">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.dtype
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.dtype_policy">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.dtype_policy
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.dynamic">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.dynamic
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.evaluate">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.evaluate()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.evaluate_generator">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.evaluate_generator()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.finalize_state">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.finalize_state()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.fit">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.fit()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.fit_generator">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.fit_generator()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.from_config">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.from_config()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.get_config">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.get_config()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.get_input_at">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.get_input_at()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.get_input_mask_at">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.get_input_mask_at()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.get_input_shape_at">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.get_input_shape_at()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.get_layer">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.get_layer()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.get_output_at">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.get_output_at()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.get_output_mask_at">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.get_output_mask_at()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.get_output_shape_at">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.get_output_shape_at()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.get_weight_paths">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.get_weight_paths()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.get_weights">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.get_weights()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.inbound_nodes">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.inbound_nodes
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.input">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.input
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.input_mask">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.input_mask
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.input_shape">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.input_shape
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.input_spec">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.input_spec
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.load_weights">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.load_weights()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.losses">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.losses
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.make_predict_function">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.make_predict_function()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.make_test_function">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.make_test_function()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.make_train_function">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.make_train_function()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.metrics">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.metrics
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.metrics_names">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.metrics_names
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.name">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.name
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.name_scope">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.name_scope
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.non_trainable_variables">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.non_trainable_variables
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.non_trainable_weights">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.non_trainable_weights
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.outbound_nodes">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.outbound_nodes
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.output">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.output
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.output_mask">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.output_mask
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.output_shape">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.output_shape
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.predict">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.predict()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.predict_generator">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.predict_generator()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.predict_on_batch">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.predict_on_batch()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.predict_step">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.predict_step()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.reset_metrics">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.reset_metrics()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.run_eagerly">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.run_eagerly
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.save">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.save()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.save_spec">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.save_spec()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.save_weights">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.save_weights()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.set_weights">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.set_weights()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.state_updates">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.state_updates
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.submodules">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.submodules
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.summary">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.summary()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.supports_masking">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.supports_masking
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.test_on_batch">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.test_on_batch()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.test_step">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.test_step()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.to_json">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.to_json()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.to_yaml">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.to_yaml()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.train_on_batch">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.train_on_batch()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.train_step">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.train_step()
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.trainable_variables">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.trainable_variables
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.trainable_weights">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.trainable_weights
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.variable_dtype">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.variable_dtype
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.variables">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.variables
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.weights">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.weights
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#hooknet.model.HookNet.with_name_scope">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       HookNet.with_name_scope()
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+</div>
+
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
     </div>
+  </div>
 
   
-  
+    
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=92025949c220c2e29695"></script>
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1e1de1a1873e13ef5536"></script>
 
-<footer class="bd-footer"><div class="bd-footer__inner container">
+  <footer class="bd-footer"><div class="bd-footer__inner container">
   
   <div class="footer-item">
-    <p class="copyright">
+    
+<p class="copyright">
+
     &copy; Copyright 2021, Mart van Rijthoven.<br>
+
 </p>
+
   </div>
   
   <div class="footer-item">
-    <p class="sphinx-version">
-Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.1.1.<br>
+    
+<p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.3.0.<br>
 </p>
+
   </div>
   
 </div>
-</footer>
+  </footer>
   </body>
 </html>
