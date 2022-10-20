@@ -31,4 +31,5 @@ hooknet.training
    hooknet.training.metrics
    hooknet.training.tracker
    hooknet.training.train
+   hooknet.training.train_torch
 
