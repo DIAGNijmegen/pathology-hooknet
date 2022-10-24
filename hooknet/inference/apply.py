@@ -82,6 +82,7 @@ def _execute_inference_single(
 def execute_inference(
     user_config,
     mode,
+    model,
     model_name,
     output_folder,
     tmp_folder,
@@ -89,16 +90,13 @@ def execute_inference(
     source_preset,
     heatmaps,
 ):
-    print("Create model")
-    model = create_hooknet(user_config=user_config)
-
     print("Create output folder")
     create_output_folders(tmp_folder=tmp_folder, output_folder=output_folder)
 
     for image_path, annotation_path in get_paths(user_config, preset=source_preset):
         print(f"PROCESSING: {image_path}, with {annotation_path}....")
 
-        lock_file_path = output_folder / (image_path.stem + ".lock")
+        lock_file_path = output_folder / (image_path.stem + f"{model_name}.lock")
         if lock_file_path.exists():
             print("Lock file exists, skipping inference.")
             continue
