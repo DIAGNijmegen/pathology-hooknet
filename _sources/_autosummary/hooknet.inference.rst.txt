@@ -29,6 +29,7 @@ hooknet.inference
    :recursive:
 
    hooknet.inference.apply
+   hooknet.inference.apply_torch
    hooknet.inference.utils
    hooknet.inference.writing
 

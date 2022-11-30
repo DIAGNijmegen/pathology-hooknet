@@ -42,6 +42,7 @@
       ~HookNet.get_input_mask_at
       ~HookNet.get_input_shape_at
       ~HookNet.get_layer
+      ~HookNet.get_metrics_result
       ~HookNet.get_output_at
       ~HookNet.get_output_mask_at
       ~HookNet.get_output_shape_at
@@ -80,6 +81,7 @@
    
       ~HookNet.activity_regularizer
       ~HookNet.compute_dtype
+      ~HookNet.distribute_reduction_method
       ~HookNet.distribute_strategy
       ~HookNet.dtype
       ~HookNet.dtype_policy
