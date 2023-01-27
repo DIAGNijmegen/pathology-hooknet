@@ -2,8 +2,8 @@ from matplotlib import pyplot as plt
 from matplotlib import patches
 import numpy as np
 
-from wholeslidedata.samplers.utils import fit_data
-from wholeslidedata.samplers.utils import plot_mask
+from wholeslidedata.samplers.utils import crop_data
+from wholeslidedata.visualization.plotting import plot_mask
 
 
 def plot_mfmr_patches(target_patch, context_patch, size, downsampling):
@@ -34,7 +34,7 @@ def plot_sample(x_batch, y_batch):
     fig, axes = plt.subplots(2, 5, figsize=(10,5))
 
     axes[0][0].imshow(x_batch[0])
-    axes[0][1].imshow(fit_data(x_batch[0], [70,70]))
+    axes[0][1].imshow(crop_data(x_batch[0], [70,70]))
     axes[0][2].set_title(str(np.unique(y_batch[0][..., 0])))
     axes[0][2].imshow(y_batch[0][..., 0])
 
@@ -45,7 +45,7 @@ def plot_sample(x_batch, y_batch):
     axes[0][4].imshow(y_batch[0][..., 2])
 
     axes[1][0].imshow(x_batch[1])
-    axes[1][1].imshow(fit_data(x_batch[1], [70,70]))
+    axes[1][1].imshow(crop_data(x_batch[1], [70,70]))
     axes[1][2].set_title(str(np.unique(y_batch[1][..., 0])))
     axes[1][2].imshow(y_batch[1][..., 0])
     axes[1][3].set_title(str(np.unique(y_batch[1][..., 1])))
