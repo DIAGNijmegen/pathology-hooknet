@@ -21,6 +21,19 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import SGD, Adam, Optimizer
 from tensorflow.python.framework.ops import Tensor
 from hooknet.utils import check_input
+from dicfg.reader import ConfigReader
+from dicfg.factory import build_config
+from hooknet.configuration import MAIN_CONFIG_PATH
+
+def create_hooknet(config, presets):
+    config_reader = ConfigReader(
+        name="wholeslidedata",
+        main_config_path=MAIN_CONFIG_PATH,
+    )
+    config = config_reader.read(user_config=config, presets=presets)
+
+    return build_config(config['default'])['hooknet']
+
 
 class HookNet(Model):
 

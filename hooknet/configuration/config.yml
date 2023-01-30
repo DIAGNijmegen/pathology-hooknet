@@ -1,0 +1,19 @@
+default:
+  "*object": hooknet.model.HookNet
+  input_shape@replace: [[284,284, 3], [284,284, 3]]
+  hook_indices@replace: [0, 4] 
+  n_classes: 7
+  model_weights: None
+  depth: 4
+  n_convs: 2
+  filter_size: 3
+  n_filters: 16
+  padding: valid
+  batch_norm: False
+  activation: relu
+  learning_rate: 0.00005
+  opt_name: adam
+  l2_lambda: 0.001
+  loss_weights: [1.0, 0.0]
+  merge_type: concat
+  predict_target_only: True
