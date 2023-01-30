@@ -25,7 +25,7 @@ from dicfg.reader import ConfigReader
 from dicfg.factory import build_config
 from hooknet.configuration import MAIN_CONFIG_PATH
 
-def create_hooknet(config, presets):
+def create_hooknet(config=None, presets=()):
     config_reader = ConfigReader(
         name="hooknet",
         main_config_path=MAIN_CONFIG_PATH,
