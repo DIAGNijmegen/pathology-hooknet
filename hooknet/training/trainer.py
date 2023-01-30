@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 
 from dicfg.reader import _open_yaml_config
-from hooknet.configuration.config import create_hooknet
+from hooknet.model import create_hooknet
 from hooknet.training.metrics import (
     ConfusionMatrixAccumulator,
     MetricAccumulater,
@@ -57,7 +57,7 @@ class Trainer:
             for mode in MODES
         }
 
-        self._hooknet = create_hooknet(hooknet_config, mode="training")
+        self._hooknet = create_hooknet(hooknet_config)
 
         self._weights_file = log_path / "hooknet_weights.h5"
 
