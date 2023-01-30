@@ -63,7 +63,7 @@ class Trainer:
 
         self._hooknet = create_hooknet(hooknet_config)
 
-        self._weights_file = log_path / "hooknet_weights.h5"
+        self._weights_file = self._log_path / "hooknet_weights.h5"
 
         label_map = _open_yaml_config(iterator_config)["wholeslidedata"]["default"][
             "labels"
