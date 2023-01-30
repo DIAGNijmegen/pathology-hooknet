@@ -14,6 +14,7 @@ from sklearn.metrics import log_loss
 from tqdm import tqdm
 from wholeslidedata.iterators import create_batch_iterator
 import numpy as np
+
 MODES = ["training", "validation"]
 
 
@@ -38,12 +39,15 @@ class KerasUpdateLearningRate:
         self._index += 1
 
 
+
+
+
 class Trainer:
     def __init__(
         self, iterator_config, hooknet_config, epochs, steps, cpus, project, log_path
     ):
         self._log_path = Path(log_path)
-        self._log_path.mkdir(parents=True, exists_ok=True)
+        self._log_path.mkdir(parents=True, exist_ok=True)
         self._tracker = WandbTracker(project=project, log_path=self._log_path)
         self._epochs = epochs
         self._steps = steps
