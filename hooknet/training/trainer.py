@@ -65,9 +65,7 @@ class Trainer:
 
         self._weights_file = self._log_path / "hooknet_weights.h5"
 
-        label_map = _open_yaml_config(iterator_config)["wholeslidedata"]["default"][
-            "labels"
-        ]
+        label_map = self._iterators['training'].dataset.labels.map
 
         self._metrics = {
             "training": [
