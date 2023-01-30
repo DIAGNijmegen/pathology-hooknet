@@ -46,28 +46,34 @@ class Trainer:
     def __init__(
         self, iterator_config, hooknet_config, epochs, steps, cpus, project, log_path
     ):
+        self._iterator_config = iterator_config
+        self._hooknet_config = hooknet_config
+        self._cpus = cpus
+        self._project = project
         self._log_path = Path(log_path)
         self._log_path.mkdir(parents=True, exist_ok=True)
-        self._tracker = WandbTracker(project=project, log_path=self._log_path)
         self._epochs = epochs
         self._steps = steps
-        self._tracker.save(str(iterator_config))
-        self._tracker.save(str(hooknet_config))
+        self._weights_file = self._log_path / "hooknet_weights.h5"
 
-        self._iterators = {
+    def train(self):
+
+        tracker = WandbTracker(project=self._project, log_path=self._log_path)
+        tracker.save(str(self._iterator_config))
+        tracker.save(str(self._hooknet_config))
+
+        iterators = {
             mode: create_batch_iterator(
-                mode=mode, user_config=iterator_config, cpus=cpus, buffer_dtype=np.uint8
+                mode=mode, user_config=self._iterator_config, cpus=self._cpus, buffer_dtype=np.uint8
             )
             for mode in MODES
         }
 
-        self._hooknet = create_hooknet(hooknet_config)
+        hooknet = create_hooknet(self._hooknet_config)
 
-        self._weights_file = self._log_path / "hooknet_weights.h5"
+        # label_map = self._iterators['training'].dataset.labels.map
 
-        label_map = self._iterators['training'].dataset.labels.map
-
-        self._metrics = {
+        metrics = {
             "training": [
                 MetricAccumulater("loss", "Loss+L2"),
                 MetricAccumulater("accuracy"),
@@ -81,42 +87,41 @@ class Trainer:
             ],
         }
 
-    def train(self):
         best_metric = None
-        update_learning_rate = KerasUpdateLearningRate(self._hooknet)
-        print("training labels", self._iterators["training"].dataset.labels.names)
-        print("validation labels", self._iterators["validation"].dataset.labels.names)
+        update_learning_rate = KerasUpdateLearningRate(hooknet)
+        print("training labels", iterators["training"].dataset.labels.names)
+        print("validation labels", iterators["validation"].dataset.labels.names)
         for _ in tqdm(range(self._epochs)):
             for mode in MODES:
                 for _ in range(self._steps):
-                    x_batch, y_batch, _ = next(self._iterators[mode])
+                    x_batch, y_batch, _ = next(iterators[mode])
                     x_batch = list(x_batch.transpose(1, 0, 2, 3, 4))
                     y_batch = y_batch.transpose(1, 0, 2, 3, 4)[0]
 
                     if mode == "training":
-                        out = self._hooknet.train_on_batch(
+                        out = hooknet.train_on_batch(
                             x=x_batch, y=y_batch, return_dict=True
                         )
                     else:
-                        predictions = self._hooknet.predict_on_batch(
+                        predictions = hooknet.predict_on_batch(
                             x=x_batch, argmax=False
                         )
                         out = {"predictions": predictions, "y": y_batch}
 
-                    for metric in self._metrics[mode]:
+                    for metric in metrics[mode]:
                         metric.update(**out)
 
                     update_learning_rate()
 
                 metrics_data = {}
-                for metric in self._metrics[mode]:
+                for metric in metrics[mode]:
                     metrics_data.update(metric())
 
                 mode_metrics = {
                     mode + "_" + name: value for name, value in metrics_data.items()
                 }
                 print(mode_metrics)
-                self._tracker.update(mode_metrics)
+                tracker.update(mode_metrics)
 
                 if mode == "validation":
                     # check if model improved
@@ -127,8 +132,13 @@ class Trainer:
                         # tracker.update_best(best_metric)
                         # save weights
                         print(f"Saving weights to: {self._weights_file}")
-                        self._hooknet.save_weights(self._weights_file)
-        self._hooknet.save_weights("/home/user/last_model.h5")
+                        hooknet.save_weights(self._weights_file)
+
+        hooknet.save_weights(self._log_path / "hooknet_last_model.h5")
+
         print("save wandb files...")
         for file in glob.glob(os.path.join(self._log_path, "*.log")):
-            self._tracker.save(file)
+            tracker.save(file)
+        for mode in MODES:
+            iterators[mode].stop()
+        
