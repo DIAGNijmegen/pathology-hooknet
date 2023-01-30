@@ -91,7 +91,7 @@ class Trainer:
         update_learning_rate = KerasUpdateLearningRate(hooknet)
         print("training labels", iterators["training"].dataset.labels.names)
         print("validation labels", iterators["validation"].dataset.labels.names)
-        for _ in tqdm(range(self._epochs)):
+        for epoch in range(self._epochs):
             for mode in MODES:
                 for _ in range(self._steps):
                     x_batch, y_batch, _ = next(iterators[mode])
@@ -120,7 +120,7 @@ class Trainer:
                 mode_metrics = {
                     mode + "_" + name: value for name, value in metrics_data.items()
                 }
-                print(mode_metrics)
+                print(epoch, mode_metrics)
                 tracker.update(mode_metrics)
 
                 if mode == "validation":
