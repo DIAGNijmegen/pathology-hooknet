@@ -1,8 +1,8 @@
 default:
   model:
     "*object": hooknet.model.HookNet
-    input_shape@replace: [[284,284, 3], [284,284, 3]]
-    hook_indices@replace: [0, 4] 
+    input_shape: [[284,284, 3], [284,284, 3]]
+    hook_indices: [0, 4] 
     n_classes: 7
     model_weights: None
     depth: 4
