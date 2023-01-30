@@ -74,9 +74,9 @@ class Trainer:
                 MetricAccumulater("categorical_crossentropy", "Loss"),
             ],
             "validation": [
-                ConfusionMatrixAccumulator(
-                    metric_names=("F1", "F1_Macro", "ACC_Macro"), label_map=label_map
-                ),
+                # ConfusionMatrixAccumulator(
+                #     metric_names=("F1", "F1_Macro", "ACC_Macro"), label_map=label_map
+                # ),
                 PredictionMetricAccumulator(log_loss, "Loss", argmax=False),
             ],
         }
@@ -115,13 +115,14 @@ class Trainer:
                 mode_metrics = {
                     mode + "_" + name: value for name, value in metrics_data.items()
                 }
+                print(mode_metrics)
                 self._tracker.update(mode_metrics)
 
                 if mode == "validation":
                     # check if model improved
-                    if best_metric is None or metrics_data["F1_Macro"] > best_metric:
+                    if best_metric is None or metrics_data["Loss"] < best_metric:
                         # update best metric
-                        best_metric = metrics_data["F1_Macro"]
+                        best_metric = metrics_data["Loss"]
                         print("new best metric: ", best_metric)
                         # tracker.update_best(best_metric)
                         # save weights
