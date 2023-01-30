@@ -27,12 +27,12 @@ from hooknet.configuration import MAIN_CONFIG_PATH
 
 def create_hooknet(config, presets):
     config_reader = ConfigReader(
-        name="wholeslidedata",
+        name="hooknet",
         main_config_path=MAIN_CONFIG_PATH,
     )
     config = config_reader.read(user_config=config, presets=presets)
 
-    return build_config(config['default'])['hooknet']
+    return build_config(config['default'])['model']
 
 
 class HookNet(Model):
