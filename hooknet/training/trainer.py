@@ -1,8 +1,6 @@
 import glob
 import os
 from pathlib import Path
-
-from dicfg.reader import _open_yaml_config
 from hooknet.model import create_hooknet
 from hooknet.training.metrics import (
     ConfusionMatrixAccumulator,
