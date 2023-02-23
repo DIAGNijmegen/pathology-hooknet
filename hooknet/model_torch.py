@@ -49,7 +49,7 @@ class HookNet(nn.Module):
         low_out, low_hooks = self.low_mag_branch(low_input)
         mid_out, mid_hooks = self.mid_mag_branch(mid_input, low_hooks)
         high_out, _ = self.high_mag_branch(high_input, mid_hooks)
-        return low_out, mid_out, high_out
+        return high_out, mid_out, low_out
 
 
 class Branch(nn.Module):
