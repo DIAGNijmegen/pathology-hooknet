@@ -44,12 +44,13 @@ class HookNet(nn.Module):
             hook_channels=mid_channels,
             hook_to_index=3,
         )
+        self.last_conv = nn.Conv2d(self.high_mag_branch.decoder._out_channels[0], n_classes, 1)
 
     def forward(self, high_input, mid_input, low_input):
-        low_out, low_hooks = self.low_mag_branch(low_input)
-        mid_out, mid_hooks = self.mid_mag_branch(mid_input, low_hooks)
-        high_out, _ = self.high_mag_branch(high_input, mid_hooks)
-        return high_out, mid_out, low_out
+        low_out = self.low_mag_branch(low_input)
+        mid_out = self.mid_mag_branch(mid_input, low_out)
+        high_out = self.high_mag_branch(high_input, mid_out)
+        return self.last_conv(high_out)
 
 
 class Branch(nn.Module):
@@ -84,14 +85,13 @@ class Branch(nn.Module):
             hook_from_index,
             hook_to_index,
         )
-        self.last_conv = nn.Conv2d(self.decoder._out_channels[0], n_classes, 1)
+        
 
     def forward(self, x, hook_in=None):
         out, residuals = self.encoder(x)
         out = self.mid_conv_block(out)
-        out, hook_out = self.decoder(out, residuals, hook_in)
-        logits = self.last_conv(out)
-        return logits, hook_out
+        out = self.decoder(out, residuals, hook_in)
+        return out
 
 
 class Encoder(nn.Module):
@@ -155,7 +155,6 @@ class Decoder(nn.Module):
 
     def forward(self, x, residuals, hook_in=None):
         out = x
-        hook_out = None
         for d in reversed(range(self._depth)):
             if hook_in is not None and d == self._hook_to_index:
                 out = concatenator(out, hook_in)
@@ -165,9 +164,9 @@ class Decoder(nn.Module):
             out = self._decode_path[f"convblock{d}"](out)
 
             if self._hook_from_index is not None and d == self._hook_from_index:
-                hook_out = out
+                return out
 
-        return out, hook_out
+        return out
 
 
 class ConvBlock(nn.Module):

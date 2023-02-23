@@ -59,11 +59,8 @@ class Trainer:
             for _ in tqdm(range(self._steps)):
                 inputs, labels, info = next(batch_iterators["training"])
                 optimizer.zero_grad()
-                outputs = hooknet(*inputs)
-                loss1 = criterion(outputs[0], labels[0].long())
-                loss2 = criterion(outputs[1], labels[1].long())
-                loss3 = criterion(outputs[2], labels[2].long())
-                loss = loss1 + loss2 + loss3
+                output = hooknet(*inputs)
+                loss = criterion(output, labels[0].long())
                 loss.backward()
                 optimizer.step()
                 train_loss += loss.item()
