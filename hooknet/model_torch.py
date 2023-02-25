@@ -2,6 +2,12 @@ import torch
 import torch.nn as nn
 from torchvision.transforms.functional import center_crop
 
+def create_hooknet_cuda(**kwargs):
+    return HookNet(**kwargs).cuda()
+
+def get_parameters(hooknet):
+    return hooknet.parameters()
+
 class HookNet(nn.Module):
     def __init__(
         self,
