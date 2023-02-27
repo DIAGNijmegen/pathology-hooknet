@@ -1,0 +1,11 @@
+experiment:
+  default:
+    project: TIGER-deeplabv3
+    log_path: /home/user/${project}
+    epochs: 500
+    steps: 50
+    cpus: 8
+    learning_rate: 0.05
+    model: deeplabmodel.yml
+    scheduler:
+      gamma: 0.95

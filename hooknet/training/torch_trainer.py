@@ -38,10 +38,7 @@ class Trainer:
         tracker.save(str(self._iterator_config))
         tracker.save(str(self._experiment_config))
 
-        epochs = experiment["epochs"]
-        steps = experiment["steps"]
-
-        model: HookNet = experiment["model"]
+        model = experiment["model"].cuda()
         criterion: nn.CrossEntropyLoss = experiment["criterion"]
         optimizer: optim.Optimizer = experiment["optimizer"]
         scheduler: _LRScheduler = experiment["scheduler"]
@@ -58,16 +55,17 @@ class Trainer:
         }
 
         min_valid_loss = np.inf
-        for epoch in range(epochs):  # loop over the dataset multiple times
+        for epoch in range(experiment["epochs"]):  # loop over the dataset multiple times
             print("Epoch: ", epoch)
             train_loss = 0.0
-            hooknet.train()  # Optional when not using Model Specific layer
+            model.train()  # Optional when not using Model Specific layer
             print("training")
-            for _ in tqdm(range(steps)):
-                inputs, labels, info = next(batch_iterators["training"])
+            for _ in tqdm(range(experiment["steps"])):
+                input_data, label_data, info = next(batch_iterators["training"])
                 optimizer.zero_grad()
-                output = model(*inputs)
-                loss = criterion(output, labels[0].long())
+                output = model(input_data)
+                output = output['out']
+                loss = criterion(output, label_data.long())
                 loss.backward()
                 optimizer.step()
                 train_loss += loss.item()
@@ -83,7 +81,7 @@ class Trainer:
             #                     loss = criterion(outputs[0], labels[0].long())
             #                     valid_loss += loss.item()
 
-            train_loss /= steps
+            train_loss /= experiment["steps"]
             #             valid_loss /= self._steps
 
             tracker.update({"train_loss": train_loss, "valid_loss": valid_loss})
@@ -98,22 +96,16 @@ class Trainer:
             #                 # Saving State Dict
             #                 torch.save(hooknet.state_dict(), self._log_path / "best_model.pth")
 
-            torch.save(hooknet.state_dict(), log_path / "last_model.pth")
+            torch.save(model.state_dict(), log_path / "last_model.pth")
             print("Finished Training")
 
 
 @click.command()
 @click.option("--iterator_config", type=Path, required=True)
-@click.option("--output_folder", type=Path, required=True)
-@click.option("--classes", type=int, required=True)
-@click.option("--filters", type=int, required=True)
-@click.option("--cpus", type=int, required=True)
-@click.option("--epochs", type=int, required=True)
-@click.option("--steps", type=int, required=True)
-@click.option("--project", type=str, required=True)
-@click.option("--log_path", type=Path, required=True)
-def main(iterator_config, output_folder: Path, classes, filters, cpus, epochs, steps):
-    pass
+@click.option("--experiment_config", type=Path, required=True)
+def main(iterator_config, experiment_config):
+    trainer = Trainer(iterator_config, experiment_config)
+    trainer.train()
 
 
 if __name__ == "__main__":

@@ -1,0 +1,38 @@
+- AdvancedBlur:
+    p: 0.02
+- GaussianBlur:
+    p: 0.02
+- Blur:
+    p: 0.05
+- MedianBlur:
+    p: 0.02
+- GlassBlur:
+    p: 0.02
+- VerticalFlip:
+    p: 0.15
+- HorizontalFlip:
+    p: 0.15
+- RandomRotate90:
+    p: 0.15
+- Flip:
+    p: 0.15
+- Transpose:
+    p: 0.15
+- RandomGamma:
+    p: 0.02
+- HueSaturationValue:
+    p: 0.02
+- RandomBrightnessContrast:
+    p: 0.02
+- CLAHE:
+    p: 0.02
+- ImageCompression:
+    p: 0.05
+- ISONoise:
+    p: 0.02
+- GaussNoise:
+    p: 0.02
+- MultiplicativeNoise:
+    p: 0.02
+- PixelDropout:
+    p: 0.02

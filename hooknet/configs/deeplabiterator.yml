@@ -1,0 +1,49 @@
+wholeslidedata:
+  default:
+    seed: 123
+    yaml_source: /home/user/pathology-whole-slide-data/docs/source/userguide/notebooks/examples/configs/tigersegmentationdata.yml
+    image_backend: asap
+    labels:
+      invasive tumor: 1
+      tumor-associated stroma: 2
+      in-situ tumor: 3
+      healthy glands: 3
+      necrosis not in-situ: 3
+      inflamed stroma: 3
+      rest: 3
+    annotation_parser:
+      "*object": wholeslidedata.annotation.parser.WholeSlideAnnotationParser
+      renamed_labels:
+        invasive tumor: 1
+        tumor-associated stroma: 2
+        rest: 3
+      sorters:
+        - ${$wholeslidedata.annotation.selector.sort_by_area_with_roi}
+    annotation_sampler:
+        "*object": wholeslidedata.samplers.annotationsampler.AreaAnnotationSampler
+        dataset: ${dataset}
+        weight: 0.7
+    batch_shape:
+      batch_size: 16
+      shape: [284, 284, 3]
+      spacing: 2.0
+    point_sampler_name: RandomPointSampler
+    point_sampler:
+      buffer:
+        spacing: ${batch_shape.spacing}
+        value: -142
+
+  training:
+    batch_callbacks:
+#       - "*object": wholeslidedata.interoperability.albumentations.callbacks.AlbumentationsSegmentationBatchCallback
+#         augmentations: augmentations.yml
+      - "*object": wholeslidedata.samplers.callbacks.HedAugmentationBatchCallback
+        probability: 0.1
+
+  inference:
+    yaml_source: /home/user/pathology-whole-slide-data/docs/source/userguide/notebooks/examples/configs/tigersegmentationdatainference.yml
+    batch_shape:
+      batch_size: 1
+      shape: [1244, 1244, 3]
+      spacing: 2.0
+      
