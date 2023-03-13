@@ -3,7 +3,7 @@ wholeslidedata:
         seed: 123
         yaml_source: data.yml
     
-        label_map: 
+        labels: 
             tumor: 1
             stroma: 2
             lymphocytes: 3
@@ -15,6 +15,5 @@ wholeslidedata:
             y_shape: [2, 1030, 1030]
             
         sample_callbacks:
-            - module: wholeslidedata.samplers.callbacks
-              attribute: FitOutput
+            - "*object": wholeslidedata.samplers.callbacks.CropSampleCallback
               output_shape: [1030, 1030]
