@@ -2,8 +2,6 @@ import torch
 import torch.nn as nn
 from torchvision.transforms.functional import center_crop
 
-def get_parameters(model):
-    return model.parameters()
 
 class HookNet(nn.Module):
     def __init__(
@@ -11,7 +9,7 @@ class HookNet(nn.Module):
         n_classes,
         depth=4,
         n_convs=2,
-        n_filters=48,
+        n_filters=2,
         batch_norm=True,
     ):
         super().__init__()
