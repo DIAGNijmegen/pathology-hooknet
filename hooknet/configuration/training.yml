@@ -1,56 +1,11 @@
 experimart:
     default:
       data_folder: /tmp/
+      
       data_settings:
-        user_config: 
-          wholeslidedata:
-            default:
-              seed: 123
-              yaml_source:
-                training: 
-                  - wsi:
-                      path: ${data_folder}/TCGA-21-5784-01Z-00-DX1.tif
-                    wsa:
-                      path: ${data_folder}/TCGA-21-5784-01Z-00-DX1.xml
-                validation: 
-                  - wsi:
-                      path: ${data_folder}/TCGA-21-5784-01Z-00-DX1.tif
-                    wsa:
-                      path: ${data_folder}/TCGA-21-5784-01Z-00-DX1.xml
-              labels: 
-                lymphocytes: 1
-                tumor: 2
-                stroma: 3
-              batch_shape: 
-                batch_size: 12
-                spacing: [0.5, 2.0, 8.0]
-                shape: [[284, 284, 3], [284, 284, 3], [284, 284, 3]]
-                y_shape: [3, 70, 70]
-                
-              sample_callbacks:
-                - "*object": wholeslidedata.samplers.callbacks.CropSampleCallback
-                  output_shape: [70, 70] 
-        cpus: 1
-        number_of_batches: None
-        index: 0
-        update_samplers: False
-        return_info: True
-        search_paths: []
-        presets: []
-        cpus: 1
-        context: "fork"
-        determinstic: True
-        buffer_dtype: ${$numpy.uint16}
+        user_config: iteratoruserconfig.yml
         iterator_class: ${$wholeslidedata.interoperability.pytorch.iterator.TorchBatchIterator}
-      training_data_iterator:
-        "*object": wholeslidedata.iterators.create_batch_iterator
-        mode: training
-        "**kwargs": ${data_settings}
-      validation_data_iterator:  
-        "*object": wholeslidedata.iterators.create_batch_iterator
-        mode: validation
-        "**kwargs": ${data_settings}
-
+ 
       model@replace(true):
         "*object": experimart.interoperability.torch.io.to_cuda
         model:
@@ -67,8 +22,3 @@ experimart:
       validation_step_iterator:
         "*object": hooknet.training.step.HookNetTorchValidationStepIterator
         
-      epoch_callbacks:
-        - "*object": experimart.interoperability.torch.io.TorchModelIO
-          model: ${model}
-          output_folder: ${log_path}
-          suffix: _hooknet

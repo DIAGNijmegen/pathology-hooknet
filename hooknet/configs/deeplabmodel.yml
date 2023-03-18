@@ -1,2 +1,0 @@
-"*object": torchvision.models.segmentation.deeplabv3_resnet50
-num_classes: 4

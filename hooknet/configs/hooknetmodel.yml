@@ -1,6 +1,0 @@
-"*object": hooknet.model_torch.create_hooknet
-n_classes: 4
-depth: 4
-n_convs: 2
-n_filters: 8
-batch_norm: True
