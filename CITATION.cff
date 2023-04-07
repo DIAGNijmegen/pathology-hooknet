@@ -3,8 +3,7 @@ message: "If you use this software, please cite it as below."
 authors:
   - family-names: Mart
     given-names: van Rijthoven
-    orcid: "https://orcid.org/0000-0000-0000-0000"
-title: DIAGNijmegen/pathology-hooknet: v0.1.0-alpha
+title: HookNet
 version: v0.1.0-alpha
 doi: 10.5281/zenodo.7559001
 date-released: 2023-01-22
