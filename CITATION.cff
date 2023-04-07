@@ -1,0 +1,8 @@
+cff-version: 1.1.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Mart
+    given-names: van Rijthoven
+title: DIAGNijmegen/pathology-hooknet: v0.1.0-alpha
+version: v0.1.0-alpha
+date-released: 2023-01-22
