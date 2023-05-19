@@ -1,0 +1,10 @@
+training: 
+    - wsi:
+        path: ${data_folder}/TCGA-21-5784-01Z-00-DX1.tif
+      wsa:
+        path: ${data_folder}/TCGA-21-5784-01Z-00-DX1.xml
+validation: 
+    - wsi:
+        path: ${data_folder}/TCGA-21-5784-01Z-00-DX1.tif
+      wsa:
+        path: ${data_folder}/TCGA-21-5784-01Z-00-DX1.xml
