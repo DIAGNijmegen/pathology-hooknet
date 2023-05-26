@@ -1,12 +1,11 @@
-from experimart.interoperability.torch.step import TorchStepIterator
-import torch
 import numpy as np
+import torch
+from experimart.interoperability.torch.step import TorchStepIterator
+
 
 def _get_cuda_data(data, label):
-    data = np.array(data)
-    label = np.array(label)
-    data = np.transpose(data, (1,0,4,2,3)).astype('float32')
-    label = np.transpose(label, (1,0,2,3)).astype('int16')
+    data = np.transpose(np.array(data), (1, 0, 4, 2, 3)).astype("float32")
+    label = np.transpose(np.array(label), (1, 0, 2, 3)).astype("int16")
     return torch.from_numpy(data).cuda(), torch.from_numpy(label).cuda().long()
 
 
@@ -16,7 +15,7 @@ class HookNetTorchTrainingStepIterator(TorchStepIterator):
         for _ in range(len(self)):
             data, label, *_ = next(self._data_iterator)
             data_cuda, label_cuda = _get_cuda_data(data, label)
-            
+
             self._components.optimizer.zero_grad()
             output = self._model(*data_cuda)["out"]
             loss = self._components.criterion(output, label_cuda[0])
@@ -33,8 +32,8 @@ class HookNetTorchValidationStepIterator(TorchStepIterator):
         with torch.no_grad():
             for _ in range(len(self)):
                 data, label, *_ = next(self._data_iterator)
-                data_cuda,  label_cuda  = _get_cuda_data(data, label)
-                
+                data_cuda, label_cuda = _get_cuda_data(data, label)
+
                 output = self._model(*data_cuda)
                 output = output["out"]
                 loss = self._components.criterion(output, label_cuda[0])
