@@ -4,9 +4,13 @@ from experimart.interoperability.torch.step import TorchStepIterator
 
 
 def _get_cuda_data(data, label):
-    data = np.transpose(np.array(data), (1, 0, 4, 2, 3)).astype("float32")
-    label = np.transpose(np.array(label), (1, 0, 2, 3)).astype("int16")
-    return torch.from_numpy(data).cuda(), torch.from_numpy(label).cuda().long()
+    data = np.transpose(data, (1, 0, 4, 2, 3))
+    label = np.transpose(label, (1, 0, 2, 3))
+
+    data = torch.tensor(data, device="cuda").float()
+    label = torch.tensor(label, device="cuda").long()
+
+    return data, label
 
 
 class HookNetTorchTrainingStepIterator(TorchStepIterator):
@@ -15,13 +19,13 @@ class HookNetTorchTrainingStepIterator(TorchStepIterator):
         for _ in range(len(self)):
             data, label, *_ = next(self._data_iterator)
             data_cuda, label_cuda = _get_cuda_data(data, label)
-
             self._components.optimizer.zero_grad()
             output = self._model(*data_cuda)["out"]
             loss = self._components.criterion(output, label_cuda[0])
             loss.backward()
             self._components.optimizer.step()
             metrics = self.get_metrics(label_cuda[0], output)
+            metrics["leanning_rate"] = self._components.scheduler.get_lr()
             yield {"loss": loss.item(), **metrics}
         self._components.scheduler.step()
 
