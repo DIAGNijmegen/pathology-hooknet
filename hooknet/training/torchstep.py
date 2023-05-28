@@ -25,7 +25,7 @@ class HookNetTorchTrainingStepIterator(TorchStepIterator):
             loss.backward()
             self._components.optimizer.step()
             metrics = self.get_metrics(label_cuda[0], output)
-            metrics["leanning_rate"] = self._components.scheduler.get_lr()
+            metrics["learning_rate"] = self._components.scheduler.get_last_lr()[0]
             yield {"loss": loss.item(), **metrics}
         self._components.scheduler.step()
 

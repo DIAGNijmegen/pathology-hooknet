@@ -35,3 +35,6 @@ experimart:
             "*object": hooknet.training.torchstep.HookNetTorchTrainingStepIterator
         validation_step_iterator:
             "*object": hooknet.training.torchstep.HookNetTorchValidationStepIterator
+        metrics:
+            training: 
+              'learning_rate': ${$statistics.mean}
