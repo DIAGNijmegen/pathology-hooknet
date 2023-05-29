@@ -7,7 +7,7 @@ def _get_cuda_data(data, label):
     data = np.transpose(data, (1, 0, 4, 2, 3))
     label = np.transpose(label, (1, 0, 2, 3))
 
-    data = torch.tensor(data, device="cuda").float()
+    data = torch.tensor(data, device="cuda").float() / 255.0
     label = torch.tensor(label, device="cuda").long()
 
     return data, label

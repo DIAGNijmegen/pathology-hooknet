@@ -2,6 +2,7 @@ experimart:
     default:
         data_folder: /tmp/
         data_settings:
+            buffer_dtype: 'uint8'
             user_config:
                 wholeslidedata:
                     default:
@@ -14,14 +15,14 @@ experimart:
                             tumor: 2
                             stroma: 3
                         batch_shape: 
-                            batch_size: 8
+                            batch_size: 24
                             spacing: [0.5, 2.0, 8.0]
                             shape: [[284, 284, 3], [284, 284, 3], [284, 284, 3]]
                             y_shape: [3, 70, 70]
                         sample_callbacks:
                             - "*object": wholeslidedata.samplers.callbacks.CropSampleCallback
                               output_shape: [70, 70]
-                            - "*object": wholeslidedata.samplers.callbacks.NormalizeSampleCallback
+#                             - "*object": wholeslidedata.samplers.callbacks.NormalizeSampleCallback
         model@replace(true):
             "*object": experimart.interoperability.torch.io.to_cuda
             model:
