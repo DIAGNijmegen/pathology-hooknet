@@ -13,7 +13,7 @@ class HookNetTorchStepIterator(TorchMultiInputStepIterator, TorchStepIterator):
         data, label, *_ = next(self._data_iterator)
         data = np.transpose(data, (1, 0, 4, 2, 3))
         label = np.transpose(label, (1, 0, 2, 3))[0]
-        return convert_data_to_device(data, label, device="cuda")
+        return convert_data_to_device(data, label, device=self._device)
 
 
 class HookNetTorchTrainingStepIterator(
