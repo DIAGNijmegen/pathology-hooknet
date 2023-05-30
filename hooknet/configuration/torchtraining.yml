@@ -2,6 +2,7 @@ experimart:
     default:
         data_folder: /tmp/
         data_settings:
+            iterator_class: hooknet.iterator.batchiterator.HookNetBatchIterator
             buffer_dtype: 'uint8'
             user_config:
                 wholeslidedata:
@@ -22,7 +23,6 @@ experimart:
                         sample_callbacks:
                             - "*object": wholeslidedata.samplers.callbacks.CropSampleCallback
                               output_shape: [70, 70]
-#                             - "*object": wholeslidedata.samplers.callbacks.NormalizeSampleCallback
         model@replace(true):
             "*object": experimart.interoperability.torch.io.to_cuda
             model:
@@ -32,10 +32,6 @@ experimart:
                 n_convs: 2
                 n_filters: 8
                 batch_norm: True
-        training_step_iterator:
-            "*object": hooknet.training.torchstep.HookNetTorchTrainingStepIterator
-        validation_step_iterator:
-            "*object": hooknet.training.torchstep.HookNetTorchValidationStepIterator
         metrics:
             training: 
               'learning_rate': ${$statistics.mean}

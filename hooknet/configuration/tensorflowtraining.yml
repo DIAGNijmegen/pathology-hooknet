@@ -2,6 +2,8 @@ experimart:
     default:
         data_folder: /tmp/
         data_settings:
+            iterator_class: hooknet.iterator.batchiterator.HookNetBatchIterator
+            buffer_dtype: 'uint8'
             user_config:
                 wholeslidedata:
                     default:
@@ -31,7 +33,3 @@ experimart:
             n_convs: 2
             n_filters: 8
             batch_norm: True
-        training_step_iterator:
-            "*object": hooknet.training.tensorflowstep.HookNetTensorflowTrainingStepIterator
-        validation_step_iterator:
-            "*object": hooknet.training.tensorflowstep.HookNetTensorflowValidationStepIterator
