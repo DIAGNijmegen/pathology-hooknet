@@ -27,7 +27,7 @@ experimart:
                               labels: ${dataset.labels}
 
         model@replace(true):        
-            "*object": hooknet.tensorflowmodel.HookNet
+            "*object": hooknet.models.tensorflowmodel.HookNet
             n_classes: 4
             depth: 4
             n_convs: 2

@@ -26,7 +26,7 @@ experimart:
         model@replace(true):
             "*object": experimart.interoperability.torch.io.to_cuda
             model:
-                "*object": hooknet.torchmodel.HookNet
+                "*object": hooknet.models.torchmodel.HookNet
                 n_classes: 4
                 depth: 4
                 n_convs: 2
