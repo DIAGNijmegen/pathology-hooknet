@@ -2,7 +2,7 @@ experimart:
     default:
         data_folder: /tmp/
         data_settings:
-            iterator_class: ${$hooknet.iterator.batchiterator.HookNetBatchIterator}
+            iterator_class: ${$hooknet.training.iterator.batchiterator.HookNetBatchIterator}
             buffer_dtype: 'uint8'
             user_config:
                 wholeslidedata:
