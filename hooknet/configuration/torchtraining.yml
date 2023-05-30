@@ -35,3 +35,4 @@ experimart:
         metrics:
             training: 
               'learning_rate': ${$statistics.mean}
+        multi_inputs: True
