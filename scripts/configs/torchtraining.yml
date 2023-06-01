@@ -32,7 +32,15 @@ experimart:
                 n_convs: 2
                 n_filters: 24
                 batch_norm: True
-        metrics:
-            training: 
-              'learning_rate': ${$statistics.mean}
         multi_inputs: True
+        validation_step_iterator:
+          metrics: 
+            cm:
+              "*object": experimart.interoperability.torch.metrics.TorchConfusionMatrixMetric
+              labels: ${validation_data_iterator.dataset.labels.map}
+          multi_inputs: ${multi_inputs}
+        metrics:
+          validation:
+            cm: 
+              "*object": experimart.interoperability.torch.metrics.TorchConfusionMatrixMetricCollector
+              metric: "F1"
