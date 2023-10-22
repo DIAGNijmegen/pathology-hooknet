@@ -19,7 +19,7 @@ from wholeslidedata.source.configuration.config import (
 )
 
 
-def _execute_inference_single(
+def execute_inference_single(
     iterator,
     model,
     image_path,
@@ -130,7 +130,7 @@ def execute_inference(
             )
             
             print("Run inference")
-            _execute_inference_single(
+            execute_inference_single(
                 iterator=iterator,
                 model=model,
                 image_path=image_path,
