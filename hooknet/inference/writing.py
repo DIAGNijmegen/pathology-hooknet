@@ -3,24 +3,12 @@ from shutil import copyfile
 from pathlib import Path
 
 from wholeslidedata.image.wholeslideimage import WholeSlideImage
-from wholeslidedata.accessories.asap.imagewriter import (HeatmapTileCallback,
+from wholeslidedata.interoperability.asap.imagewriter import (HeatmapTileCallback,
                                                         PredictionTileCallback,
                                                         WholeSlideMaskWriter)
 
 SPACING = 0.5
 TILE_SIZE = 1024
-
-
-class MaskType(Enum):
-    """Different mask types
-    
-    The PREDICTION type is for writing masks with prediction values, range=(0, num_classes)
-    The HEATMAP type is for writing masks with heatmap values, range=(0, 255)
-    """
-
-    
-    PREDICTION = auto()    
-    HEATMAP = auto()
 
 
 class TmpWholeSlideMaskWriter(WholeSlideMaskWriter):

@@ -21,9 +21,7 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import SGD, Adam, Optimizer
 from tensorflow.python.framework.ops import Tensor
 from hooknet.utils import check_input
-from dicfg.reader import ConfigReader
-from dicfg.factory import build_config
-from hooknet.configuration import MAIN_CONFIG_PATH
+
 
 
 class HookNet(Model):

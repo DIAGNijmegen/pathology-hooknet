@@ -1,5 +1,5 @@
 from pathlib import Path
-from hooknet.inference.writing import MaskType
+from wholeslidedata.interoperability.asap.masks import MaskType
 
 def create_lock_file(lock_file_path):
     print(f"Creating lock file: {lock_file_path}")
