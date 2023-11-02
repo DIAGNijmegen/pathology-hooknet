@@ -1,20 +1,20 @@
-from enum import Enum, auto
 from shutil import copyfile
 from pathlib import Path
 
 from wholeslidedata.image.wholeslideimage import WholeSlideImage
-from wholeslidedata.interoperability.asap.imagewriter import (HeatmapTileCallback,
-                                                        PredictionTileCallback,
-                                                        WholeSlideMaskWriter)
+from wholeslidedata.interoperability.asap.imagewriter import (
+    HeatmapTileCallback,
+    PredictionTileCallback,
+    WholeSlideMaskWriter,
+)
+from wholeslidedata.interoperability.asap.masks import MaskType
 
 SPACING = 0.5
 TILE_SIZE = 1024
 
 
 class TmpWholeSlideMaskWriter(WholeSlideMaskWriter):
-    
-
-    def __init__(self, output_path: Path, callbacks=(), suffix='.tif'):
+    def __init__(self, output_path: Path, callbacks=(), suffix=".tif"):
         """Writes temp file and copies the tmp file to an output folder in the save method.
 
         Args:
@@ -61,7 +61,7 @@ def _create_writer(
     """
 
     if file["type"] == MaskType.HEATMAP:
-        callbacks = (HeatmapTileCallback(heatmap_index=file['heatmap_index']),)
+        callbacks = (HeatmapTileCallback(heatmap_index=file["heatmap_index"]),)
     elif file["type"] == MaskType.PREDICTION:
         callbacks = (PredictionTileCallback(),)
     else:
@@ -101,7 +101,7 @@ def create_writers(
     writers = []
 
     # get info
-    with WholeSlideImage(image_path) as wsi:
+    with WholeSlideImage(image_path, backend="asap") as wsi:
         shape = wsi.shapes[wsi.get_level_from_spacing(SPACING)]
         real_spacing = wsi.get_real_spacing(SPACING)
 

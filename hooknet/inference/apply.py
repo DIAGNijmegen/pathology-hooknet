@@ -1,6 +1,7 @@
 import time
 import traceback
 from pathlib import Path
+
 import numpy as np
 from hooknet.inference.utils import (
     create_lock_file,
@@ -9,10 +10,10 @@ from hooknet.inference.utils import (
     get_files,
     release_lock_file,
 )
+from hooknet.inference.writing import create_writers, TILE_SIZE
 from tqdm import tqdm
 from wholeslidedata.interoperability.asap.masks import MaskType
-from hooknet.inference.writing import create_writers
-
+from wholeslidedata.samplers.utils import crop_data
 
 
 def execute_inference_single(
@@ -23,7 +24,6 @@ def execute_inference_single(
     output_folder,
     tmp_folder,
 ):
-
     print("Init writers...")
     writers = create_writers(
         image_path=image_path,
@@ -43,39 +43,35 @@ def execute_inference_single(
     batch_time = -1
     for x_batch, y_batch, info in tqdm(iterator):
         if index > 0:
-            batch_times.append(time.time()-batch_time)
-            print("batch time", batch_times[-1])
+            batch_times.append(time.time() - batch_time)
         x_batch = list(x_batch.transpose(1, 0, 2, 3, 4))
         prediction_time = time.time()
         predictions = model.predict_on_batch(x_batch, argmax=False)
         if index > 0:
-            prediction_times.append(time.time()-prediction_time)
-            print("prediction_time", prediction_times[-1])
-
+            prediction_times.append(time.time() - prediction_time)
+            
         for idx, prediction in enumerate(predictions):
             c, r = (
-                info["x"] - model.output_shape[1] // 4,
-                info["y"] - model.output_shape[0] // 4,
+                info["x"] - TILE_SIZE//2,
+                info["y"] - TILE_SIZE//2
             )
-
+            mask = crop_data(y_batch[idx][0], model.output_shape[:2])
             for writer in writers:
                 writer.write_tile(
                     tile=prediction,
                     coordinates=(int(c), int(r)),
-                    mask=y_batch[idx][0],
+                    mask=mask,
                 )
         index += 1
         batch_time = time.time()
 
-
     print(f"average batch time: {np.mean(batch_times)}")
     print(f"average prediction time: {np.mean(prediction_times)}")
-    
+
     # save predictions
     print("Saving...")
     for writer in writers:
         writer.save()
-
 
 
 def create_lock_file(lock_file_path):
@@ -132,7 +128,6 @@ def execute_inference(
     tmp_folder,
     heatmaps,
 ):
-    
     image_path = Path(image_path)
     output_folder = Path(output_folder)
     tmp_folder = Path(tmp_folder)
